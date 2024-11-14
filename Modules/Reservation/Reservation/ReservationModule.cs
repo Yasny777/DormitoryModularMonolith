@@ -1,4 +1,6 @@
-﻿namespace Reservation;
+﻿using Microsoft.AspNetCore.Builder;
+
+namespace Reservation;
 
 public static class ReservationModule
 {
@@ -7,5 +9,10 @@ public static class ReservationModule
     {
 
         return services;
+    }
+
+    public static IApplicationBuilder UseReservationModule(this IApplicationBuilder app)
+    {
+        return app;
     }
 }

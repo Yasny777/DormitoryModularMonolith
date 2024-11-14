@@ -1,4 +1,6 @@
-﻿namespace User;
+﻿using Microsoft.AspNetCore.Builder;
+
+namespace User;
 
 public static class UserModule
 {
@@ -7,5 +9,10 @@ public static class UserModule
     {
 
         return services;
+    }
+
+    public static IApplicationBuilder UseUserModule(this IApplicationBuilder app)
+    {
+        return app;
     }
 }

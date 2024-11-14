@@ -11,4 +11,9 @@ builder.Services
 
 var app = builder.Build();
 // Configure HTTP request pipeline
+
+app.UseDormitoryModule()
+    .UseReservationModule()
+    .UseUserModule();
+
 app.Run();
