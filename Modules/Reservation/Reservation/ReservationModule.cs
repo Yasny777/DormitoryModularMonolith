@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-
-namespace Reservation;
+﻿namespace Reservation;
 
 public static class ReservationModule
 {

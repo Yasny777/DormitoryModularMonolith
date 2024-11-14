@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-
-namespace User;
+﻿namespace User;
 
 public static class UserModule
 {
