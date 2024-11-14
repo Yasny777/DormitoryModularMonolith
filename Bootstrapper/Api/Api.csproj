@@ -6,4 +6,10 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Modules\Dormitory\Dormitory\Dormitory.csproj" />
+      <ProjectReference Include="..\..\Modules\Reservation\Reservation\Reservation.csproj" />
+      <ProjectReference Include="..\..\Modules\User\User\User.csproj" />
+    </ItemGroup>
+
 </Project>
