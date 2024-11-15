@@ -10,4 +10,12 @@
       <ProjectReference Include="..\..\..\Shared\Shared\Shared.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Data\" />
+      <Folder Include="Dormitories\Dto\" />
+      <Folder Include="Dormitories\EventHandlers\" />
+      <Folder Include="Dormitories\Exceptions\" />
+      <Folder Include="Dormitories\Features\" />
+    </ItemGroup>
+
 </Project>
