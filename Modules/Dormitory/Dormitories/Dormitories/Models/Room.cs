@@ -4,6 +4,9 @@ public class Room : Entity<Guid>
 {
     public Guid DormitoryId { get; private set; } = default!;
     public string Number { get; private set; } = default!;
+
+    public string Category { get; private set; } = default!;
+
     public int Capacity { get; private set; } = default!;
     public decimal Price { get; private set; } = default!;
 
