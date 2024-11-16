@@ -10,11 +10,11 @@ public class Room : Entity<Guid>
     public decimal Price { get; private set; } = default!;
 
     //todo User type will come from User Module (reference guid to Users module)
-     // private readonly List<Guid> _occupants = [];
-     // public IReadOnlyList<Guid> Occupants => _occupants.AsReadOnly();
-     // public int TotalOccupants => Occupants.Count;
-     //
-     // public bool IsFull() => TotalOccupants >= Capacity;
+     private readonly List<Guid> _occupants = [];
+     public IReadOnlyList<Guid> Occupants => _occupants.AsReadOnly();
+     public int TotalOccupants => Occupants.Count;
+
+     public bool IsFull() => TotalOccupants >= Capacity;
     internal Room(Guid dormitoryId, string number, int capacity, decimal price)
     {
         DormitoryId = dormitoryId;
@@ -26,6 +26,7 @@ public class Room : Entity<Guid>
     public IDomainEvent AddOccupant(Guid userId)
     {
         // logika
+        //_occupants.Add()
         //return new OccupantAddedToRoomEvent(roomId, userId);
         throw new NotImplementedException();
     }
