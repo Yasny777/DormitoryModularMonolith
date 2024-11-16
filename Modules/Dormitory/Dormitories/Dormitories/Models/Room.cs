@@ -1,6 +1,4 @@
-﻿using Dormitory.Dormitories.Events;
-
-namespace Dormitory.Dormitories.Models;
+﻿namespace Dormitories.Dormitories.Models;
 
 public class Room : Entity<Guid>
 {
@@ -10,11 +8,12 @@ public class Room : Entity<Guid>
     public decimal Price { get; private set; } = default!;
 
     //todo User type will come from User Module (reference guid to Users module)
-     private readonly List<Guid> _occupants = [];
-     public IReadOnlyList<Guid> Occupants => _occupants.AsReadOnly();
-     public int TotalOccupants => Occupants.Count;
+    private readonly List<Guid> _occupants = [];
+    public IReadOnlyList<Guid> Occupants => _occupants.AsReadOnly();
+    public int TotalOccupants => Occupants.Count;
 
-     public bool IsFull() => TotalOccupants >= Capacity;
+    public bool IsFull() => TotalOccupants >= Capacity;
+
     internal Room(Guid dormitoryId, string number, int capacity, decimal price)
     {
         DormitoryId = dormitoryId;

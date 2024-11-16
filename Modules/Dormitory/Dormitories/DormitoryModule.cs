@@ -1,4 +1,4 @@
-﻿namespace Dormitory;
+﻿namespace Dormitories;
 
 public static class DormitoryModule
 {

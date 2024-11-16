@@ -7,8 +7,6 @@ builder.Services
     .AddReservationModule(configuration)
     .AddUserModule(configuration);
 
-
-
 var app = builder.Build();
 // Configure HTTP request pipeline
 

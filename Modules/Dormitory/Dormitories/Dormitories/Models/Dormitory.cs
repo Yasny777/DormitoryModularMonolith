@@ -1,4 +1,4 @@
-﻿namespace Dormitory.Dormitories.Models;
+﻿namespace Dormitories.Dormitories.Models;
 
 public class Dormitory : Aggregate<Guid>
 {

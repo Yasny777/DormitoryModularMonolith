@@ -4,10 +4,18 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>e2568e14-fa49-4f78-9cc8-98557d250904</UserSecretsId>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <DockerfileContext>..\..</DockerfileContext>
+        <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Modules\Dormitory\Dormitory\Dormitory.csproj" />
+      <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Modules\Dormitory\Dormitories\Dormitories.csproj" />
       <ProjectReference Include="..\..\Modules\Reservation\Reservation\Reservation.csproj" />
       <ProjectReference Include="..\..\Modules\User\User\User.csproj" />
     </ItemGroup>

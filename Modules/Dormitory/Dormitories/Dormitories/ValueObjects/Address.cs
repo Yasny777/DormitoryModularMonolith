@@ -1,4 +1,4 @@
-﻿namespace Dormitory.Dormitories.ValueObjects;
+﻿namespace Dormitories.Dormitories.ValueObjects;
 
 public record Address
 {
