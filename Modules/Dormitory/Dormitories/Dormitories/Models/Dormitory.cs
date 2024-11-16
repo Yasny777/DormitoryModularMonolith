@@ -12,6 +12,25 @@ public class Dormitory : Aggregate<Guid>
     public IReadOnlyList<Room> Rooms => _rooms.AsReadOnly();
 
 
+    public static Dormitory Create(Guid id, string name, string category, string contactEmail, string contactNumber, Address address)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(name);
+        ArgumentException.ThrowIfNullOrEmpty(category);
+
+        var dormitory = new Dormitory()
+        {
+            Id = id,
+            Name = name,
+            Category = category,
+            ContactEmail = contactEmail,
+            ContactNumber = contactNumber,
+            Address = address
+        };
+        // adddomainevent dormitorycreated
+        return dormitory;
+    }
+
+
     public void AddRoom(string number, int capacity, decimal price)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(number);

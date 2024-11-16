@@ -26,7 +26,7 @@ public class DormitoryConfiguration : IEntityTypeConfiguration<Dormitory>
         {
             addressBuilder.Property(x => x.Street).IsRequired().HasMaxLength(150);
             addressBuilder.Property(x => x.City).IsRequired().HasMaxLength(50);
-            addressBuilder.Property(x => x.ZipCode).IsRequired().HasMaxLength(5);
+            addressBuilder.Property(x => x.ZipCode).IsRequired().HasMaxLength(6);
         });
 
     }
