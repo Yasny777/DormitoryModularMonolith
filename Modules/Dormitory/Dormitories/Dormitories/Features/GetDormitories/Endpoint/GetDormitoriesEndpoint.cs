@@ -4,6 +4,7 @@ using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Shared.Exceptions;
 using Shared.Features.Endpoints;
 
 namespace Dormitories.Dormitories.Features.GetDormitories.Endpoint;

@@ -4,5 +4,8 @@ services:
   dormitorydb:
     image: postgres
 
+  seq:
+    image: datalust/seq:latest
+
 volumes:
   postgres_dormitorydb:
