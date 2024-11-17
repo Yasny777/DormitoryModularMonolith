@@ -11,10 +11,15 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Dormitories\Dto\" />
       <Folder Include="Dormitories\EventHandlers\" />
       <Folder Include="Dormitories\Exceptions\" />
-      <Folder Include="Dormitories\Features\" />
+      <Folder Include="Dormitories\Features\AddOcuupantToRoom\" />
+      <Folder Include="Dormitories\Features\CreateDormitory\" />
+      <Folder Include="Dormitories\Features\GetRoomById\" />
+      <Folder Include="Dormitories\Features\GetRoomsInDormitory\" />
+      <Folder Include="Dormitories\Features\RemoveOccupantFromRoom\" />
+      <Folder Include="Dormitories\Features\UpdateDormitory\" />
+      <Folder Include="Dormitories\Features\UpdateRoom\" />
     </ItemGroup>
 
 </Project>
