@@ -4,3 +4,4 @@ global using Microsoft.AspNetCore.Builder;
 global using Dormitories.Dormitories.ValueObjects;
 global using Shared.DDD;
 global using Dormitories.Data;
+global using Shared.CQRS;

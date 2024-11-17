@@ -1,6 +1,9 @@
-﻿using Dormitories.Data.Seed;
+﻿using Dormitories.Data.Repository;
+using Dormitories.Data.Seed;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Shared.Data;
+using Shared.Data.Interceptors;
 using Shared.Data.Seed;
 
 namespace Dormitories;
@@ -11,8 +14,14 @@ public static class DormitoryModule
     {
         var connectionString = configuration.GetConnectionString("Database");
 
-        services.AddDbContext<DormitoryDbContext>(options =>
+        services.AddScoped<IDormitoryRepository, DormitoryRepository>();
+
+        services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
+        services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
+
+        services.AddDbContext<DormitoryDbContext>((serviceProvider, options) =>
         {
+            options.AddInterceptors(serviceProvider.GetServices<ISaveChangesInterceptor>());
             options.UseNpgsql(connectionString);
         });
 
