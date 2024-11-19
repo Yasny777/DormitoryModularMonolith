@@ -17,6 +17,7 @@ public static class MediatRExtentions
             config.AddOpenBehavior(typeof(LoggingBehavior<,>));
         });
 
+        // adding validators
         services.AddValidatorsFromAssemblies(assemblies);
 
         return services;

@@ -13,10 +13,11 @@
     <ItemGroup>
       <Folder Include="Dormitories\EventHandlers\" />
       <Folder Include="Dormitories\Exceptions\" />
-      <Folder Include="Dormitories\Features\AddOcuupantToRoom\" />
-      <Folder Include="Dormitories\Features\CreateDormitory\" />
-      <Folder Include="Dormitories\Features\GetRoomById\" />
-      <Folder Include="Dormitories\Features\GetRoomsInDormitory\" />
+      <Folder Include="Dormitories\Features\AddOcuupantToRoom\Endpoint\" />
+      <Folder Include="Dormitories\Features\AddOcuupantToRoom\Handler\" />
+      <Folder Include="Dormitories\Features\CreateRoom\" />
+      <Folder Include="Dormitories\Features\GetRoomById\Endpoint\" />
+      <Folder Include="Dormitories\Features\GetRoomById\Handler\" />
       <Folder Include="Dormitories\Features\RemoveOccupantFromRoom\" />
       <Folder Include="Dormitories\Features\UpdateDormitory\" />
       <Folder Include="Dormitories\Features\UpdateRoom\" />

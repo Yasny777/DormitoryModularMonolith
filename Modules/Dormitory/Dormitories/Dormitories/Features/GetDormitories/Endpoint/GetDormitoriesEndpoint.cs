@@ -1,11 +1,4 @@
-﻿using Carter;
-using Dormitories.Dormitories.Features.GetDormitories.Handler;
-using Mapster;
-using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
-using Shared.Exceptions;
-using Shared.Features.Endpoints;
+﻿using Dormitories.Dormitories.Features.GetDormitories.Handler;
 
 namespace Dormitories.Dormitories.Features.GetDormitories.Endpoint;
 

@@ -1,0 +1,20 @@
+﻿using Dormitories.Data.Repository;
+using Dormitories.Dormitories.Models;
+
+namespace Dormitories.Dormitories.Features.GetRoomsInDormitory.Handler;
+
+public class GetRoomsInDormitoryHandler(IDormitoryRepository repository)
+    : IQueryHandler<GetRoomsInDormitoryQuery, GetRoomsInDormitoryResult>
+{
+    public async Task<GetRoomsInDormitoryResult> Handle(GetRoomsInDormitoryQuery query, CancellationToken cancellationToken)
+    {
+        var pageNumber = query.PageNumber;
+        var pageSize = query.PageSize;
+        var totalCount = await repository.GetTotalRoomCountInDormitory(query.DormitoryId, cancellationToken);
+        var rooms = await repository.GetRoomsInDormitoryByQuery(query, true, cancellationToken);
+
+        var roomsDto = rooms.Adapt<List<RoomDto>>();
+
+        return new GetRoomsInDormitoryResult(roomsDto, totalCount, pageSize, pageNumber);
+    }
+}
