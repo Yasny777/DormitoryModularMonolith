@@ -6,8 +6,8 @@ namespace Dormitories.Dormitories.Features.GetRoomsInDormitory.Handler;
 
 public record GetRoomsInDormitoryQuery(
     Guid DormitoryId,
-    int PageNumber = 1,
-    int PageSize = 10,
-    string SortBy = RoomsInDormitorySortBy.Number,
-    SortDirection SortDirection = SortDirection.Asc)
+    int PageNumber,
+    int PageSize,
+    string SortBy,
+    SortDirection SortDirection)
     :  IQuery<GetRoomsInDormitoryResult>;
