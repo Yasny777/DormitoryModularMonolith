@@ -9,9 +9,7 @@ public class DormitoryRepository(DormitoryDbContext dbContext) : IDormitoryRepos
 {
     public async Task<List<Dormitory>> GetDormitories(bool asNoTracking = true, CancellationToken cancellationToken = default)
     {
-        var query = dbContext.Dormitories;
-
-        if (asNoTracking) query.AsNoTracking();
+        var query = asNoTracking ? dbContext.Dormitories.AsNoTracking() : dbContext.Dormitories;
 
         var dormitories = await query.ToListAsync(cancellationToken);
 
@@ -28,9 +26,9 @@ public class DormitoryRepository(DormitoryDbContext dbContext) : IDormitoryRepos
     public async Task<List<Room>> GetRoomsInDormitoryByQuery(GetRoomsInDormitoryQuery query, bool asNoTracking = true, CancellationToken cancellationToken = default)
     {
         var roomsQuery = dbContext.Rooms.Where(r => r.DormitoryId == query.DormitoryId);
-        if (asNoTracking) roomsQuery.AsNoTracking();
+        if (asNoTracking) roomsQuery = roomsQuery.AsNoTracking();
         // sorting
-        roomsQuery.ApplySorting(query.SortBy, query.SortDirection);
+        roomsQuery = roomsQuery.ApplySorting(query.SortBy, query.SortDirection);
 
         // todo include users?
 
