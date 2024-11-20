@@ -13,4 +13,6 @@ public interface IDormitoryRepository
         CancellationToken cancellationToken = default);
 
     Task<long> GetTotalRoomCountInDormitory(Guid id, CancellationToken cancellationToken);
+    Task<Dormitory?> GetDormitoryById(Guid dormitoryId, CancellationToken cancellationToken);
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

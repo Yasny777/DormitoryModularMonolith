@@ -31,11 +31,12 @@ public class Dormitory : Aggregate<Guid>
     }
 
 
-    public void AddRoom(string number, int capacity, decimal price)
+    public Guid AddRoom(string number, string category, int capacity, decimal price)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(number);
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(capacity);
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(price);
+        ArgumentException.ThrowIfNullOrEmpty(category);
 
         var room = _rooms.FirstOrDefault(x => x.Number == number);
 
@@ -46,6 +47,10 @@ public class Dormitory : Aggregate<Guid>
 
         var newRoom = new Room(Id, number, capacity, price);
         _rooms.Add(newRoom);
+
+        // can add domain event here
+
+        return newRoom.Id;
     }
 
     public void AddOccupantToRoom(Guid roomId, Guid userId)

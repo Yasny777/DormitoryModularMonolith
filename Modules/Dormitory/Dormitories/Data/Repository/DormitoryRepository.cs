@@ -2,12 +2,14 @@
 using Dormitories.Dormitories.Features.GetRoomsInDormitory.Handler;
 using Dormitories.Dormitories.Models;
 using Microsoft.EntityFrameworkCore;
+using Shared.Exceptions;
 
 namespace Dormitories.Data.Repository;
 
 public class DormitoryRepository(DormitoryDbContext dbContext) : IDormitoryRepository
 {
-    public async Task<List<Dormitory>> GetDormitories(bool asNoTracking = true, CancellationToken cancellationToken = default)
+    public async Task<List<Dormitory>> GetDormitories(bool asNoTracking = true,
+        CancellationToken cancellationToken = default)
     {
         var query = asNoTracking ? dbContext.Dormitories.AsNoTracking() : dbContext.Dormitories;
 
@@ -23,7 +25,8 @@ public class DormitoryRepository(DormitoryDbContext dbContext) : IDormitoryRepos
         return dormitory.Id;
     }
 
-    public async Task<List<Room>> GetRoomsInDormitoryByQuery(GetRoomsInDormitoryQuery query, bool asNoTracking = true, CancellationToken cancellationToken = default)
+    public async Task<List<Room>> GetRoomsInDormitoryByQuery(GetRoomsInDormitoryQuery query, bool asNoTracking = true,
+        CancellationToken cancellationToken = default)
     {
         var roomsQuery = dbContext.Rooms.Where(r => r.DormitoryId == query.DormitoryId);
         if (asNoTracking) roomsQuery = roomsQuery.AsNoTracking();
@@ -43,5 +46,15 @@ public class DormitoryRepository(DormitoryDbContext dbContext) : IDormitoryRepos
     public async Task<long> GetTotalRoomCountInDormitory(Guid id, CancellationToken cancellationToken)
     {
         return await dbContext.Rooms.Where(r => r.DormitoryId == id).LongCountAsync(cancellationToken);
+    }
+
+    public async Task<Dormitory?> GetDormitoryById(Guid dormitoryId, CancellationToken cancellationToken)
+    {
+        return await dbContext.Dormitories.FindAsync([dormitoryId], cancellationToken) ?? null;
+    }
+
+    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+    {
+        return await dbContext.SaveChangesAsync(cancellationToken);
     }
 }

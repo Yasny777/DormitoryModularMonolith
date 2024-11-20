@@ -2,7 +2,7 @@
 
 namespace Dormitories.Dormitories.Features.GetDormitories.Handler;
 
-public class GetDormitoriesHandler(IDormitoryRepository repository) : IQueryHandler<GetDormitoriesQuery, GetDormitoriesResult>
+internal class GetDormitoriesHandler(IDormitoryRepository repository) : IQueryHandler<GetDormitoriesQuery, GetDormitoriesResult>
 {
     public async Task<GetDormitoriesResult> Handle(GetDormitoriesQuery query, CancellationToken cancellationToken)
     {

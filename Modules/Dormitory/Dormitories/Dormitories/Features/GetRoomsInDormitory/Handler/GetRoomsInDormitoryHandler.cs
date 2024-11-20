@@ -3,7 +3,7 @@ using Dormitories.Dormitories.Models;
 
 namespace Dormitories.Dormitories.Features.GetRoomsInDormitory.Handler;
 
-public class GetRoomsInDormitoryHandler(IDormitoryRepository repository)
+internal class GetRoomsInDormitoryHandler(IDormitoryRepository repository)
     : IQueryHandler<GetRoomsInDormitoryQuery, GetRoomsInDormitoryResult>
 {
     public async Task<GetRoomsInDormitoryResult> Handle(GetRoomsInDormitoryQuery query, CancellationToken cancellationToken)

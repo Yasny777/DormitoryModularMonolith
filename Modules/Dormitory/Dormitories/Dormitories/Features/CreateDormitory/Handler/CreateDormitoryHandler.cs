@@ -3,7 +3,7 @@ using Dormitories.Dormitories.Models;
 
 namespace Dormitories.Dormitories.Features.CreateDormitory.Handler;
 
-public class CreateDormitoryHandler(IDormitoryRepository repository)
+internal class CreateDormitoryHandler(IDormitoryRepository repository)
     : ICommandHandler<CreateDormitoryCommand, CreateDormitoryResult>
 {
     public async Task<CreateDormitoryResult> Handle(CreateDormitoryCommand command, CancellationToken cancellationToken)

@@ -19,11 +19,13 @@ public class Room : Entity<Guid>
 
     internal Room(Guid dormitoryId, string number, int capacity, decimal price)
     {
+        Id = Guid.NewGuid();
         DormitoryId = dormitoryId;
         Number = number;
         Capacity = capacity;
         Price = price;
     }
+
 
     public IDomainEvent AddOccupant(Guid userId)
     {
