@@ -13,7 +13,7 @@ internal class CreateRoomHandler(IDormitoryRepository repository)
         var dormitory = await repository.GetDormitoryById(request.DormitoryId, cancellationToken);
         if (dormitory == null) throw new NotFoundException("Room", request.DormitoryId);
 
-        var roomId = dormitory.AddRoom(
+        var room = dormitory.AddRoom(
             request.RoomDto.Number,
             request.RoomDto.Category,
             request.RoomDto.Capacity,
@@ -21,6 +21,7 @@ internal class CreateRoomHandler(IDormitoryRepository repository)
 
         await repository.SaveChangesAsync(cancellationToken);
 
-        return new CreateRoomResult(roomId);
+            // room is reference to Room entity which is tracked and Id is assigned after savechanges
+        return new CreateRoomResult(room.Id);
     }
 }

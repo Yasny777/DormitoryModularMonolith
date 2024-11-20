@@ -17,12 +17,12 @@ public class Room : Entity<Guid>
 
     public bool IsFull() => TotalOccupants >= Capacity;
 
-    internal Room(Guid dormitoryId, string number, int capacity, decimal price)
+    internal Room(Guid dormitoryId, string number, int capacity, string category, decimal price)
     {
-        Id = Guid.NewGuid();
         DormitoryId = dormitoryId;
         Number = number;
         Capacity = capacity;
+        Category = category;
         Price = price;
     }
 
