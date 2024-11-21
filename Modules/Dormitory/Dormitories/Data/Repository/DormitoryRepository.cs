@@ -34,7 +34,6 @@ public class DormitoryRepository(DormitoryDbContext dbContext) : IDormitoryRepos
         roomsQuery = roomsQuery.ApplySorting(query.SortBy, query.SortDirection);
 
         // todo include users?
-
         var rooms = await roomsQuery
             .Skip(query.PageSize * (query.PageNumber - 1))
             .Take(query.PageSize)
@@ -50,11 +49,17 @@ public class DormitoryRepository(DormitoryDbContext dbContext) : IDormitoryRepos
 
     public async Task<Dormitory?> GetDormitoryById(Guid dormitoryId, CancellationToken cancellationToken)
     {
-        return await dbContext.Dormitories.FindAsync([dormitoryId], cancellationToken) ?? null;
+        return await dbContext.Dormitories.Include(d => d.Rooms)
+            .Where(d => d.Id == dormitoryId).SingleOrDefaultAsync(cancellationToken) ?? null;
     }
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
     {
         return await dbContext.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task<Room?> GetRoomById(Guid roomId, CancellationToken cancellationToken)
+    {
+        return await dbContext.Rooms.FindAsync([roomId], cancellationToken) ?? null;
     }
 }
