@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using Identity.Data;
+using Identity.Data.Seed;
 using Identity.Identity.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
 using Shared.Data;
 using Shared.Data.Interceptors;
+using Shared.Data.Seed;
 
 namespace Identity;
 
@@ -17,7 +19,7 @@ public static class IdentityModule
         IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("Database");
-
+        services.AddScoped<IDataSeeder, RolesDataSeeder>();
         services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
         services.AddDbContext<MyIdentityDbContext>((serviceProvider, opt) =>
         {

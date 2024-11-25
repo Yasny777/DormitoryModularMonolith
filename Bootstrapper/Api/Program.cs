@@ -25,7 +25,7 @@ builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 builder.Services.AddCarterWithAssemblies(dormitoryAssembly, identityAssembly);
 
-builder.Services.AddMediatRWithAssemblies(dormitoryAssembly);
+builder.Services.AddMediatRWithAssemblies(dormitoryAssembly, identityAssembly);
 
 builder.Services.AddCors(options =>
 {
