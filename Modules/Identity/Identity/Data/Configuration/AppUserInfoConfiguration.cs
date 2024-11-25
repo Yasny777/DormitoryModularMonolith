@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Identity.Identity.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using User.User.Modules;
 
-namespace User.Data.Configuration;
+namespace Identity.Data.Configuration;
 
 public class AppUserInfoConfiguration : IEntityTypeConfiguration<AppUserInfo>
 {

@@ -1,6 +1,6 @@
 ﻿using Shared.DDD;
 
-namespace User.User.Modules;
+namespace Identity.Identity.Models;
 
 public class AppUserInfo : Entity<Guid>
 {

@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Shared.DDD;
 
-namespace User.User.Modules;
+namespace Identity.Identity.Models;
 
 public class AppUser : IdentityUser<Guid>, IEntity
 {

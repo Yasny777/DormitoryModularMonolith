@@ -1,10 +1,9 @@
 ﻿using System.Reflection;
-using Microsoft.AspNetCore.Identity;
+using Identity.Identity.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using User.User.Modules;
 
-namespace User.Data;
+namespace Identity.Data;
 
 public class MyIdentityDbContext : IdentityDbContext<AppUser, AppRole, Guid>
 {
