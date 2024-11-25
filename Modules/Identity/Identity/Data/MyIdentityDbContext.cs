@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Identity.Data;
 
-public class MyIdentityDbContext : IdentityDbContext<AppUser, AppRole, Guid>
+public class MyIdentityDbContext : IdentityDbContext<AppUser, AppRole, string>
 {
     public MyIdentityDbContext(DbContextOptions<MyIdentityDbContext> options) : base(options)
     {

@@ -2,13 +2,7 @@
 
 namespace Identity.Identity.Models;
 
-public class AppRole : IdentityRole<Guid>
+public class AppRole : IdentityRole
 {
-    public AppRole(string roleName) : base(roleName)
-    {
-    }
 
-    public AppRole()
-    {
-    }
 }

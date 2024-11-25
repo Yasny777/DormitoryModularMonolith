@@ -7,7 +7,6 @@ public static class InitialData
 {
     public static IEnumerable<AppRole> Roles =>
     [
-        new AppRole(AppRoles.Admin), new AppRole(AppRoles.Manager), new AppRole(AppRoles.Student),
-        new AppRole(AppRoles.Candidate)
+        new AppRole(){Name = AppRoles.Candidate}
     ];
 }

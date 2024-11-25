@@ -16,7 +16,11 @@ internal class RegisterUserHandler
         var user = await userManager.FindByEmailAsync(request.Email);
         if (user != null) throw new UserExistsException($"User with email {request.Email} already exists");
 
-        var newUser = AppUser.Create(request.Email);
+        var newUser = new AppUser()
+        {
+            Email = request.Email,
+            UserName = request.Email
+        };
         var createResult = await userManager.CreateAsync(newUser, request.Password);
 
         if (!createResult.Succeeded)
@@ -24,7 +28,6 @@ internal class RegisterUserHandler
             throw new Exception($"Failed to create user {createResult.Errors}");
         }
 
-// Użytkownik został utworzony, teraz przypisz rolę
         var roleResult = await userManager.AddToRoleAsync(newUser, AppRoles.Candidate);
 
         if (!roleResult.Succeeded)
