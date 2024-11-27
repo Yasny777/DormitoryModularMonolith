@@ -60,6 +60,6 @@ public class DormitoryRepository(DormitoryDbContext dbContext) : IDormitoryRepos
 
     public async Task<Room?> GetRoomById(Guid roomId, CancellationToken cancellationToken)
     {
-        return await dbContext.Rooms.FindAsync([roomId], cancellationToken) ?? null;
+        return await dbContext.Rooms.Include(r => r.Occupants).SingleOrDefaultAsync(r => r.Id == roomId, cancellationToken) ?? null;
     }
 }

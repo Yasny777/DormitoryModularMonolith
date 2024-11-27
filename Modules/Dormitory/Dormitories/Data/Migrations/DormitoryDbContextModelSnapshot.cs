@@ -138,6 +138,19 @@ namespace Dormitories.Data.Migrations
                     b.ToTable("Rooms", "dormitory");
                 });
 
+            modelBuilder.Entity("Dormitories.Dormitories.ValueObjects.RoomOccupant", b =>
+                {
+                    b.Property<Guid>("RoomId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("text");
+
+                    b.HasKey("RoomId", "AppUserId");
+
+                    b.ToTable("RoomOccupants", "dormitory");
+                });
+
             modelBuilder.Entity("Dormitories.Dormitories.Models.Room", b =>
                 {
                     b.HasOne("Dormitories.Dormitories.Models.Dormitory", null)
@@ -147,9 +160,23 @@ namespace Dormitories.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Dormitories.Dormitories.ValueObjects.RoomOccupant", b =>
+                {
+                    b.HasOne("Dormitories.Dormitories.Models.Room", null)
+                        .WithMany("Occupants")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Dormitories.Dormitories.Models.Dormitory", b =>
                 {
                     b.Navigation("Rooms");
+                });
+
+            modelBuilder.Entity("Dormitories.Dormitories.Models.Room", b =>
+                {
+                    b.Navigation("Occupants");
                 });
 #pragma warning restore 612, 618
         }

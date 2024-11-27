@@ -13,6 +13,8 @@ public class DormitoryDbContext : DbContext
     public DbSet<Dormitory> Dormitories => Set<Dormitory>();
     public DbSet<Room> Rooms => Set<Room>();
 
+    public DbSet<RoomOccupant> RoomOccupants { get; set; }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.HasDefaultSchema("dormitory");

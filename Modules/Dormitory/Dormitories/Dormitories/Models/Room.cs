@@ -1,4 +1,6 @@
-﻿namespace Dormitories.Dormitories.Models;
+﻿using Dormitories.Dormitories.Events;
+
+namespace Dormitories.Dormitories.Models;
 
 public class Room : Entity<Guid>
 {
@@ -11,11 +13,10 @@ public class Room : Entity<Guid>
     public decimal Price { get; private set; } = default!;
 
     //todo User type will come from User Module (reference guid to Users module)
-    private readonly List<Guid> _occupants = [];
-    public IReadOnlyList<Guid> Occupants => _occupants.AsReadOnly();
+    public List<RoomOccupant> Occupants { get; private set; } = [];
     public int TotalOccupants => Occupants.Count;
 
-    public bool IsAvailable() => TotalOccupants < Capacity;
+    public bool IsAvailable => TotalOccupants < Capacity;
     internal Room(Guid dormitoryId, string number, int capacity, string category, decimal price)
     {
         DormitoryId = dormitoryId;
@@ -28,10 +29,14 @@ public class Room : Entity<Guid>
 
     public IDomainEvent AddOccupant(Guid userId)
     {
-        // logika
-        //_occupants.Add()
-        //return new OccupantAddedToRoomEvent(roomId, userId);
-        throw new NotImplementedException();
+        Occupants.Add(new RoomOccupant
+        {
+            RoomId = Id,
+            AppUserId = userId.ToString()
+        });
+
+        return new OccupantAddedToRoomEvent(Id, userId);
+
     }
 
     public IDomainEvent RemoveOccupant(Guid userId)
