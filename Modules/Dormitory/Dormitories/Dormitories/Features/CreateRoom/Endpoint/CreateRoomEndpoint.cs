@@ -12,6 +12,6 @@ public class CreateRoomEndpoint : PrefixedCarterModule
             var result = await sender.Send(command);
             var response = result.Adapt<CreateRoomResponse>();
             return Results.Created($"dormitory/{dormitoryId}/room/{response.RoomId}", response);
-        });
+        }).WithTags("Dormitory");
     }
 }

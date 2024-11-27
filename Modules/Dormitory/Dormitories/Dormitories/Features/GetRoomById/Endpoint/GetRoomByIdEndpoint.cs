@@ -13,6 +13,6 @@ public class GetRoomByIdEndpoint : PrefixedCarterModule
             var response = result.Adapt<GetRoomByIdResponse>();
 
             return Results.Ok(response);
-        });
+        }).WithTags("Dormitory");
     }
 }

@@ -27,6 +27,6 @@ public class LoginUserEndpoint : PrefixedCarterModule
                 });
 
                 return Results.Ok(new LoginUserResponse(result.Token, result.TokenExpiryTime));
-            });
+            }).WithTags("Identity");
     }
 }

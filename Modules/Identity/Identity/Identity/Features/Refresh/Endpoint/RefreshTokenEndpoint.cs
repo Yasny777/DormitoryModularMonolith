@@ -32,6 +32,6 @@ public class RefreshTokenEndpoint : PrefixedCarterModule
             });
 
             return Results.Ok(new RefreshTokenResponse(result.Token, result.TokenExpiryTime));
-        });
+        }).WithTags("Identity");
     }
 }

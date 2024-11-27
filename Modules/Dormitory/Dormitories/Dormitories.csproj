@@ -14,8 +14,6 @@
       <Folder Include="Dormitories\EventHandlers\" />
       <Folder Include="Dormitories\Features\AddOcuupantToRoom\Handler\" />
       <Folder Include="Dormitories\Features\RemoveOccupantFromRoom\" />
-      <Folder Include="Dormitories\Features\UpdateDormitory\" />
-      <Folder Include="Dormitories\Features\UpdateRoom\" />
     </ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
 ﻿using Identity.Identity.Features.Register.Handler;
 using Mapster;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Shared.Features.Endpoints;
 
@@ -15,6 +16,6 @@ public class RegisterUserEndpoint : PrefixedCarterModule
             var command = request.Adapt<RegisterUserCommand>();
             var result = await sender.Send(command);
             var response = result.Adapt<RegisterUserResponse>();
-        });
+        }).WithTags("Identity");
     }
 }

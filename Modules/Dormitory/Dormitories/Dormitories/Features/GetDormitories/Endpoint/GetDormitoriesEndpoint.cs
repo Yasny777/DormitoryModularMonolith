@@ -11,6 +11,6 @@ public class GetDormitoriesEndpoint : PrefixedCarterModule
             var result = await sender.Send(new GetDormitoriesQuery());
             var response = result.Adapt<GetDormitoriesResponse>();
             return Results.Ok(response);
-        }).RequireAuthorization();
+        }).WithTags("Dormitory");
     }
 }

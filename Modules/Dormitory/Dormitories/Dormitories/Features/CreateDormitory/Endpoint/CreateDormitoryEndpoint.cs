@@ -12,6 +12,6 @@ public class CreateDormitoryEndpoint : PrefixedCarterModule
             var result = await sender.Send(command);
             var response = result.Adapt<CreateDormitoryResponse>();
             return Results.Created($"/dormitory/{response.Id}", response);
-        });
+        }).WithTags("Dormitory");
     }
 }

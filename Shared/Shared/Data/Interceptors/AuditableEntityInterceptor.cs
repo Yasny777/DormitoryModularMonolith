@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Shared.DDD;
 
 namespace Shared.Data.Interceptors;
 
-public class AuditableEntityInterceptor : SaveChangesInterceptor
+public class AuditableEntityInterceptor(IHttpContextAccessor httpContext) : SaveChangesInterceptor
 {
     public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
     {
@@ -22,19 +23,19 @@ public class AuditableEntityInterceptor : SaveChangesInterceptor
     private void UpdateEntities(DbContext? dbContext)
     {
         if (dbContext == null) return;
-
+        var userAuditing = httpContext.HttpContext?.User.Identity?.Name;
         foreach (var entry in dbContext.ChangeTracker.Entries<IEntity>())
         {
             if (entry.State == EntityState.Added)
             {
-                entry.Entity.CreatedBy = ""; // todo retrieve from token need to inject httpcontextaccessor
+                entry.Entity.CreatedBy = userAuditing ?? "System"; // todo retrieve from token need to inject httpcontextaccessor
                 entry.Entity.CreatedAt = DateTime.UtcNow;
             }
 
             if (entry.State is EntityState.Added or EntityState.Modified
                 || entry.HasChangedOwnedEntities())
             {
-                entry.Entity.LastModifiedBy = ""; // todo retrieve from token
+                entry.Entity.LastModifiedBy = userAuditing ?? "System"; // todo retrieve from token
                 entry.Entity.LastModified = DateTime.UtcNow;
             }
         }
