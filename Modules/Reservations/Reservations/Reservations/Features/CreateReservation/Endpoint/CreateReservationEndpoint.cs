@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using System.Security.Claims;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Reservations.Reservations.Features.CreateReservation.Handler;
@@ -13,11 +14,12 @@ public class CreateReservationEndpoint : PrefixedCarterModule
     {
         app.MapPost("/reservation", async (HttpContext httpContext, CreateReservationRequest request, ISender sender) =>
         {
-            var userId = httpContext.User.Identity?.Name ?? throw new BadRequestException("User doesnt exist");
+            var userId = httpContext.User.Claims
+                             .FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value
+                         ?? throw new BadRequestException("User doesn't exist");
 
             var command = new CreateReservationCommand(request.RoomId, Guid.Parse(userId));
             var result = await sender.Send(command);
-
         }).WithTags("Reservation");
     }
 }
