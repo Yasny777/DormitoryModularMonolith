@@ -1,4 +1,4 @@
-namespace Reservation.Reservation.ValueObjects;
+namespace Reservations.Reservations.ValueObjects;
 
 public class ReservationStatus
 {
@@ -14,5 +14,16 @@ public class ReservationStatus
         Value = value;
     }
 
+    public static ReservationStatus FromValue(string value)
+    {
+        return value switch
+        {
+            "Pending" => Pending,
+            "Confirmed" => Confirmed,
+            "Cancelled" => Cancelled,
+            "Expired" => Expired,
+            _ => throw new ArgumentException($"Invalid status value: {value}")
+        };
+    }
     public override string ToString() => Value;
 }

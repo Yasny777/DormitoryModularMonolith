@@ -1,7 +1,7 @@
-﻿using Reservation.Reservation.ValueObjects;
+﻿using Reservations.Reservations.ValueObjects;
 using Shared.DDD;
 
-namespace Reservation.Reservation.Models;
+namespace Reservations.Reservations.Models;
 
 public class Reservation : Aggregate<Guid>
 {

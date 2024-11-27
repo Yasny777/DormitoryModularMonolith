@@ -4,11 +4,16 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>User</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Shared\Shared\Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Reservations\Dto\" />
+      <Folder Include="Reservations\Events\" />
+      <Folder Include="Reservations\Features\" />
     </ItemGroup>
 
 </Project>

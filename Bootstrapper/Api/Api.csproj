@@ -24,7 +24,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Modules\Dormitory\Dormitories\Dormitories.csproj" />
       <ProjectReference Include="..\..\Modules\Identity\Identity\Identity.csproj" />
-      <ProjectReference Include="..\..\Modules\Reservation\Reservation\Reservation.csproj" />
+      <ProjectReference Include="..\..\Modules\Reservations\Reservations\Reservations.csproj" />
     </ItemGroup>
 
 </Project>

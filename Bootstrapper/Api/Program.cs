@@ -1,34 +1,31 @@
-using Carter;
-using Identity;
-using Identity.Identity.Constants;
-using Identity.Identity.Models;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
-using Serilog;
-using Shared.Exceptions.Handler;
-using Shared.Extensions;
-
+// INITALIZE BUILDER
 var builder = WebApplication.CreateBuilder(args);
+
+// CONFIGURATION
 var configuration = builder.Configuration;
 
+// HOST
 builder.Host.UseSerilog((ctx, cfg) =>
 {
     cfg.ReadFrom.Configuration(ctx.Configuration);
 });
-// Configure services
 
+// Configure services
 var dormitoryAssembly = typeof(DormitoryModule).Assembly;
 var identityAssembly = typeof(IdentityModule).Assembly;
+var reservationAssembly = typeof(ReservationModule).Assembly;
 
 // Common services
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
-builder.Services.AddCarterWithAssemblies(dormitoryAssembly, identityAssembly);
+builder.Services.AddCarterWithAssemblies(dormitoryAssembly, identityAssembly, reservationAssembly);
 
-builder.Services.AddMediatRWithAssemblies(dormitoryAssembly, identityAssembly);
+builder.Services.AddMediatRWithAssemblies(dormitoryAssembly, identityAssembly, reservationAssembly);
 
+
+// CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
@@ -77,6 +74,10 @@ builder.Services.AddSwaggerGen(opt =>
         }
     });
 });
+
+
+
+
 var app = builder.Build();
 // Configure HTTP request pipeline
 if (app.Environment.IsDevelopment())
