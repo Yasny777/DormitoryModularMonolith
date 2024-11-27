@@ -1,7 +1,7 @@
 ﻿using Dormitories.Data.Repository;
 using Dormitories.Dormitories.Exceptions;
-using Dormitory.Contracts.Dormitories.GetRoomById;
-using Dormitory.Contracts.Dto;
+using Dormitories.Contracts.Dormitories.GetRoomById;
+using Dormitories.Contracts.Dto;
 using Shared.Contracts.CQRS;
 
 namespace Dormitories.Dormitories.Features.GetRoomById.Handler;

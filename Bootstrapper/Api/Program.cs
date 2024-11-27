@@ -1,4 +1,7 @@
 // INITALIZE BUILDER
+
+using Mapster;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // CONFIGURATION
@@ -19,6 +22,8 @@ var reservationAssembly = typeof(ReservationModule).Assembly;
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
+builder.Services.AddMappings();
 
 builder.Services.AddCarterWithAssemblies(dormitoryAssembly, identityAssembly, reservationAssembly);
 

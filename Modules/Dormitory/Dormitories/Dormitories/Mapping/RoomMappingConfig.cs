@@ -1,5 +1,5 @@
 ﻿using Dormitories.Dormitories.Models;
-using Dormitory.Contracts.Dto;
+using Dormitories.Contracts.Dto;
 
 namespace Dormitories.Dormitories.Mapping;
 

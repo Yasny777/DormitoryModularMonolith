@@ -1,6 +1,6 @@
 using Shared.Contracts.CQRS;
 
-namespace Dormitory.Contracts.Dormitories.GetRoomById;
+namespace Dormitories.Contracts.Dormitories.GetRoomById;
 
 public record GetRoomByIdQuery(Guid RoomId) : IQuery<GetRoomByIdResult>
 {

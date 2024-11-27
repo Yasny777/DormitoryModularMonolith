@@ -1,4 +1,4 @@
-using Dormitory.Contracts.Dto;
+using Dormitories.Contracts.Dto;
 
 namespace Dormitories.Dormitories.Features.GetRoomsInDormitory.Handler;
 

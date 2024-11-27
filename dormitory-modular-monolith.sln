@@ -27,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reservations", "Reservation
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reservations", "Modules\Reservations\Reservations\Reservations.csproj", "{05E1912A-BBED-421C-AF02-E74473750C23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dormitory.Contracts", "Modules\Dormitory\Dormitory.Contracts\Dormitory.Contracts.csproj", "{3E37386A-D733-4F34-A67A-5D27FA5D0355}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dormitories.Contracts", "Modules\Dormitory\Dormitories.Contracts\Dormitories.Contracts.csproj", "{3E37386A-D733-4F34-A67A-5D27FA5D0355}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Contracts", "Shared\Shared.Contracts\Shared.Contracts.csproj", "{FA0E5821-92F4-4D38-81C6-52FD650B9976}"
 EndProject

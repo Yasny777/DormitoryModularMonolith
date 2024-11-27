@@ -1,4 +1,4 @@
-﻿using Dormitory.Contracts.Dormitories.GetRoomById;
+﻿using Dormitories.Contracts.Dormitories.GetRoomById;
 using MediatR;
 using Shared.Contracts.CQRS;
 
@@ -11,7 +11,8 @@ internal class CreateReservationHandler(ISender sender)
     {
         var room = await sender.Send(new GetRoomByIdQuery(request.RoomId));
 
-        if (room.IsAvailable) ...
+        return new CreateReservationResult();
+
 
     }
 }

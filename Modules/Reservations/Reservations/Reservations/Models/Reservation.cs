@@ -12,8 +12,8 @@ public class Reservation : Aggregate<Guid>
     public ReservationStatus Status { get; private set; }
 
 
-    public static Reservation Create()
-    {
-
-    }
+    // public static Reservation Create()
+    // {
+    //
+    // }
 }

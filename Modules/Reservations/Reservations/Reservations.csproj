@@ -8,7 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Shared\Shared\Shared.csproj" />
-      <ProjectReference Include="..\..\Dormitory\Dormitory.Contracts\Dormitory.Contracts.csproj" />
+      <ProjectReference Include="..\..\Dormitory\Dormitories.Contracts\Dormitories.Contracts.csproj" />
     </ItemGroup>
 
     <ItemGroup>

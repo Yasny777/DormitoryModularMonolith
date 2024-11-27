@@ -1,4 +1,4 @@
-using Dormitory.Contracts.Dto;
+using Dormitories.Contracts.Dto;
 using Shared.Contracts.CQRS;
 
 namespace Dormitories.Dormitories.Features.CreateRoom.Handler;
