@@ -1,3 +1,5 @@
+using Dormitory.Contracts.Dto;
+
 namespace Dormitories.Dormitories.Features.GetRoomsInDormitory.Handler;
 
 public class GetRoomsInDormitoryResult : PagedResult<RoomDto>

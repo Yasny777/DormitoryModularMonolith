@@ -2,6 +2,7 @@
 using Dormitories.Dormitories.Exceptions;
 using Dormitories.Dormitories.Features.CreateRoom.Endpoint;
 using Dormitories.Dormitories.Models;
+using Shared.Contracts.CQRS;
 using Shared.Exceptions;
 
 namespace Dormitories.Dormitories.Features.CreateRoom.Handler;

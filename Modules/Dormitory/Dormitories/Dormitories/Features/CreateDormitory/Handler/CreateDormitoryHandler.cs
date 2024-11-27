@@ -1,5 +1,6 @@
 ﻿using Dormitories.Data.Repository;
 using Dormitories.Dormitories.Models;
+using Shared.Contracts.CQRS;
 
 namespace Dormitories.Dormitories.Features.CreateDormitory.Handler;
 

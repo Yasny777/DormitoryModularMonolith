@@ -10,4 +10,10 @@ public class Reservation : Aggregate<Guid>
     public DateTime StartDate { get; private set; }
     public DateTime EndDate { get; private set; }
     public ReservationStatus Status { get; private set; }
+
+
+    public static Reservation Create()
+    {
+
+    }
 }

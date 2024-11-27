@@ -1,6 +1,7 @@
 ﻿using Dormitories.Dormitories.Constants;
 using Dormitories.Dormitories.Features.GetDormitories.Endpoint;
 using Shared.Constants;
+using Shared.Contracts.CQRS;
 
 namespace Dormitories.Dormitories.Features.GetRoomsInDormitory.Handler;
 

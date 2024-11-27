@@ -1,5 +1,6 @@
 ﻿using Identity.Identity.Constants;
 using Identity.Identity.Exceptions;
+using Shared.Contracts.CQRS;
 
 namespace Identity.Identity.Features.Register.Handler;
 //todo validate password and confirm password

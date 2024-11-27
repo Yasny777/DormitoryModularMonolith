@@ -15,8 +15,7 @@ public class Room : Entity<Guid>
     public IReadOnlyList<Guid> Occupants => _occupants.AsReadOnly();
     public int TotalOccupants => Occupants.Count;
 
-    public bool IsFull() => TotalOccupants >= Capacity;
-
+    public bool IsAvailable() => TotalOccupants < Capacity;
     internal Room(Guid dormitoryId, string number, int capacity, string category, decimal price)
     {
         DormitoryId = dormitoryId;

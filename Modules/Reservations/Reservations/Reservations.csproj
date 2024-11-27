@@ -8,12 +8,13 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Shared\Shared\Shared.csproj" />
+      <ProjectReference Include="..\..\Dormitory\Dormitory.Contracts\Dormitory.Contracts.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Reservations\Dto\" />
-      <Folder Include="Reservations\Events\" />
-      <Folder Include="Reservations\Features\" />
+      <Folder Include="Reservations\EventHandlers\" />
+      <Folder Include="Reservations\Features\CancelReservation\" />
     </ItemGroup>
 
 </Project>

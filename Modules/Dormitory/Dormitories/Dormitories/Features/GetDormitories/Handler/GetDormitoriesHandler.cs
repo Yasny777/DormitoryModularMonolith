@@ -1,4 +1,5 @@
 ﻿using Dormitories.Data.Repository;
+using Shared.Contracts.CQRS;
 
 namespace Dormitories.Dormitories.Features.GetDormitories.Handler;
 

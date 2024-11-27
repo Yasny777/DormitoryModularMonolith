@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using Shared.Contracts.CQRS;
 using Shared.Exceptions;
 
 namespace Identity.Identity.Features.Login.Handler;
