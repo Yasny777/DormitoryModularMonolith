@@ -25,7 +25,6 @@
       <ProjectReference Include="..\..\Modules\Dormitory\Dormitories\Dormitories.csproj" />
       <ProjectReference Include="..\..\Modules\Identity\Identity\Identity.csproj" />
       <ProjectReference Include="..\..\Modules\Reservation\Reservation\Reservation.csproj" />
-      <ProjectReference Include="..\..\Modules\User\User\User.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,5 +1,4 @@
 ﻿using Identity.Identity.Constants;
-using Identity.Identity.Models;
 
 namespace Identity.Data.Seed;
 

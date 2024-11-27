@@ -1,12 +1,9 @@
 ﻿using Identity.Identity.Constants;
 using Identity.Identity.Exceptions;
-using Identity.Identity.Features.Register.Endpoint;
-using Identity.Identity.Models;
-using Microsoft.AspNetCore.Identity;
-using Shared.CQRS;
 
 namespace Identity.Identity.Features.Register.Handler;
 //todo validate password and confirm password
+
 internal class RegisterUserHandler
     (UserManager<AppUser> userManager)
     : ICommandHandler<RegisterUserCommand, RegisterUserResult>

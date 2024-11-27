@@ -1,5 +1,7 @@
 using Carter;
 using Identity;
+using Identity.Identity.Constants;
+using Identity.Identity.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -82,12 +84,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.MapCarter();
+
 app.UseSerilogRequestLogging();
 app.UseExceptionHandler(cfg => {});
 app.UseCors("AllowFrontend");
 app.UseIdentityModule();
-
+app.MapCarter();
 app.UseDormitoryModule()
     .UseReservationModule();
 

@@ -1,7 +1,4 @@
-﻿using Identity.Identity.Constants;
-using Identity.Identity.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Shared.Data.Seed;
 
 namespace Identity.Data.Seed;

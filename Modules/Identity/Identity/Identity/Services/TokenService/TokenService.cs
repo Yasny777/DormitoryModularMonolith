@@ -2,25 +2,31 @@
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using Identity.Identity.Models;
+using Identity.Identity.Features.Login.Handler;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Identity.Identity.Services.TokenService;
 
 public interface ITokenService
 {
-    string GenerateJwtToken(UserSession userSession);
-    string GenerateRefreshToken();
+    JwtRefreshTokensWithExpiry GenerateAccessAndRefreshToken(UserSession userSession);
 }
 
 
 public class TokenService(IConfiguration configuration) : ITokenService
 {
-    public string GenerateJwtToken(UserSession userSession)
+    public JwtRefreshTokensWithExpiry GenerateAccessAndRefreshToken(UserSession userSession)
+    {
+        var token = GenerateJwtToken(userSession);
+        var refreshToken = GenerateRefreshToken();
+        var expiryRefreshTokenTime = DateTime.UtcNow.AddMinutes(10);
+        return new JwtRefreshTokensWithExpiry(token.Token, token.ExpiryTime, refreshToken, expiryRefreshTokenTime);
+    }
+    private TokenWithExpiry GenerateJwtToken(UserSession userSession)
     {
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-        var claims = new[]
+        var claims = new List<Claim>()
         {
             new Claim(ClaimTypes.NameIdentifier, userSession.Id.ToString()),
             new Claim(ClaimTypes.Name, userSession.UserName),
@@ -28,33 +34,36 @@ public class TokenService(IConfiguration configuration) : ITokenService
         };
 
         var roles = userSession.Roles;
-        foreach (var roleName in roles.Select(role => role.Name))
-        {
-            claims.Append(new Claim(ClaimTypes.Role, roleName));
-        }
+        claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
+
+        var jwtExpiryTime = DateTime.Now.AddMinutes(5);
 
         var token = new JwtSecurityToken(
             issuer: configuration["Jwt:Issuer"],
             audience: configuration["Jwt:Audience"],
             claims: claims,
-            expires: DateTime.Now.AddMinutes(5),
+            expires: jwtExpiryTime,
             signingCredentials: credentials
         );
 
-        return new JwtSecurityTokenHandler().WriteToken(token);
+        var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
+        return new TokenWithExpiry(jwtToken, jwtExpiryTime);
     }
 
-    public string GenerateRefreshToken()
+    private string GenerateRefreshToken()
     {
         var randomNumber = new byte[32];
         using var rng = RandomNumberGenerator.Create();
         rng.GetBytes(randomNumber);
         return Convert.ToBase64String(randomNumber);
     }
+
+
+
 }
 
+public record TokenWithExpiry(string Token, DateTime ExpiryTime);
 
-
-public record UserSession(Guid Id, string UserName, string Email, List<AppRole> Roles)
+public record UserSession(Guid Id, string UserName, string Email, List<string> Roles)
 {
 }

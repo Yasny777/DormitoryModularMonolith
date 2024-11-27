@@ -1,9 +1,7 @@
 ﻿using System.Text;
 using Identity.Data;
 using Identity.Data.Seed;
-using Identity.Identity.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
@@ -59,9 +57,12 @@ public static class IdentityModule
                     ValidAudience = configuration["Jwt:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"] ??
                         throw new InvalidOperationException(
-                            "Key doesnt exist")))
+                            "Key doesnt exist"))),
+                    ClockSkew = TimeSpan.FromMinutes(2)
                 };
             });
+
+        services.AddScoped<ITokenService, TokenService>();
 
         services.AddAuthorization();
 
