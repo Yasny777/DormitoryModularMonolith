@@ -1,4 +1,5 @@
-﻿using Reservations.Reservations.ValueObjects;
+﻿using Reservations.Reservations.Events;
+using Reservations.Reservations.ValueObjects;
 using Shared.DDD;
 
 namespace Reservations.Reservations.Models;
@@ -12,8 +13,16 @@ public class Reservation : Aggregate<Guid>
     public ReservationStatus Status { get; private set; }
 
 
-    // public static Reservation Create()
-    // {
-    //
-    // }
+    public static Reservation Create(Guid id, Guid roomId, Guid userId)
+    {
+        var reservation = new Reservation()
+        {
+            Status = ReservationStatus.Confirmed,
+            RoomId = roomId,
+            UserId = userId,
+        };
+
+        reservation.AddDomainEvent(new ReservationCreatedEvent(reservation));
+        return reservation;
+    }
 }
