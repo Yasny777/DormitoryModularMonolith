@@ -11,9 +11,4 @@
       <ProjectReference Include="..\..\Dormitory\Dormitories.Contracts\Dormitories.Contracts.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Reservations\Dto\" />
-      <Folder Include="Reservations\Features\CancelReservation\" />
-    </ItemGroup>
-
 </Project>
