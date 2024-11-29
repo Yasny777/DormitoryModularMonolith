@@ -5,7 +5,7 @@ using Shared.Exceptions;
 
 namespace Dormitories.Dormitories.Features.AddOcuupantToRoom.Handler;
 
-public class AddOcuppantToRoomHandler(IDormitoryRepository dormitoryRepository)
+internal class AddOcuppantToRoomHandler(IDormitoryRepository dormitoryRepository)
     : ICommandHandler<AddOccupantToRoomCommand, AddOccupantToRoomResult>
 {
     public async Task<AddOccupantToRoomResult> Handle(AddOccupantToRoomCommand request,
