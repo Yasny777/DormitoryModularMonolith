@@ -13,7 +13,8 @@ public class Room : Entity<Guid>
     public decimal Price { get; private set; } = default!;
 
     //todo User type will come from User Module (reference guid to Users module)
-    public List<RoomOccupant> Occupants { get; private set; } = [];
+    private readonly List<RoomOccupant> _occupants = new();
+    public IReadOnlyList<RoomOccupant> Occupants => _occupants.AsReadOnly();
     public int TotalOccupants => Occupants.Count;
 
     public bool IsAvailable => TotalOccupants < Capacity;
@@ -29,7 +30,7 @@ public class Room : Entity<Guid>
 
     public IDomainEvent AddOccupant(Guid userId)
     {
-        Occupants.Add(new RoomOccupant
+        _occupants.Add(new RoomOccupant
         {
             RoomId = Id,
             AppUserId = userId.ToString()
