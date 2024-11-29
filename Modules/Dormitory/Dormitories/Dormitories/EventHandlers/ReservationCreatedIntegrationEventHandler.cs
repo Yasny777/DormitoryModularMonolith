@@ -4,7 +4,7 @@ using Shared.Events;
 
 namespace Dormitories.Dormitories.EventHandlers;
 
-public class ReservationCreatedIntegrationEventHandler(
+internal class ReservationCreatedIntegrationEventHandler(
     ISender sender,
     ILogger<ReservationCreatedIntegrationEventHandler> logger)
     : INotificationHandler<ReservationCreatedIntegrationEvent>
