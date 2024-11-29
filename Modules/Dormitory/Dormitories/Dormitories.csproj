@@ -12,8 +12,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Dormitories\EventHandlers\" />
-      <Folder Include="Dormitories\Features\AddOcuupantToRoom\Handler\" />
       <Folder Include="Dormitories\Features\RemoveOccupantFromRoom\" />
     </ItemGroup>
 

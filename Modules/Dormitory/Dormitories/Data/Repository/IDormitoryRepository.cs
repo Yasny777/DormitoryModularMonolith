@@ -17,4 +17,6 @@ public interface IDormitoryRepository
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 
     Task<Room?> GetRoomById(Guid roomId, CancellationToken cancellationToken);
+
+    Task<Dormitory?> GetDormitoryByRoomId(Guid roomId, CancellationToken cancellationToken);
 }

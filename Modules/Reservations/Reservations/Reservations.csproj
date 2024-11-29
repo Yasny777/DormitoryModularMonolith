@@ -13,7 +13,6 @@
 
     <ItemGroup>
       <Folder Include="Reservations\Dto\" />
-      <Folder Include="Reservations\EventHandlers\" />
       <Folder Include="Reservations\Features\CancelReservation\" />
     </ItemGroup>
 

@@ -15,6 +15,8 @@ public class Reservation : Aggregate<Guid>
 
     public static Reservation Create(Guid id, Guid roomId, Guid userId)
     {
+
+
         var reservation = new Reservation()
         {
             Status = ReservationStatus.Confirmed,

@@ -20,6 +20,7 @@ public class CreateReservationEndpoint : PrefixedCarterModule
 
             var command = new CreateReservationCommand(request.RoomId, Guid.Parse(userId));
             var result = await sender.Send(command);
+            return Results.Created();
         }).WithTags("Reservation");
     }
 }

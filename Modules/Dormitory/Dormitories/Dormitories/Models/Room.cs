@@ -28,7 +28,7 @@ public class Room : Entity<Guid>
     }
 
 
-    public IDomainEvent AddOccupant(Guid userId)
+    public OccupantAddedToRoomEvent AddOccupant(Guid userId)
     {
         _occupants.Add(new RoomOccupant
         {

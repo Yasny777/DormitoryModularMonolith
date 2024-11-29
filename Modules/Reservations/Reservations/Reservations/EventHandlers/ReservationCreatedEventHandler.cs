@@ -5,7 +5,7 @@ using Shared.Events;
 
 namespace Reservations.Reservations.EventHandlers;
 
-public class ReservationCreatedEventHandler(ILogger<ReservationCreatedEventHandler> logger, ISender sender)
+public class ReservationCreatedEventHandler(ILogger<ReservationCreatedEventHandler> logger, IPublisher publisher)
     : INotificationHandler<ReservationCreatedEvent>
 {
     public async Task Handle(ReservationCreatedEvent notification, CancellationToken cancellationToken)
@@ -16,10 +16,10 @@ public class ReservationCreatedEventHandler(ILogger<ReservationCreatedEventHandl
 
         var reservationCreatedIntegrationEvent = new ReservationCreatedIntegrationEvent(
             notification.Reservation.Id,
-            notification.Reservation.RoomId,
-            notification.Reservation.UserId);
+            notification.Reservation.UserId,
+            notification.Reservation.RoomId);
 
         // multicast do modułu Dormitory i Identity (User)
-        await sender.Send(reservationCreatedIntegrationEvent, cancellationToken);
+        await publisher.Publish(reservationCreatedIntegrationEvent, cancellationToken);
     }
 }

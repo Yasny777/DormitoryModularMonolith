@@ -1,4 +1,5 @@
-﻿using Dormitories.Data.Extensions;
+﻿using Dormitories.Contracts.Dormitories.GetRoomById;
+using Dormitories.Data.Extensions;
 using Dormitories.Dormitories.Features.GetRoomsInDormitory.Handler;
 using Dormitories.Dormitories.Models;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +29,7 @@ public class DormitoryRepository(DormitoryDbContext dbContext) : IDormitoryRepos
     public async Task<List<Room>> GetRoomsInDormitoryByQuery(GetRoomsInDormitoryQuery query, bool asNoTracking = true,
         CancellationToken cancellationToken = default)
     {
-        var roomsQuery = dbContext.Rooms.Where(r => r.DormitoryId == query.DormitoryId);
+        var roomsQuery = dbContext.Rooms.Include(r => r.Occupants).Where(r => r.DormitoryId == query.DormitoryId);
         if (asNoTracking) roomsQuery = roomsQuery.AsNoTracking();
         // sorting
         roomsQuery = roomsQuery.ApplySorting(query.SortBy, query.SortDirection);
@@ -60,6 +61,15 @@ public class DormitoryRepository(DormitoryDbContext dbContext) : IDormitoryRepos
 
     public async Task<Room?> GetRoomById(Guid roomId, CancellationToken cancellationToken)
     {
-        return await dbContext.Rooms.Include(r => r.Occupants).SingleOrDefaultAsync(r => r.Id == roomId, cancellationToken) ?? null;
+        return await dbContext.Rooms.Include(r => r.Occupants)
+            .SingleOrDefaultAsync(r => r.Id == roomId, cancellationToken) ?? null;
+    }
+
+    public async Task<Dormitory?> GetDormitoryByRoomId(Guid roomId, CancellationToken cancellationToken)
+    {
+        return await dbContext.Dormitories
+            .Include(d => d.Rooms)
+            .ThenInclude(r => r.Occupants)
+            .FirstOrDefaultAsync(d => d.Rooms.Any(r => r.Id == roomId), cancellationToken);
     }
 }
