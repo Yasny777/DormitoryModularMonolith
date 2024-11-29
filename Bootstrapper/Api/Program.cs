@@ -1,6 +1,7 @@
 // INITALIZE BUILDER
 
 using Mapster;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,14 @@ var reservationAssembly = typeof(ReservationModule).Assembly;
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
+builder.Services.AddStackExchangeRedisCache(opt =>
+{
+    opt.Configuration = builder.Configuration.GetConnectionString("Redis");
+});
+
+builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
+    ConnectionMultiplexer.Connect(configuration.GetConnectionString("Redis")!));
 
 builder.Services.AddMappings();
 

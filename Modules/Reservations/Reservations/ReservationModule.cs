@@ -1,4 +1,5 @@
 ﻿using Reservations.Data;
+using Reservations.Data.Redis;
 
 namespace Reservations;
 
@@ -17,6 +18,8 @@ public static class ReservationModule
             options.AddInterceptors(serviceProvider.GetServices<ISaveChangesInterceptor>());
             options.UseNpgsql(connectionString);
         });
+
+        services.AddSingleton(RedLockFactoryProvider.CreateRedLockFactory(configuration.GetConnectionString("Redis")!));
 
         return services;
     }
