@@ -1,7 +1,8 @@
-﻿using Shared.DDD;
+﻿using Reservations.Reservations.Models;
+using Shared.DDD;
 
 namespace Reservations.Reservations.Events;
 
-public record ReservationCreatedEvent() : IDomainEvent
+public record ReservationCreatedEvent(Reservation Reservation) : IDomainEvent
 {
 }
