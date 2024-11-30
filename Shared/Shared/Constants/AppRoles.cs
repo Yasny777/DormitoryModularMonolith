@@ -1,4 +1,4 @@
-﻿namespace Identity.Identity.Constants;
+﻿namespace Shared.Constants;
 
 public static class AppRoles
 {
