@@ -6,11 +6,11 @@ public class GetRoomsInDormitoryEndpoint : PrefixedCarterModule
 {
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("/dormitory/{dormitoryId}/room",
-            async ([AsParameters] GetRoomsInDormitoryRequest request, ISender sender) =>
+        app.MapGet("/dormitory/{dormitoryId:guid}/room",
+            async (Guid dormitoryId, [AsParameters] GetRoomsInDormitoryRequest request, ISender sender) =>
             {
                 var result = await sender.Send(new GetRoomsInDormitoryQuery(
-                    request.DormitoryId,
+                    dormitoryId,
                     request.PageNumber,
                     request.PageSize,
                     request.SortBy,
