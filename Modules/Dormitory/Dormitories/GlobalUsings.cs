@@ -11,3 +11,4 @@ global using Microsoft.AspNetCore.Routing;
 global using Shared.Features.Endpoints;
 global using Shared.Pagination;
 global using Dormitories.Dormitories.Dto;
+global using Shared.Constants;

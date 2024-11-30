@@ -1,4 +1,4 @@
-﻿using Identity.Identity.Constants;
+﻿using Shared.Constants;
 
 namespace Identity.Data.Seed;
 
