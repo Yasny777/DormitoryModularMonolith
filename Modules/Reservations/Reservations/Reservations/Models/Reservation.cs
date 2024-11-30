@@ -12,6 +12,8 @@ public class Reservation : Aggregate<Guid>
     public DateTime EndDate { get; private set; }
     public ReservationStatus Status { get; private set; } = default!;
 
+    public RoomInfo RoomInfo { get; private set; } = default!;
+
 
     public static Reservation Create(Guid id, Guid roomId, Guid userId)
     {
