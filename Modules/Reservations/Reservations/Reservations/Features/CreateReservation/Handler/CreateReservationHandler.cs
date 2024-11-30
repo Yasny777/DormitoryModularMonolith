@@ -89,7 +89,7 @@ internal class CreateReservationHandler(
 
                     await transaction.CommitAsync(cancellationToken);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     if (incrementedFlag != true) throw;
 

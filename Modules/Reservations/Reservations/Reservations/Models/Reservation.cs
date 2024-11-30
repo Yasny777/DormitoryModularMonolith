@@ -10,7 +10,7 @@ public class Reservation : Aggregate<Guid>
     public Guid UserId { get; private set; }
     public DateTime StartDate { get; private set; }
     public DateTime EndDate { get; private set; }
-    public ReservationStatus Status { get; private set; }
+    public ReservationStatus Status { get; private set; } = default!;
 
 
     public static Reservation Create(Guid id, Guid roomId, Guid userId)

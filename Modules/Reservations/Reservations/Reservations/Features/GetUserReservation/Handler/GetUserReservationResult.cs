@@ -2,6 +2,6 @@ using Reservations.Reservations.Dto;
 
 namespace Reservations.Reservations.Features.GetUserReservation.Handler;
 
-public record GetUserReservationResult(ReservationDto ReservationDto)
+public record GetUserReservationResult(List<ReservationDto> ReservationDto)
 {
 }
