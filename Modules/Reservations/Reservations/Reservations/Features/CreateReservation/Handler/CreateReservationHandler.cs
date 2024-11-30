@@ -4,6 +4,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.IdentityModel.Tokens;
 using RedLockNet.SERedis;
 using Reservations.Reservations.Models;
+using Reservations.Reservations.ValueObjects;
 using Shared.Contracts.CQRS;
 using Shared.Exceptions;
 
@@ -21,8 +22,12 @@ internal class CreateReservationHandler(
     {
         // check if user has already reservation
         var reservationActive =
-            await reservationDbContext.Reservations.SingleOrDefaultAsync(r => r.UserId == request.UserId,
+            await reservationDbContext
+                .Reservations
+                .Where(r => r.Status == ReservationStatus.Confirmed)
+                .SingleOrDefaultAsync(r => r.UserId == request.UserId,
                 cancellationToken);
+
         if (reservationActive != null) throw new BadRequestException("User already has active reservation");
 
         var roomId = request.RoomId;
