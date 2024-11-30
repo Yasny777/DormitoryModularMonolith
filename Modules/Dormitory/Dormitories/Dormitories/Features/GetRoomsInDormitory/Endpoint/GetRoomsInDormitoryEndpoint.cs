@@ -18,6 +18,6 @@ public class GetRoomsInDormitoryEndpoint : PrefixedCarterModule
 
                 var response = result.Adapt<GetRoomsInDormitoryResponse>();
                 return Results.Ok(response);
-            }).WithTags("Dormitory");
+            }).WithTags("Dormitory").RequireAuthorization();
     }
 }

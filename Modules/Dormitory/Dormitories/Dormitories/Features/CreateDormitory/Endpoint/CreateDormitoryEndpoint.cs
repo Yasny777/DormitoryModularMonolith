@@ -1,4 +1,5 @@
 ﻿using Dormitories.Dormitories.Features.CreateDormitory.Handler;
+using Shared.Constants;
 
 namespace Dormitories.Dormitories.Features.CreateDormitory.Endpoint;
 
@@ -12,6 +13,6 @@ public class CreateDormitoryEndpoint : PrefixedCarterModule
             var result = await sender.Send(command);
             var response = result.Adapt<CreateDormitoryResponse>();
             return Results.Created($"/dormitory/{response.Id}", response);
-        }).WithTags("Dormitory");
+        }).WithTags("Dormitory").RequireAuthorization(c => c.RequireRole(AppRoles.Admin));
     }
 }
