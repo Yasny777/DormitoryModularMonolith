@@ -1,3 +1,3 @@
 ﻿namespace Dormitories.Dormitories.Events;
 
-public record OccupantRemovedFromRoomEvent(Guid RoomId, Guid UserId) : IDomainEvent;
+public record OccupantRemovedFromRoomEvent(Guid RoomId, string UserId) : IDomainEvent;

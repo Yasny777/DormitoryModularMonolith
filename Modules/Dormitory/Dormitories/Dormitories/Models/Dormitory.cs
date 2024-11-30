@@ -65,7 +65,7 @@ public class Dormitory : Aggregate<Guid>
         AddDomainEvent(occupantAddedToRoomEvent);
     }
 
-    public void RemoveOccupantFromRoom(Guid roomId, Guid userId)
+    public void RemoveOccupantFromRoom(Guid roomId, string userId)
     {
         var room = _rooms.FirstOrDefault(r => r.Id == roomId)
                    ?? throw new InvalidOperationException("Room not found.");

@@ -11,8 +11,4 @@
       <ProjectReference Include="..\Dormitories.Contracts\Dormitories.Contracts.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Dormitories\Features\RemoveOccupantFromRoom\" />
-    </ItemGroup>
-
 </Project>

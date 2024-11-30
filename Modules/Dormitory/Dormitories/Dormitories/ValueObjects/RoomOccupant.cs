@@ -3,5 +3,5 @@
 public class RoomOccupant
 {
     public Guid RoomId { get; set; }
-    public string AppUserId { get; set; }  // Użytkownik jako string bo IdentityManager mapuje Guid na string
+    public string AppUserId { get; set; } = default!; // Użytkownik jako string bo IdentityManager mapuje Guid na string
 }
