@@ -18,8 +18,8 @@ public class Reservation : Aggregate<Guid>
         var reservation = new Reservation()
         {
             Status = ReservationStatus.Confirmed,
-            StartDate = new DateTime(2024, 2, 1), //! todo hard coded, should be get from db
-            EndDate =  new DateTime(2024, 6, 30),
+            StartDate = new DateTime(2024, 2, 1).ToUniversalTime(), //! todo hard coded, should be get from db
+            EndDate =  new DateTime(2024, 6, 30).ToUniversalTime(),
             RoomId = roomId,
             UserId = userId,
         };
