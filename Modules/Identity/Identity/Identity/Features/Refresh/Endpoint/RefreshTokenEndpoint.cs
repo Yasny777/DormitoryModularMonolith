@@ -13,7 +13,6 @@ public class RefreshTokenEndpoint : PrefixedCarterModule
     {
         app.MapPost("/refresh", async (HttpContext httpContext, ISender sender) =>
         {
-            var d = httpContext.User;
             var refreshToken = httpContext.Request.Cookies["App_Dormitory_Refresh"];
             if (string.IsNullOrEmpty(refreshToken))
                 return Results.Unauthorized();
