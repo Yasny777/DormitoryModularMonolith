@@ -1,6 +1,7 @@
 ﻿using Dormitories.Contracts.Dormitories.GetRoomById;
 using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using RedLockNet.SERedis;
 using Reservations.Reservations.Models;
@@ -12,6 +13,7 @@ namespace Reservations.Reservations.Features.CreateReservation.Handler;
 
 internal class CreateReservationHandler(
     ISender sender,
+    ILogger<CreateReservationHandler> logger,
     ReservationDbContext reservationDbContext,
     RedLockFactory redLockFactory,
     IDistributedCache redis)
@@ -26,7 +28,7 @@ internal class CreateReservationHandler(
                 .Reservations
                 .Where(r => r.Status == ReservationStatus.Confirmed)
                 .SingleOrDefaultAsync(r => r.UserId == request.UserId,
-                cancellationToken);
+                    cancellationToken);
 
         if (reservationActive != null) throw new BadRequestException("User already has active reservation");
 
@@ -44,6 +46,7 @@ internal class CreateReservationHandler(
             if (redLock.IsAcquired)
             {
                 var incrementedFlag = false;
+                using var transaction = await reservationDbContext.Database.BeginTransactionAsync(cancellationToken);
                 try
                 {
                     var capacity = await redis.GetStringAsync(redisKeyCapacity, cancellationToken);
@@ -79,8 +82,12 @@ internal class CreateReservationHandler(
 
                     // Create reservation
                     var reservation = Reservation.Create(Guid.NewGuid(), roomId, request.UserId);
+
                     await reservationDbContext.Reservations.AddAsync(reservation, cancellationToken);
+
                     await reservationDbContext.SaveChangesAsync(cancellationToken);
+
+                    await transaction.CommitAsync(cancellationToken);
                 }
                 catch (Exception e)
                 {
@@ -90,10 +97,14 @@ internal class CreateReservationHandler(
                     var occupantsCount = int.Parse(currentOccupants);
                     occupantsCount -= 1;
                     await redis.SetStringAsync(redisKeyOccupants, occupantsCount.ToString(), cancellationToken);
+
+                    await transaction.RollbackAsync(cancellationToken);
+                    throw;
                 }
                 finally
                 {
                     // zwalnia blokade za pomoca IDisposable
+                    logger.LogInformation("Lock for room {roomId} was released", roomId);
                 }
             }
             else
@@ -101,7 +112,6 @@ internal class CreateReservationHandler(
                 throw new Exception("Failed to acquire lock. Other User try to reserve this room. Try again later.");
             }
         }
-
 
         return new CreateReservationResult();
     }

@@ -4,13 +4,13 @@ public class CreateReservationEndpoint : PrefixedCarterModule
 {
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/reservation", async (HttpContext httpContext, CreateReservationRequest request, ISender sender) =>
+        app.MapPost("/reservation/{roomId:guid}", async (HttpContext httpContext, Guid roomId, ISender sender) =>
             {
                 var userId = httpContext.User.Claims
                                  .FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value
                              ?? throw new BadRequestException("User doesn't exist");
 
-                var command = new CreateReservationCommand(request.RoomId, Guid.Parse(userId));
+                var command = new CreateReservationCommand(roomId, Guid.Parse(userId));
                 var result = await sender.Send(command);
                 return Results.Created();
             })

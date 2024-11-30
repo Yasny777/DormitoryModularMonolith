@@ -6,13 +6,13 @@ public class CancelReservationEndpoint : PrefixedCarterModule
 {
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapDelete("/reservation", async (HttpContext httpContext, CancelReservationRequest request, ISender sender) =>
+        app.MapDelete("/reservation/{reservationId:guid}", async (Guid reservationId, HttpContext httpContext, ISender sender) =>
             {
                 var userId = httpContext.User.Claims
                                  .FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value
                              ?? throw new BadRequestException("User doesn't exist");
 
-                var command = new CancelReservationCommand(userId, request.ReservationId);
+                var command = new CancelReservationCommand(userId, reservationId);
                 var result = await sender.Send(command);
                 return Results.NoContent();
             })
