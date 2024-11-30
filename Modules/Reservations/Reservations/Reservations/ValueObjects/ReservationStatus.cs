@@ -19,7 +19,7 @@ public class ReservationStatus
         return value switch
         {
             "Pending" => Pending,
-            "Confirmed" => Active,
+            "Active" => Active,
             "Cancelled" => Cancelled,
             "Expired" => Expired,
             _ => throw new ArgumentException($"Invalid status value: {value}")
