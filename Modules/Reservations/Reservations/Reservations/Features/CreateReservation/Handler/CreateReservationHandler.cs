@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using RedLockNet.SERedis;
 using Reservations.Reservations.Models;
+using Reservations.Reservations.Services;
 using Reservations.Reservations.ValueObjects;
 using Shared.Contracts.CQRS;
 using Shared.Exceptions;
@@ -15,104 +16,52 @@ internal class CreateReservationHandler(
     ISender sender,
     ILogger<CreateReservationHandler> logger,
     ReservationDbContext reservationDbContext,
-    RedLockFactory redLockFactory,
-    IDistributedCache redis)
+    IDistributedLockService distributedLockService,
+    IRedisService redisService,
+    IReservationService reservationService)
     : ICommandHandler<CreateReservationCommand, CreateReservationResult>
 {
-    public async Task<CreateReservationResult> Handle(CreateReservationCommand request,
-        CancellationToken cancellationToken)
+    public async Task<CreateReservationResult> Handle(CreateReservationCommand request, CancellationToken cancellationToken)
     {
-        // check if user has already reservation
-        var reservationActive =
-            await reservationDbContext
-                .Reservations
-                .Where(r => r.Status == ReservationStatus.Confirmed)
-                .SingleOrDefaultAsync(r => r.UserId == request.UserId,
-                    cancellationToken);
-
-        if (reservationActive != null) throw new BadRequestException("User already has active reservation");
+        await reservationService.ValidateUserReservationAsync(request.UserId, cancellationToken);
 
         var roomId = request.RoomId;
         var roomResourceKey = $"room-reservation-{roomId}";
-        var redisKeyOccupants = $"room:{roomId}:occupants";
-        var redisKeyCapacity = $"room:{roomId}:capacity";
-        var lockExpiry = TimeSpan.FromSeconds(10);
-        var waitTime = TimeSpan.FromSeconds(2);
-        var retryTime = TimeSpan.FromMilliseconds(500);
 
-        await using (var redLock =
-                     await redLockFactory.CreateLockAsync(roomResourceKey, lockExpiry, waitTime, retryTime))
+        await using var redLock = await distributedLockService.AcquireLockAsync(roomResourceKey, cancellationToken);
+        if (!redLock.IsAcquired)
         {
-            if (redLock.IsAcquired)
-            {
-                var incrementedFlag = false;
-                using var transaction = await reservationDbContext.Database.BeginTransactionAsync(cancellationToken);
-                try
-                {
-                    var capacity = await redis.GetStringAsync(redisKeyCapacity, cancellationToken);
-                    var currentOccupants = await redis.GetStringAsync(redisKeyOccupants, cancellationToken);
-                    if (capacity.IsNullOrEmpty())
-                    {
-                        var room = await sender.Send(new GetRoomByIdQuery(roomId), cancellationToken);
-                        await redis.SetStringAsync(redisKeyCapacity, room.RoomDto.Capacity.ToString(),
-                            cancellationToken);
-                        capacity = room.RoomDto.Capacity.ToString();
-                    }
-
-                    //await Task.Delay(5000);
-                    if (currentOccupants.IsNullOrEmpty())
-                    {
-                        await redis.SetStringAsync(redisKeyOccupants, "1", cancellationToken);
-                        incrementedFlag = true;
-                    }
-                    else
-                    {
-                        var occupantsCount = int.Parse(currentOccupants);
-                        var capacityCount = int.Parse(capacity);
-                        if (occupantsCount >= capacityCount)
-                        {
-                            throw new Exception("Room is fully booked.");
-                        }
-
-                        occupantsCount += 1;
-                        incrementedFlag = true;
-
-                        await redis.SetStringAsync(redisKeyOccupants, occupantsCount.ToString(), cancellationToken);
-                    }
-
-                    // Create reservation
-                    var reservation = Reservation.Create(Guid.NewGuid(), roomId, request.UserId);
-
-                    await reservationDbContext.Reservations.AddAsync(reservation, cancellationToken);
-
-                    await reservationDbContext.SaveChangesAsync(cancellationToken);
-
-                    await transaction.CommitAsync(cancellationToken);
-                }
-                catch (Exception)
-                {
-                    if (incrementedFlag != true) throw;
-
-                    var currentOccupants = await redis.GetStringAsync(redisKeyOccupants, cancellationToken);
-                    var occupantsCount = int.Parse(currentOccupants);
-                    occupantsCount -= 1;
-                    await redis.SetStringAsync(redisKeyOccupants, occupantsCount.ToString(), cancellationToken);
-
-                    await transaction.RollbackAsync(cancellationToken);
-                    throw;
-                }
-                finally
-                {
-                    // zwalnia blokade za pomoca IDisposable
-                    logger.LogInformation("Lock for room {roomId} was released", roomId);
-                }
-            }
-            else
-            {
-                throw new Exception("Failed to acquire lock. Other User try to reserve this room. Try again later.");
-            }
+            throw new Exception("Failed to acquire lock. Room is currently being reserved by another user.");
         }
 
-        return new CreateReservationResult();
+        using var transaction = await reservationDbContext.Database.BeginTransactionAsync(cancellationToken);
+        try
+        {
+            var capacity = await redisService.GetOrSetRoomCapacityAsync(roomId, cancellationToken);
+            var currentOccupants = await redisService.IncrementOccupantsAsync(roomId, capacity, cancellationToken);
+
+            var roomToReserve = await sender.Send(new GetRoomByIdQuery(roomId), cancellationToken);
+
+            var reservation = Reservation.Create(
+                Guid.NewGuid(),
+                roomId,
+                request.UserId,
+                RoomInfo.Of(roomToReserve.RoomDto.Number, roomToReserve.RoomDto.Price, roomToReserve.RoomDto.Capacity));
+
+            await reservationService.CreateReservationAsync(reservation, cancellationToken);
+
+            await transaction.CommitAsync(cancellationToken);
+
+            logger.LogInformation("Reservation for room {roomId} successfully created.", roomId);
+
+            return new CreateReservationResult();
+        }
+        catch (Exception ex)
+        {
+            await redisService.DecrementOccupantsAsync(roomId, cancellationToken);
+            await transaction.RollbackAsync(cancellationToken);
+            logger.LogError(ex, "Error while creating reservation for room {roomId}", roomId);
+            throw;
+        }
     }
 }

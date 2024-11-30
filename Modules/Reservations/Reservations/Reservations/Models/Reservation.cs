@@ -15,15 +15,16 @@ public class Reservation : Aggregate<Guid>
     public RoomInfo RoomInfo { get; private set; } = default!;
 
 
-    public static Reservation Create(Guid id, Guid roomId, Guid userId)
+    public static Reservation Create(Guid id, Guid roomId, Guid userId, RoomInfo roomInfo)
     {
         var reservation = new Reservation()
         {
-            Status = ReservationStatus.Confirmed,
+            Status = ReservationStatus.Active,
             StartDate = new DateTime(2024, 2, 1).ToUniversalTime(), //! todo hard coded, should be get from db
             EndDate =  new DateTime(2024, 6, 30).ToUniversalTime(),
             RoomId = roomId,
             UserId = userId,
+            RoomInfo = roomInfo
         };
 
         reservation.AddDomainEvent(new ReservationCreatedEvent(reservation));

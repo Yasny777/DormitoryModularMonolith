@@ -1,5 +1,8 @@
-﻿using Reservations.Data;
+﻿using RedLockNet;
+using RedLockNet.SERedis;
+using Reservations.Data;
 using Reservations.Data.Redis;
+using Reservations.Reservations.Services;
 
 namespace Reservations;
 
@@ -20,6 +23,9 @@ public static class ReservationModule
         });
 
         services.AddSingleton(RedLockFactoryProvider.CreateRedLockFactory(configuration.GetConnectionString("Redis")!));
+        services.AddScoped<IDistributedLockService, DistributedLockService>();
+        services.AddScoped<IRedisService, RedisService>();
+        services.AddScoped<IReservationService, ReservationService>();
 
         return services;
     }

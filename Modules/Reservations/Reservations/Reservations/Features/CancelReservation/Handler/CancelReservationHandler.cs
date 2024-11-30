@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using Reservations.Reservations.Features.CancelReservation.Endpoint;
+using Reservations.Reservations.Services;
 using Shared.Contracts.CQRS;
 
 namespace Reservations.Reservations.Features.CancelReservation.Handler;
 
-public class CancelReservationHandler(ReservationDbContext reservationDbContext, IDistributedCache redis)
+internal class CancelReservationHandler(ReservationDbContext reservationDbContext, IRedisService redisService)
     : ICommandHandler<CancelReservationCommand, CancelReservationResult>
 {
     public async Task<CancelReservationResult> Handle(CancelReservationCommand request,
@@ -25,19 +26,14 @@ public class CancelReservationHandler(ReservationDbContext reservationDbContext,
             await reservationDbContext.SaveChangesAsync(cancellationToken);
             await transaction.CommitAsync(cancellationToken);
 
-            // after commit need to decrease in redis db too
-            var redisKeyOccupants = $"room:{reservation.RoomId}:occupants";
-            var roomOccupantsCount = await redis.GetStringAsync(redisKeyOccupants, cancellationToken);
-            var newOccupantsCount = int.Parse(roomOccupantsCount);
-            newOccupantsCount -= 1;
-            await redis.SetStringAsync(redisKeyOccupants, newOccupantsCount.ToString(), cancellationToken);
+            await redisService.DecrementOccupantsAsync(reservation.RoomId, cancellationToken);
+
+            return new CancelReservationResult(true);
         }
         catch (Exception e)
         {
             await transaction.RollbackAsync(cancellationToken);
             throw;
         }
-
-        return new CancelReservationResult(true);
     }
 }

@@ -3,7 +3,7 @@ namespace Reservations.Reservations.ValueObjects;
 public class ReservationStatus
 {
     public static readonly ReservationStatus Pending = new("Pending");
-    public static readonly ReservationStatus Confirmed = new("Confirmed");
+    public static readonly ReservationStatus Active = new("Active");
     public static readonly ReservationStatus Cancelled = new("Cancelled");
     public static readonly ReservationStatus Expired = new("Expired");
 
@@ -19,7 +19,7 @@ public class ReservationStatus
         return value switch
         {
             "Pending" => Pending,
-            "Confirmed" => Confirmed,
+            "Confirmed" => Active,
             "Cancelled" => Cancelled,
             "Expired" => Expired,
             _ => throw new ArgumentException($"Invalid status value: {value}")

@@ -24,5 +24,12 @@ public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
         builder.Property(r => r.StartDate).IsRequired();
 
         builder.Property(r => r.EndDate).IsRequired();
+
+        builder.ComplexProperty(r => r.RoomInfo, roomInfoBuilder =>
+        {
+            roomInfoBuilder.Property(x => x.Capacity).IsRequired();
+            roomInfoBuilder.Property(x => x.Number).IsRequired().HasMaxLength(5);
+            roomInfoBuilder.Property(x => x.Price).IsRequired().HasPrecision(18, 2);
+        });
     }
 }
