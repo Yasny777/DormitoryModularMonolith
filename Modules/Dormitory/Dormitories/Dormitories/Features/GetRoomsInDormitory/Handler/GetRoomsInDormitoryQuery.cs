@@ -10,5 +10,9 @@ public record GetRoomsInDormitoryQuery(
     int PageNumber,
     int PageSize,
     string SortBy,
-    SortDirection SortDirection)
+    SortDirection SortDirection,
+    decimal? PriceFrom = null,
+    decimal? PriceTo = null,
+    int? Capacity = null,
+    string? Category = null)
     :  IQuery<GetRoomsInDormitoryResult>;

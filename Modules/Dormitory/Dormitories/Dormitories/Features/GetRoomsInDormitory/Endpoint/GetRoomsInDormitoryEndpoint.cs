@@ -14,7 +14,11 @@ public class GetRoomsInDormitoryEndpoint : PrefixedCarterModule
                     request.PageNumber,
                     request.PageSize,
                     request.SortBy,
-                    request.SortDirection));
+                    request.SortDirection,
+                    request.PriceFrom,
+                    request.PriceTo,
+                    request.Capacity,
+                    request.Category));
 
                 var response = result.Adapt<GetRoomsInDormitoryResponse>();
                 return Results.Ok(response);

@@ -4,10 +4,10 @@ namespace Shared.Pagination;
 
 public class PagedRequest
 {
-    public PagedRequest(int pageNumber = 1, // Domyślnie pierwsza strona
-        int pageSize = 10,  // Domyślny rozmiar strony
-        string sortBy = "Id", // Domyślne pole sortowania
-        SortDirection sortDirection = SortDirection.Asc) // Domyślny kierunek sortowania)
+    public PagedRequest(int pageNumber = 1,
+        int pageSize = 10,
+        string sortBy = "Id",
+        SortDirection sortDirection = SortDirection.Asc)
     {
         PageNumber = pageNumber;
         PageSize = pageSize;

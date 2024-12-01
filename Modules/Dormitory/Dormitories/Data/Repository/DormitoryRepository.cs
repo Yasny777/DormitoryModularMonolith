@@ -1,5 +1,6 @@
 ﻿using Dormitories.Contracts.Dormitories.GetRoomById;
 using Dormitories.Data.Extensions;
+using Dormitories.Data.Repository.Queries;
 using Dormitories.Dormitories.Features.GetRoomsInDormitory.Handler;
 using Dormitories.Dormitories.Models;
 using Microsoft.EntityFrameworkCore;
@@ -26,28 +27,47 @@ public class DormitoryRepository(DormitoryDbContext dbContext) : IDormitoryRepos
         return dormitory.Id;
     }
 
-    public async Task<List<Room>> GetRoomsInDormitoryByQuery(GetRoomsInDormitoryQuery query, bool asNoTracking = true,
+    public async Task<RoomQueryResult> GetRoomsInDormitoryByQuery(GetRoomsInDormitoryQuery query, bool asNoTracking = true,
         CancellationToken cancellationToken = default)
     {
-        var roomsQuery = dbContext.Rooms.Include(r => r.Occupants).Where(r => r.DormitoryId == query.DormitoryId);
+        var roomsQuery = dbContext.Rooms
+            .Include(r => r.Occupants)
+            .Where(r => r.DormitoryId == query.DormitoryId);
+
         if (asNoTracking) roomsQuery = roomsQuery.AsNoTracking();
+
+        if (query.PriceFrom.HasValue)
+        {
+            roomsQuery = roomsQuery.Where(r => r.Price >= query.PriceFrom);
+        }
+
+        if (query.PriceTo.HasValue)
+        {
+            roomsQuery = roomsQuery.Where(r => r.Price <= query.PriceTo);
+        }
+
+        if (query.Capacity.HasValue)
+        {
+            roomsQuery = roomsQuery.Where(r => r.Capacity == query.Capacity);
+        }
+
+        if (!string.IsNullOrEmpty(query.Category))
+        {
+            roomsQuery = roomsQuery.Where(r => r.Category == query.Category);
+        }
+
         // sorting
         roomsQuery = roomsQuery.ApplySorting(query.SortBy, query.SortDirection);
 
+        var totalCount = await roomsQuery.LongCountAsync(cancellationToken);
         // todo include users?
         var rooms = await roomsQuery
             .Skip(query.PageSize * (query.PageNumber - 1))
             .Take(query.PageSize)
             .ToListAsync(cancellationToken);
 
-        return rooms;
+        return new RoomQueryResult(rooms, totalCount);
     }
-
-    public async Task<long> GetTotalRoomCountInDormitory(Guid id, CancellationToken cancellationToken)
-    {
-        return await dbContext.Rooms.Where(r => r.DormitoryId == id).LongCountAsync(cancellationToken);
-    }
-
     public async Task<Dormitory?> GetDormitoryById(Guid dormitoryId, CancellationToken cancellationToken)
     {
         return await dbContext.Dormitories.Include(d => d.Rooms)

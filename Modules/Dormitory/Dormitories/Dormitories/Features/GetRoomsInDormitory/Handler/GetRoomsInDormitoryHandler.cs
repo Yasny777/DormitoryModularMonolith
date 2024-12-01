@@ -12,11 +12,11 @@ internal class GetRoomsInDormitoryHandler(IDormitoryRepository repository)
     {
         var pageNumber = query.PageNumber;
         var pageSize = query.PageSize;
-        var totalCount = await repository.GetTotalRoomCountInDormitory(query.DormitoryId, cancellationToken);
-        var rooms = await repository.GetRoomsInDormitoryByQuery(query, true, cancellationToken);
+        //var totalCount = await repository.GetTotalRoomCountInDormitory(query.DormitoryId, cancellationToken);
+        var roomsQueryResult = await repository.GetRoomsInDormitoryByQuery(query, true, cancellationToken);
 
-        var roomsDto = rooms.Adapt<List<RoomDto>>();
+        var roomsDto = roomsQueryResult.Rooms.Adapt<List<RoomDto>>();
 
-        return new GetRoomsInDormitoryResult(roomsDto, totalCount, pageSize, pageNumber);
+        return new GetRoomsInDormitoryResult(roomsDto, roomsQueryResult.TotalCount, pageSize, pageNumber);
     }
 }
