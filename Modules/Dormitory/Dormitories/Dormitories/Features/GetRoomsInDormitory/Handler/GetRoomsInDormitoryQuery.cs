@@ -1,5 +1,4 @@
-﻿using Dormitories.Dormitories.Constants;
-using Dormitories.Dormitories.Features.GetDormitories.Endpoint;
+﻿using Dormitories.Dormitories.Features.GetDormitories.Endpoint;
 using Shared.Constants;
 using Shared.Contracts.CQRS;
 

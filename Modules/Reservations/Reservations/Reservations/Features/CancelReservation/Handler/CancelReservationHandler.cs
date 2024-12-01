@@ -30,7 +30,7 @@ internal class CancelReservationHandler(ReservationDbContext reservationDbContex
 
             return new CancelReservationResult(true);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             await transaction.RollbackAsync(cancellationToken);
             throw;

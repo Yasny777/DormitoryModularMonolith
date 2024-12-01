@@ -1,5 +1,4 @@
-﻿using Dormitories.Dormitories.Constants;
-using Shared.Constants;
+﻿using Shared.Constants;
 
 namespace Dormitories.Dormitories.Features.GetRoomsInDormitory.Endpoint;
 

@@ -1,4 +1,4 @@
-﻿namespace Dormitories.Dormitories.Constants;
+﻿namespace Shared.Constants;
 
 public static class RoomsInDormitorySortBy
 {

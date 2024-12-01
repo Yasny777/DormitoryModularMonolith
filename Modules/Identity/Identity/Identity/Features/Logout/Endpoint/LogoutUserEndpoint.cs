@@ -29,7 +29,6 @@ public class LogoutUserEndpoint : PrefixedCarterModule
                     HttpOnly = true,
                     Secure = false, // change to true in production through HTTPS
                     SameSite = SameSiteMode.Lax,
-                    Path = "/api/refresh",
                 });
 
                 return Results.Ok();

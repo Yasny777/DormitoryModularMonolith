@@ -19,7 +19,7 @@ public class TokenService(IConfiguration configuration) : ITokenService
     {
         var token = GenerateJwtToken(userSession);
         var refreshToken = GenerateRefreshToken();
-        var expiryRefreshTokenTime = DateTime.UtcNow.AddMinutes(10);
+        var expiryRefreshTokenTime = DateTime.UtcNow.AddDays(1);
         return new JwtRefreshTokensWithExpiry(token.Token, token.ExpiryTime, refreshToken, expiryRefreshTokenTime);
     }
     private TokenWithExpiry GenerateJwtToken(UserSession userSession)
@@ -36,7 +36,7 @@ public class TokenService(IConfiguration configuration) : ITokenService
         var roles = userSession.Roles;
         claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
-        var jwtExpiryTime = DateTime.Now.AddMinutes(33360); //todo change
+        var jwtExpiryTime = DateTime.Now.AddMinutes(5); //todo change
 
         var token = new JwtSecurityToken(
             issuer: configuration["Jwt:Issuer"],

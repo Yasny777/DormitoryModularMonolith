@@ -22,8 +22,7 @@ public class LoginUserEndpoint : PrefixedCarterModule
                     HttpOnly = true,
                     Expires = result.ExpiryRefreshTokenTime,
                     Secure = false, // change to true in production through HTTPS
-                    SameSite = SameSiteMode.Lax,
-                    Path = "/api/refresh",
+                    SameSite = SameSiteMode.Lax, // Pozwala na żądania cross-origin
                 });
 
                 return Results.Ok(new LoginUserResponse(result.Token, result.TokenExpiryTime));

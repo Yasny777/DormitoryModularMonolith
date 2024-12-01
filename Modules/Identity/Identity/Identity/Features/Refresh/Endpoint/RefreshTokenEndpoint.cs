@@ -26,8 +26,7 @@ public class RefreshTokenEndpoint : PrefixedCarterModule
                 HttpOnly = true,
                 Expires = result.ExpiryRefreshTokenTime,
                 Secure = true, // Wymagaj HTTPS w produkcji
-                SameSite = SameSiteMode.Strict,
-                Path = "/api/refresh"
+                SameSite = SameSiteMode.Lax,
             });
 
             return Results.Ok(new RefreshTokenResponse(result.Token, result.TokenExpiryTime));

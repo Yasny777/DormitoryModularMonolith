@@ -10,6 +10,7 @@ internal class GetRoomsInDormitoryHandler(IDormitoryRepository repository)
 {
     public async Task<GetRoomsInDormitoryResult> Handle(GetRoomsInDormitoryQuery query, CancellationToken cancellationToken)
     {
+        //todo query validator
         var pageNumber = query.PageNumber;
         var pageSize = query.PageSize;
         //var totalCount = await repository.GetTotalRoomCountInDormitory(query.DormitoryId, cancellationToken);
