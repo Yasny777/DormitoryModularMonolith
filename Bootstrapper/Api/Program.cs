@@ -46,11 +46,12 @@ builder.Services.AddMediatRWithAssemblies(dormitoryAssembly, identityAssembly, r
 
 
 // CORS
+var frontend = builder.Configuration["Frontend:Url"];
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:5173") // Adres frontendu
+        policy.WithOrigins(frontend!) // Adres frontendu
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials(); // Umożliwia obsługę ciasteczek
