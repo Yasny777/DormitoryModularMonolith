@@ -5,9 +5,15 @@ using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
+    .AddEnvironmentVariables(); // Umożliwia nadpisanie z Docker Compose
+
 // CONFIGURATION
 var configuration = builder.Configuration;
-
+//Console.WriteLine($"Seq URL: {builder.Configuration["Serilog:WriteTo:Args:serverUrl"]}");
 // HOST
 builder.Host.UseSerilog((ctx, cfg) =>
 {
