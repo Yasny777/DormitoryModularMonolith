@@ -16,6 +16,7 @@ public class RegisterUserEndpoint : PrefixedCarterModule
             var command = request.Adapt<RegisterUserCommand>();
             var result = await sender.Send(command);
             var response = result.Adapt<RegisterUserResponse>();
+            return Results.Ok(response);
         }).WithTags("Identity");
     }
 }
