@@ -13,7 +13,8 @@ public class Dormitory : Aggregate<Guid>
 
 
     // Dormitory management
-    public static Dormitory Create(Guid id, string name, string category, string contactEmail, string contactNumber, Address address)
+    public static Dormitory Create(Guid id, string name, string category, string contactEmail, string contactNumber,
+        Address address)
     {
         ArgumentException.ThrowIfNullOrEmpty(name);
         ArgumentException.ThrowIfNullOrEmpty(category);
@@ -40,7 +41,6 @@ public class Dormitory : Aggregate<Guid>
             Category = category;
 
         Address = address;
-
     }
 
     // Room management
@@ -55,7 +55,7 @@ public class Dormitory : Aggregate<Guid>
 
         if (room != null)
         {
-            throw new Exception("nie ma"); //todo custom exception
+            throw new NotFoundException($"Room with that number {room.Number} already exists"); //todo custom exception
         }
 
         var newRoom = new Room(Id, number, capacity, category, price);
@@ -79,12 +79,16 @@ public class Dormitory : Aggregate<Guid>
     public Room UpdateRoom(Guid roomId, string number, int capacity, decimal price)
     {
         var room = _rooms.FirstOrDefault(r => r.Id == roomId)
-               ?? throw new InvalidOperationException($"Room with ID {roomId} not found in dormitory {Id}.");
+                   ?? throw new InvalidOperationException($"Room with ID {roomId} not found in dormitory {Id}.");
+
+        if (room.Number != number && _rooms.Any(r => r.Number == number))
+            throw new InvalidOperationException($"Room with that number {number} already exists");
 
         room.UpdateDetails(number, capacity, price);
         return room;
         //!!!todo!  add domain event to integrate with users, and reservations to cancel and remove from rooms
     }
+
     public void AddOccupantToRoom(Guid roomId, Guid userId)
     {
         var room = _rooms.FirstOrDefault(r => r.Id == roomId)
@@ -108,7 +112,4 @@ public class Dormitory : Aggregate<Guid>
         // Root agregat rejestruje zdarzenie
         AddDomainEvent(occupantRemovedFromRoomEvent);
     }
-
-
-
 }

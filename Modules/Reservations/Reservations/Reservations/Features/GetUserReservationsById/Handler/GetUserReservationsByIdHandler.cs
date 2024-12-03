@@ -10,7 +10,9 @@ public class GetUserReservationsByIdHandler(ReservationDbContext dbContext)
 {
     public async Task<GetUserReservationsByIdResult> Handle(GetUserReservationsByIdQuery query, CancellationToken cancellationToken)
     {
-        var reservations = await dbContext.Reservations.AsNoTracking()
+        var reservations = await dbContext.Reservations
+            .Include(r => r.Semester)
+            .AsNoTracking()
             .Where(r => r.UserId == query.UserId)
             .ToListAsync(cancellationToken);
 
