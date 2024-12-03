@@ -13,23 +13,12 @@ public class UpdateDormitoryCommandValidator : AbstractValidator<UpdateDormitory
 
         RuleFor(x => x.Name)
             .MaximumLength(100)
-            .WithMessage("Dormitory name cannot exceed 100 characters.")
-            .When(x => !string.IsNullOrWhiteSpace(x.Name));
+            .WithMessage("Dormitory name cannot exceed 100 characters.");
 
         RuleFor(x => x.Category)
             .Must(category =>
                 string.IsNullOrWhiteSpace(category) || // Allow empty category
                 new[] { "cheap", "normal", "prestige" }.Contains(category))
             .WithMessage("Category must be one of: 'cheap', 'normal', or 'prestige'.");
-
-        RuleFor(x => x.ContactEmail)
-            .EmailAddress()
-            .WithMessage("Invalid email format.")
-            .When(x => !string.IsNullOrWhiteSpace(x.ContactEmail));
-
-        RuleFor(x => x.ContactNumber)
-            .Matches(@"^\+?[1-9]\d{1,14}$")
-            .WithMessage("Invalid phone number format.")
-            .When(x => !string.IsNullOrWhiteSpace(x.ContactNumber));
     }
 }

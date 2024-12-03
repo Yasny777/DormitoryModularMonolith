@@ -42,7 +42,7 @@ internal class CreateReservationHandler(
             var roomToReserve = await sender.Send(new GetRoomByIdQuery(roomId), cancellationToken);
 
             semester.AddReservation(request.UserId, request.RoomId,
-                RoomInfo.Of(roomToReserve.RoomDto.Number, roomToReserve.RoomDto.Price, roomToReserve.RoomDto.Capacity));
+                RoomInfo.Of(roomToReserve.Room.Number, roomToReserve.Room.Price, roomToReserve.Room.Capacity));
 
             //await reservationService.CreateReservationAsync(reservation, cancellationToken);
             await reservationDbContext.SaveChangesAsync(cancellationToken);

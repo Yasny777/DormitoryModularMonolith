@@ -31,7 +31,7 @@ public class Dormitory : Aggregate<Guid>
         return dormitory;
     }
 
-    public void Update(string? name, string? category, string? contactEmail, string? contactNumber)
+    public void Update(string name, string category, Address address)
     {
         if (!string.IsNullOrWhiteSpace(name))
             Name = name;
@@ -39,13 +39,8 @@ public class Dormitory : Aggregate<Guid>
         if (!string.IsNullOrWhiteSpace(category))
             Category = category;
 
-        if (!string.IsNullOrWhiteSpace(contactEmail))
-        {
-            ContactEmail = contactEmail;
-        }
+        Address = address;
 
-        if (!string.IsNullOrWhiteSpace(contactNumber))
-            ContactNumber = contactNumber;
     }
 
     // Room management
@@ -81,7 +76,7 @@ public class Dormitory : Aggregate<Guid>
         //!!!todo!  add domain event to integrate with users, and reservations to cancel and remove from rooms
     }
 
-    public Room UpdateRoom(Guid roomId, string? number, int? capacity, decimal? price)
+    public Room UpdateRoom(Guid roomId, string number, int capacity, decimal price)
     {
         var room = _rooms.FirstOrDefault(r => r.Id == roomId)
                ?? throw new InvalidOperationException($"Room with ID {roomId} not found in dormitory {Id}.");

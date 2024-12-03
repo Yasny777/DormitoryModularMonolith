@@ -36,7 +36,7 @@ public class TokenService(IConfiguration configuration) : ITokenService
         var roles = userSession.Roles;
         claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
-        var jwtExpiryTime = DateTime.Now.AddMinutes(5); //todo change
+        var jwtExpiryTime = DateTime.Now.AddMinutes(99999); //todo change
 
         var token = new JwtSecurityToken(
             issuer: configuration["Jwt:Issuer"],

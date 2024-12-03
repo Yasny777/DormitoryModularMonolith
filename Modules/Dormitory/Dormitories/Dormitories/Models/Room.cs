@@ -25,22 +25,23 @@ public class Room : Entity<Guid>
         Price = price;
     }
 
-    public void UpdateDetails(string? number, int? capacity, decimal? price)
+    public void UpdateDetails(string number, int capacity, decimal price)
     {
-        if (!string.IsNullOrWhiteSpace(number))
-            Number = number;
+        if (string.IsNullOrWhiteSpace(number))
+            throw new ArgumentException("Room number cannot be empty.");
+        if (capacity <= 0)
+            throw new ArgumentException("Capacity must be greater than 0.");
+        if (price < 0)
+            throw new ArgumentException("Price must be a positive value.");
 
-        if (capacity.HasValue)
+        if (capacity < TotalOccupants)
         {
-            if (capacity.Value <= 0)
-                throw new ArgumentException("Capacity must be greater than 0.");
-            Capacity = capacity.Value;
+            throw new ArgumentException("Occupants in room is greater than capacity to change");
         }
 
-        if (!price.HasValue) return;
-        if (price.Value < 0)
-            throw new ArgumentException("Price must be a positive value.");
-        Price = price.Value;
+        Number = number;
+        Capacity = capacity;
+        Price = price;
     }
 
     public OccupantAddedToRoomEvent AddOccupant(Guid userId)

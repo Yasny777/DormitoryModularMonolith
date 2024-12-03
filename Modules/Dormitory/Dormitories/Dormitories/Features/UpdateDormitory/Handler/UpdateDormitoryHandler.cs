@@ -15,7 +15,8 @@ internal class UpdateDormitoryHandler(IDormitoryRepository repository)
         if (dormitory == null)
             throw new NotFoundException($"Dormitory with ID {command.DormitoryId} not found.");
 
-        dormitory.Update(command.Name, command.Category, command.ContactEmail, command.ContactNumber);
+        dormitory.Update(command.Name, command.Category,
+            Address.Of(command.Address.Street, command.Address.City, command.Address.ZipCode));
 
         await repository.SaveChangesAsync(cancellationToken);
         var dormitoryDto = dormitory.Adapt<DormitoryDto>();

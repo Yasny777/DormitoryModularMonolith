@@ -21,8 +21,8 @@ public class RedisService(IDistributedCache redis, ISender sender) : IRedisServi
         if (!capacity.IsNullOrEmpty()) return capacity;
 
         var room = await sender.Send(new GetRoomByIdQuery(roomId), cancellationToken);
-        await redis.SetStringAsync(redisKeyCapacity, room.RoomDto.Capacity.ToString(), cancellationToken);
-        capacity = room.RoomDto.Capacity.ToString();
+        await redis.SetStringAsync(redisKeyCapacity, room.Room.Capacity.ToString(), cancellationToken);
+        capacity = room.Room.Capacity.ToString();
 
         return capacity;
     }
