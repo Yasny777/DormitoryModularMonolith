@@ -71,6 +71,25 @@ public class Dormitory : Aggregate<Guid>
         return newRoom;
     }
 
+    public void RemoveRoom(Guid roomId)
+    {
+        var room = _rooms.FirstOrDefault(r => r.Id == roomId);
+        if (room == null)
+            throw new InvalidOperationException($"Room with ID {roomId} does not exist in dormitory {Id}.");
+
+        _rooms.Remove(room);
+        //!!!todo!  add domain event to integrate with users, and reservations to cancel and remove from rooms
+    }
+
+    public Room UpdateRoom(Guid roomId, string? number, int? capacity, decimal? price)
+    {
+        var room = _rooms.FirstOrDefault(r => r.Id == roomId)
+               ?? throw new InvalidOperationException($"Room with ID {roomId} not found in dormitory {Id}.");
+
+        room.UpdateDetails(number, capacity, price);
+        return room;
+        //!!!todo!  add domain event to integrate with users, and reservations to cancel and remove from rooms
+    }
     public void AddOccupantToRoom(Guid roomId, Guid userId)
     {
         var room = _rooms.FirstOrDefault(r => r.Id == roomId)
@@ -94,6 +113,7 @@ public class Dormitory : Aggregate<Guid>
         // Root agregat rejestruje zdarzenie
         AddDomainEvent(occupantRemovedFromRoomEvent);
     }
+
 
 
 }

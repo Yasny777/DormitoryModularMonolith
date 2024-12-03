@@ -1,4 +1,6 @@
-﻿namespace Dormitories.Dormitories.Features.UpdateDormitory.Endpoint;
+﻿using Dormitories.Dormitories.Features.UpdateDormitory.Handler;
+
+namespace Dormitories.Dormitories.Features.UpdateDormitory.Endpoint;
 
 public class UpdateDormitoryEndpoint : PrefixedCarterModule
 {

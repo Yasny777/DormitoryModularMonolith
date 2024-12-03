@@ -5,7 +5,7 @@ using Shared.Exceptions;
 
 namespace Dormitories.Dormitories.Features.UpdateDormitory.Handler;
 
-public class UpdateDormitoryHandler(IDormitoryRepository repository)
+internal class UpdateDormitoryHandler(IDormitoryRepository repository)
     : ICommandHandler<UpdateDormitoryCommand, UpdateDormitoryResult>
 {
     public async Task<UpdateDormitoryResult> Handle(UpdateDormitoryCommand command, CancellationToken cancellationToken)
