@@ -1,14 +1,8 @@
 ﻿using Dormitories.Contracts.Dormitories.GetRoomById;
-using MediatR;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
-using RedLockNet.SERedis;
-using Reservations.Reservations.Models;
 using Reservations.Reservations.Services;
 using Reservations.Reservations.ValueObjects;
 using Shared.Contracts.CQRS;
-using Shared.Exceptions;
 
 namespace Reservations.Reservations.Features.CreateReservation.Handler;
 
@@ -21,8 +15,14 @@ internal class CreateReservationHandler(
     IReservationService reservationService)
     : ICommandHandler<CreateReservationCommand, CreateReservationResult>
 {
-    public async Task<CreateReservationResult> Handle(CreateReservationCommand request, CancellationToken cancellationToken)
+    public async Task<CreateReservationResult> Handle(CreateReservationCommand request,
+        CancellationToken cancellationToken)
     {
+        var semester = await reservationDbContext.Semesters.FirstOrDefaultAsync(r => r.Name == request.SemesterName,
+            cancellationToken: cancellationToken);
+
+        if (semester == null) throw new NotFoundException("Semester not found to reserve");
+        // maybe to remove Logic is in DDD model Semester
         await reservationService.ValidateUserReservationAsync(request.UserId, cancellationToken);
         var roomId = request.RoomId;
         var roomResourceKey = $"room-reservation-{roomId}";
@@ -41,14 +41,11 @@ internal class CreateReservationHandler(
 
             var roomToReserve = await sender.Send(new GetRoomByIdQuery(roomId), cancellationToken);
 
-            var reservation = Reservation.Create(
-                Guid.NewGuid(),
-                roomId,
-                request.UserId,
+            semester.AddReservation(request.UserId, request.RoomId,
                 RoomInfo.Of(roomToReserve.RoomDto.Number, roomToReserve.RoomDto.Price, roomToReserve.RoomDto.Capacity));
 
-            await reservationService.CreateReservationAsync(reservation, cancellationToken);
-
+            //await reservationService.CreateReservationAsync(reservation, cancellationToken);
+            await reservationDbContext.SaveChangesAsync(cancellationToken);
             await transaction.CommitAsync(cancellationToken);
 
             logger.LogInformation("Reservation for room {roomId} successfully created.", roomId);

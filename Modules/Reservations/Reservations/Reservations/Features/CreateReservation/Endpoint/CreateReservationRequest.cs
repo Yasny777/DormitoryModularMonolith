@@ -1,5 +1,3 @@
 namespace Reservations.Reservations.Features.CreateReservation.Endpoint;
 
-public record CreateReservationRequest(Guid RoomId)
-{
-}
+public record CreateReservationRequest(string SemesterName);

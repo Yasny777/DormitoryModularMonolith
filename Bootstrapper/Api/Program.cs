@@ -107,9 +107,9 @@ if (app.Environment.IsDevelopment())
 app.UseSerilogRequestLogging();
 app.UseExceptionHandler(cfg => {});
 app.UseCors("AllowFrontend");
-app.UseIdentityModule(); // jesli przy starcie apki nie dziala seedowanie zmienic kolejnoscia na dormitory module pierw
+ // jesli przy starcie apki nie dziala seedowanie zmienic kolejnoscia na dormitory module pierw
 app.MapCarter();
 app.UseDormitoryModule()
     .UseReservationModule();
-
+app.UseIdentityModule();
 app.Run();

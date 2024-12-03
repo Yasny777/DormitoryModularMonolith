@@ -18,7 +18,7 @@ public class Reservation : Entity<Guid>
 
     public Semester Semester { get; private set; } = default!;
 
-
+    private Reservation() { }
     internal Reservation(Guid roomId, Guid userId, DateTime startDate, DateTime endDate, ReservationStatus status, RoomInfo roomInfo, Guid semesterId, Semester semester)
     {
         RoomId = roomId;

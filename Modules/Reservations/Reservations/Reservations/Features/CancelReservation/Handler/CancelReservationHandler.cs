@@ -16,12 +16,16 @@ internal class CancelReservationHandler(ReservationDbContext reservationDbContex
         try
         {
             var reservation =
-                await reservationDbContext.Reservations.FirstOrDefaultAsync(r => r.Id == request.ReservationId,
-                    cancellationToken);
+                await reservationDbContext
+                    .Reservations
+                    .Include(reservation => reservation.Semester)
+                    .FirstOrDefaultAsync(r => r.Id == request.ReservationId,
+                        cancellationToken);
 
             if (reservation == null) throw new NotFoundException("Reservation", request.ReservationId);
 
-            reservation.Cancel();
+            var semester = reservation.Semester;
+            semester.CancelReservation(reservation.Id);
 
             await reservationDbContext.SaveChangesAsync(cancellationToken);
             await transaction.CommitAsync(cancellationToken);
