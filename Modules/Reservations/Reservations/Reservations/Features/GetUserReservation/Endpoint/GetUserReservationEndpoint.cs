@@ -6,6 +6,7 @@ public class GetUserReservationEndpoint : PrefixedCarterModule
 {
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
+        // its /me endpoint from token
         app.MapGet("/reservation", async (HttpContext httpContext, ISender sender) =>
             {
                 var userId = httpContext.User.Claims

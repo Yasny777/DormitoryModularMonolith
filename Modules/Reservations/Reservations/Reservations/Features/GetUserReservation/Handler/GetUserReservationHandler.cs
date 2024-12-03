@@ -14,7 +14,7 @@ public class GetUserReservationHandler(ReservationDbContext dbContext)
         var reservations = await dbContext.Reservations.AsNoTracking()
             .Where(r => r.UserId == Guid.Parse(query.UserId)).ToListAsync(cancellationToken) ;
 
-        if (reservations == null) throw new NotFoundException("Reservation for user not found");
+        if (reservations == null || reservations.Count == 0) throw new NotFoundException("Reservation for user not found");
 
         var reservationDto = reservations.Adapt<List<ReservationDto>>();
 
