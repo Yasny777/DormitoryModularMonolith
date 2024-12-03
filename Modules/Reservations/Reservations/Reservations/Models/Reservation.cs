@@ -4,7 +4,7 @@ using Shared.DDD;
 
 namespace Reservations.Reservations.Models;
 
-public class Reservation : Aggregate<Guid>
+public class Reservation : Entity<Guid>
 {
     public Guid RoomId { get; private set; }
     public Guid UserId { get; private set; }
@@ -14,32 +14,26 @@ public class Reservation : Aggregate<Guid>
 
     public RoomInfo RoomInfo { get; private set; } = default!;
 
+    public Guid SemesterId { get; private set; }
 
-    public static Reservation Create(Guid id, Guid roomId, Guid userId, RoomInfo roomInfo)
+    public Semester Semester { get; private set; } = default!;
+
+
+    internal Reservation(Guid roomId, Guid userId, DateTime startDate, DateTime endDate, ReservationStatus status, RoomInfo roomInfo, Guid semesterId, Semester semester)
     {
-        var reservation = new Reservation()
-        {
-            Status = ReservationStatus.Active,
-            StartDate = new DateTime(2024, 2, 1).ToUniversalTime(), //! todo hard coded, should be get from db
-            EndDate =  new DateTime(2024, 6, 30).ToUniversalTime(),
-            RoomId = roomId,
-            UserId = userId,
-            RoomInfo = roomInfo
-        };
-
-        reservation.AddDomainEvent(new ReservationCreatedEvent(reservation));
-        return reservation;
+        RoomId = roomId;
+        UserId = userId;
+        StartDate = startDate;
+        EndDate = endDate;
+        Status = status;
+        RoomInfo = roomInfo;
+        SemesterId = semesterId;
+        Semester = semester;
     }
 
 
-    public void Cancel()
+    public void CancelReservation()
     {
-        if (Status == ReservationStatus.Cancelled)
-            throw new InvalidOperationException("Reservation is already canceled.");
-
         Status = ReservationStatus.Cancelled;
-
-        // Emit Domain Event
-        AddDomainEvent(new ReservationCancelledEvent(this));
     }
 }

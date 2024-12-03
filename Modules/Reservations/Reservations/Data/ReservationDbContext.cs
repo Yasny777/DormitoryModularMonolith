@@ -11,6 +11,8 @@ public class ReservationDbContext : DbContext
     }
 
     public DbSet<Reservation> Reservations => Set<Reservation>();
+    public DbSet<Semester> Semesters => Set<Semester>();
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.HasDefaultSchema("reservation");

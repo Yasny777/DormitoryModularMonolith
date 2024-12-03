@@ -24,7 +24,6 @@ internal class CreateReservationHandler(
     public async Task<CreateReservationResult> Handle(CreateReservationCommand request, CancellationToken cancellationToken)
     {
         await reservationService.ValidateUserReservationAsync(request.UserId, cancellationToken);
-
         var roomId = request.RoomId;
         var roomResourceKey = $"room-reservation-{roomId}";
 

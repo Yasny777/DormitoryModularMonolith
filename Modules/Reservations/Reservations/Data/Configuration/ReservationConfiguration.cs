@@ -31,5 +31,7 @@ public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
             roomInfoBuilder.Property(x => x.Number).IsRequired().HasMaxLength(5);
             roomInfoBuilder.Property(x => x.Price).IsRequired().HasPrecision(18, 2);
         });
+
+
     }
 }
