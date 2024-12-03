@@ -1,6 +1,4 @@
 // INITALIZE BUILDER
-
-using Mapster;
 using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -106,11 +104,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseSerilogRequestLogging();
 app.UseExceptionHandler(cfg => {});
 app.UseCors("AllowFrontend");
-app.UseIdentityModule();
+app.UseIdentityModule(); // jesli przy starcie apki nie dziala seedowanie zmienic kolejnoscia na dormitory module pierw
 app.MapCarter();
 app.UseDormitoryModule()
     .UseReservationModule();

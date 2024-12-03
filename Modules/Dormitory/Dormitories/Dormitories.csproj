@@ -11,4 +11,10 @@
       <ProjectReference Include="..\Dormitories.Contracts\Dormitories.Contracts.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Dormitories\Features\DeleteRoom\" />
+      <Folder Include="Dormitories\Features\UpdateDormitory\" />
+      <Folder Include="Dormitories\Features\UpdateRoom\" />
+    </ItemGroup>
+
 </Project>

@@ -8,4 +8,9 @@ public static class InitialData
     [
         new AppRole(){Name = AppRoles.Candidate}
     ];
+
+    public static IEnumerable<AppUser> Users =>
+    [
+        
+    ];
 }

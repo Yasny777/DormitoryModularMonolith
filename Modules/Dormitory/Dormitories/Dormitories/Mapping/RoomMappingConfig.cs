@@ -10,5 +10,8 @@ public class RoomMappingConfig : IRegister
         config.NewConfig<Room, RoomDto>()
             .Map(dest => dest.IsAvailable, src => src.IsAvailable)
             .Map(dest => dest.TotalOccupants, src => src.TotalOccupants);
+
+
+
     }
 }

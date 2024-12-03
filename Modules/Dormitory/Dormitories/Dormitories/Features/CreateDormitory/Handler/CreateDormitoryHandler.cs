@@ -16,8 +16,8 @@ internal class CreateDormitoryHandler(IDormitoryRepository repository)
 
     private Dormitory CreateNewDormitory(DormitoryDto dormitoryDto)
     {
-        var dormitoryAddress = Address.Of(dormitoryDto.AddressDto.Street, dormitoryDto.AddressDto.City,
-            dormitoryDto.AddressDto.ZipCode);
+        var dormitoryAddress = Address.Of(dormitoryDto.Address.Street, dormitoryDto.Address.City,
+            dormitoryDto.Address.ZipCode);
 
         var newDormitory = Dormitory.Create(
             Guid.NewGuid(),

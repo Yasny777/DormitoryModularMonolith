@@ -3,8 +3,8 @@
 namespace Dormitories.Dormitories.Features.GetRoomsInDormitory.Endpoint;
 
 public class GetRoomsInDormitoryRequest(
-    int pageNumber,
-    int pageSize,
+    int pageNumber = 1,
+    int pageSize = 10,
     string sortBy = RoomsInDormitorySortBy.Number,
     SortDirection sortDirection = SortDirection.Asc,
     decimal? priceFrom = null,

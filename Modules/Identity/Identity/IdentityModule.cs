@@ -18,6 +18,7 @@ public static class IdentityModule
     {
         var connectionString = configuration.GetConnectionString("Database");
         services.AddScoped<IDataSeeder, RolesDataSeeder>();
+        services.AddScoped<IDataSeeder, UserDataSeeder>();
         services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
 
         services.AddDbContext<MyIdentityDbContext>((serviceProvider, opt) =>
