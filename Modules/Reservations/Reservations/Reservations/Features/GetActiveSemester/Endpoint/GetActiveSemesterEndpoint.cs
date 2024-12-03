@@ -11,8 +11,7 @@ public class GetActiveSemesterEndpoint : PrefixedCarterModule
         {
             var query = new GetActiveSemesterQuery();
             var result = await sender.Send(query);
-            var response = result.Adapt<GetActiveSemesterResponse>();
-            return Results.Ok(response);
+            return Results.Ok(result);
         }).WithTags("Semester").RequireAuthorization();
     }
 }

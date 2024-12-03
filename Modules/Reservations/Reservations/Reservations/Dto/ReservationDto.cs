@@ -9,4 +9,5 @@ public record ReservationDto(
     DateTime StartDate,
     DateTime EndDate,
     ReservationStatus Status,
+    SemesterDto Semester,
     RoomInfo RoomInfo);

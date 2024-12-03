@@ -12,6 +12,7 @@ public class Dormitory : Aggregate<Guid>
     public IReadOnlyList<Room> Rooms => _rooms.AsReadOnly();
 
 
+    // Dormitory management
     public static Dormitory Create(Guid id, string name, string category, string contactEmail, string contactNumber, Address address)
     {
         ArgumentException.ThrowIfNullOrEmpty(name);
@@ -30,7 +31,24 @@ public class Dormitory : Aggregate<Guid>
         return dormitory;
     }
 
+    public void Update(string? name, string? category, string? contactEmail, string? contactNumber)
+    {
+        if (!string.IsNullOrWhiteSpace(name))
+            Name = name;
 
+        if (!string.IsNullOrWhiteSpace(category))
+            Category = category;
+
+        if (!string.IsNullOrWhiteSpace(contactEmail))
+        {
+            ContactEmail = contactEmail;
+        }
+
+        if (!string.IsNullOrWhiteSpace(contactNumber))
+            ContactNumber = contactNumber;
+    }
+
+    // Room management
     public Room AddRoom(string number, string category, int capacity, decimal price)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(number);
@@ -76,4 +94,6 @@ public class Dormitory : Aggregate<Guid>
         // Root agregat rejestruje zdarzenie
         AddDomainEvent(occupantRemovedFromRoomEvent);
     }
+
+
 }

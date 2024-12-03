@@ -11,10 +11,14 @@ public class GetUserReservationHandler(ReservationDbContext dbContext)
     public async Task<GetUserReservationResult> Handle(GetUserReservationQuery query,
         CancellationToken cancellationToken)
     {
-        var reservations = await dbContext.Reservations.AsNoTracking()
-            .Where(r => r.UserId == Guid.Parse(query.UserId)).ToListAsync(cancellationToken) ;
+        var reservations = await dbContext.Reservations
+            .Include(r => r.Semester)
+            .AsNoTracking()
+            .Where(r => r.UserId == Guid.Parse(query.UserId))
+            .ToListAsync(cancellationToken);
 
-        if (reservations == null || reservations.Count == 0) throw new NotFoundException("Reservation for user not found");
+        if (reservations == null || reservations.Count == 0)
+            throw new NotFoundException("Reservation for user not found");
 
         var reservationDto = reservations.Adapt<List<ReservationDto>>();
 

@@ -1,4 +1,6 @@
-﻿using Reservations.Reservations.Features.GetActiveSemester.Endpoint;
+﻿using Mapster;
+using Reservations.Reservations.Dto;
+using Reservations.Reservations.Features.GetActiveSemester.Endpoint;
 using Shared.Contracts.CQRS;
 
 namespace Reservations.Reservations.Features.GetActiveSemester.Handler;
@@ -18,12 +20,9 @@ internal class GetActiveSemesterHandler(ReservationDbContext dbContext)
             throw new NotFoundException("No active semester found.");
         }
 
+        var semesterDto = semester.Adapt<SemesterDto>();
         return new GetActiveSemesterResult(
-            semester.Id,
-            semester.Name,
-            semester.StartDate,
-            semester.EndDate,
-            semester.IsActive
+            semesterDto
         );
     }
 }

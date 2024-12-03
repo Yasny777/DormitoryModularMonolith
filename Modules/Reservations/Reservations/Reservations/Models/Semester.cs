@@ -59,4 +59,6 @@ public class Semester : Aggregate<Guid>
         // Emit Domain Event
         AddDomainEvent(new ReservationCancelledEvent(reservation));
     }
+
+
 }

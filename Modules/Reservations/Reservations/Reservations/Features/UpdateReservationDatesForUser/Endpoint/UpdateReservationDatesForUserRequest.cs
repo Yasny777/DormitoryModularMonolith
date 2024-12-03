@@ -1,0 +1,3 @@
+namespace Reservations.Reservations.Features.UpdateReservationDatesForUser.Endpoint;
+
+public record UpdateReservationDatesForUserRequest(DateTime NewStartDate, DateTime NewEndDate);

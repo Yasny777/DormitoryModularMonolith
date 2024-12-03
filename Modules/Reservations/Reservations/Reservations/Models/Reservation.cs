@@ -31,6 +31,14 @@ public class Reservation : Entity<Guid>
         Semester = semester;
     }
 
+    public void UpdateDates(DateTime newStartDate, DateTime newEndDate)
+    {
+        if (newStartDate >= newEndDate)
+            throw new ArgumentException("Start date must be before end date.");
+
+        StartDate = newStartDate.ToUniversalTime();
+        EndDate = newEndDate.ToUniversalTime();
+    }
 
     public void CancelReservation()
     {

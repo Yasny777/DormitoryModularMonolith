@@ -1,6 +1,4 @@
-﻿using Reservations.Reservations.Dto;
-using Reservations.Reservations.Features.GetUserReservationsById.Handler;
-using Shared.Contracts.CQRS;
+﻿using Reservations.Reservations.Features.GetUserReservationsById.Handler;
 
 namespace Reservations.Reservations.Features.GetUserReservationsById.Endpoint;
 
@@ -18,6 +16,3 @@ public class GetUserReservationsByIdEndpoint : PrefixedCarterModule
             .RequireAuthorization();
     }
 }
-
-public record GetUserReservationsByIdQuery(Guid UserId) : IQuery<GetUserReservationsByIdResult>;
-public record GetUserReservationsByIdResult(List<ReservationDto> Reservations);
