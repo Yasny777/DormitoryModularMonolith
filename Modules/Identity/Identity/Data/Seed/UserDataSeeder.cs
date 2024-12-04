@@ -4,7 +4,7 @@ using Shared.Data.Seed;
 
 namespace Identity.Data.Seed;
 
-public class UserDataSeeder(UserManager<AppUser> userManager,RoleManager<AppRole> roleManager) : IDataSeeder
+public class UserDataSeeder(UserManager<AppUser> userManager) : IDataSeeder
 {
     public async Task SeedAllAsync()
     {

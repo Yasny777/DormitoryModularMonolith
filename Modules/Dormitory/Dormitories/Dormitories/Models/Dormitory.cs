@@ -1,4 +1,6 @@
-﻿namespace Dormitories.Dormitories.Models;
+﻿using Dormitories.Dormitories.Events;
+
+namespace Dormitories.Dormitories.Models;
 
 public class Dormitory : Aggregate<Guid>
 {
@@ -55,7 +57,7 @@ public class Dormitory : Aggregate<Guid>
 
         if (room != null)
         {
-            throw new NotFoundException($"Room with that number {room.Number} already exists"); //todo custom exception
+            throw new NotFoundException($"Room with that number {room.Number} already exists");
         }
 
         var newRoom = new Room(Id, number, capacity, category, price);
@@ -73,6 +75,8 @@ public class Dormitory : Aggregate<Guid>
             throw new InvalidOperationException($"Room with ID {roomId} does not exist in dormitory {Id}.");
 
         _rooms.Remove(room);
+
+        AddDomainEvent(new RoomRemovedEvent(room));
         //!!!todo!  add domain event to integrate with users, and reservations to cancel and remove from rooms
     }
 
@@ -85,8 +89,11 @@ public class Dormitory : Aggregate<Guid>
             throw new InvalidOperationException($"Room with that number {number} already exists");
 
         room.UpdateDetails(number, capacity, price);
-        return room;
+
         //!!!todo!  add domain event to integrate with users, and reservations to cancel and remove from rooms
+        AddDomainEvent(new RoomUpdatedEvent(room));
+
+        return room;
     }
 
     public void AddOccupantToRoom(Guid roomId, Guid userId)
