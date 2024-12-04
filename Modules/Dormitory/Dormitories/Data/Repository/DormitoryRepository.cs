@@ -1,14 +1,12 @@
-﻿using Dormitories.Contracts.Dormitories.GetRoomById;
-using Dormitories.Data.Extensions;
+﻿using Dormitories.Data.Extensions;
 using Dormitories.Data.Repository.Queries;
 using Dormitories.Dormitories.Features.GetRoomsInDormitory.Handler;
 using Dormitories.Dormitories.Models;
 using Microsoft.EntityFrameworkCore;
-using Shared.Exceptions;
 
 namespace Dormitories.Data.Repository;
 
-public class DormitoryRepository(DormitoryDbContext dbContext) : IDormitoryRepository
+internal class DormitoryRepository(DormitoryDbContext dbContext) : IDormitoryRepository
 {
     public async Task<List<Dormitory>> GetDormitories(bool asNoTracking = true,
         CancellationToken cancellationToken = default)
