@@ -1,8 +1,8 @@
-﻿using Mapster;
+﻿using Identity.Identity.Features.GetUserByEmail.Handler;
+using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using Shared.Contracts.CQRS;
 using Shared.Features.Endpoints;
 
 namespace Identity.Identity.Features.GetUserByEmail.Endpoint;
@@ -20,7 +20,3 @@ public class GetUserByEmailEndpoint : PrefixedCarterModule
         }).WithTags("User").RequireAuthorization();
     }
 }
-
-public record GetUserByEmailQuery(string Email) : IQuery<GetUserByEmailResult>;
-public record GetUserByEmailResult(Guid Id, string UserName, string Email, IList<string> Roles);
-public record GetUserByEmailResponse(Guid Id, string UserName, string Email, IList<string> Roles);

@@ -1,5 +1,5 @@
 namespace Dormitories.Dormitories.Features.AddOcuupantToRoom.Handler;
 
-public record AddOccupantToRoomResult(bool IsSuccess)
+internal record AddOccupantToRoomResult(bool IsSuccess)
 {
 }

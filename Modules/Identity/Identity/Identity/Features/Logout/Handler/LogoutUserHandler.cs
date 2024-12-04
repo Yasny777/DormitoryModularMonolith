@@ -4,7 +4,7 @@ using Shared.Exceptions;
 
 namespace Identity.Identity.Features.Logout.Handler;
 
-public class LogoutUserHandler(UserManager<AppUser> userManager) : ICommandHandler<LogoutUserCommand, LogoutUserResult>
+internal class LogoutUserHandler(UserManager<AppUser> userManager) : ICommandHandler<LogoutUserCommand, LogoutUserResult>
 {
     public async Task<LogoutUserResult> Handle(LogoutUserCommand request, CancellationToken cancellationToken)
     {

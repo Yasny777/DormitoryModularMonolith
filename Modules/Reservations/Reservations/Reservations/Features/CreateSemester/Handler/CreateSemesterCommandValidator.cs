@@ -3,7 +3,7 @@ using Reservations.Reservations.Features.CreateSemester.Endpoint;
 
 namespace Reservations.Reservations.Features.CreateSemester.Handler;
 
-public class CreateSemesterCommandValidator : AbstractValidator<CreateSemesterCommand>
+internal class CreateSemesterCommandValidator : AbstractValidator<CreateSemesterCommand>
 {
     public CreateSemesterCommandValidator()
     {

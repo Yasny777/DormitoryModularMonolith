@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace Dormitories.Dormitories.Features.UpdateRoom.Handler;
 
-public class UpdateRoomCommandValidator : AbstractValidator<UpdateRoomCommand>
+internal class UpdateRoomCommandValidator : AbstractValidator<UpdateRoomCommand>
 {
     public UpdateRoomCommandValidator()
     {

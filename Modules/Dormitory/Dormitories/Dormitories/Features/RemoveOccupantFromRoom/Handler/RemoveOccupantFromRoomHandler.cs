@@ -6,7 +6,7 @@ using Shared.Exceptions;
 
 namespace Dormitories.Dormitories.Features.RemoveOccupantFromRoom.Handler;
 
-public class RemoveOccupantFromRoomHandler(IDormitoryRepository dormitoryRepository) : ICommandHandler<RemoveOccupantFromRoomCommand, RemoveOccupantFromRoomResult>
+internal class RemoveOccupantFromRoomHandler(IDormitoryRepository dormitoryRepository) : ICommandHandler<RemoveOccupantFromRoomCommand, RemoveOccupantFromRoomResult>
 {
     public async Task<RemoveOccupantFromRoomResult> Handle(RemoveOccupantFromRoomCommand request, CancellationToken cancellationToken)
     {

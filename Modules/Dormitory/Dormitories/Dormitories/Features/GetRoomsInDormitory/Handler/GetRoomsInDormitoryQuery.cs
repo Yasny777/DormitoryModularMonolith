@@ -4,7 +4,7 @@ using Shared.Contracts.CQRS;
 
 namespace Dormitories.Dormitories.Features.GetRoomsInDormitory.Handler;
 
-public record GetRoomsInDormitoryQuery(
+internal record GetRoomsInDormitoryQuery(
     Guid DormitoryId,
     int PageNumber,
     int PageSize,

@@ -4,7 +4,7 @@ using Shared.Contracts.CQRS;
 
 namespace Reservations.Reservations.Features.UpdateReservationDatesForUser.Handler;
 
-public class UpdateReservationDatesForUserHandler(ReservationDbContext dbContext)
+internal class UpdateReservationDatesForUserHandler(ReservationDbContext dbContext)
     : ICommandHandler<UpdateReservationDatesForUserCommand, UpdateReservationDatesForUserResult>
 {
     public async Task<UpdateReservationDatesForUserResult> Handle(UpdateReservationDatesForUserCommand command, CancellationToken cancellationToken)

@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace Dormitories.Dormitories.Features.CreateDormitory.Handler;
 
-public class CreateDormitoryCommandValidator : AbstractValidator<CreateDormitoryCommand>
+internal class CreateDormitoryCommandValidator : AbstractValidator<CreateDormitoryCommand>
 {
     public CreateDormitoryCommandValidator()
     {

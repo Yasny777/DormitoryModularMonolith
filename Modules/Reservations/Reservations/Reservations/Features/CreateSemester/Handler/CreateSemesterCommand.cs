@@ -4,4 +4,4 @@ using Shared.Contracts.CQRS;
 
 namespace Reservations.Reservations.Features.CreateSemester.Handler;
 
-public record CreateSemesterCommand(SemesterDto SemesterDto) : ICommand<CreateSemesterResult>;
+internal record CreateSemesterCommand(SemesterDto SemesterDto) : ICommand<CreateSemesterResult>;

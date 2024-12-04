@@ -2,4 +2,4 @@
 
 namespace Identity.Identity.Features.GetUsers.Handler;
 
-public record GetAllUsersQuery() : IQuery<GetAllUsersResult>;
+internal record GetAllUsersQuery() : IQuery<GetAllUsersResult>;

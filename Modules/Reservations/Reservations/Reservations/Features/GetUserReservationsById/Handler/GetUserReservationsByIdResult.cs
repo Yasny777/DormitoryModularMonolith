@@ -2,4 +2,4 @@
 
 namespace Reservations.Reservations.Features.GetUserReservationsById.Handler;
 
-public record GetUserReservationsByIdResult(List<ReservationDto> Reservations);
+internal record GetUserReservationsByIdResult(List<ReservationDto> Reservations);

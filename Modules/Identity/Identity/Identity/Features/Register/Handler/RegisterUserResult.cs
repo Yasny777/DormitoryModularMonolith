@@ -1,5 +1,5 @@
 namespace Identity.Identity.Features.Register.Handler;
 
-public record RegisterUserResult(bool IsSuccess)
+internal record RegisterUserResult(bool IsSuccess)
 {
 }

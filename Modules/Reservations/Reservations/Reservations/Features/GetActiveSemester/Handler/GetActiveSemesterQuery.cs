@@ -2,4 +2,4 @@
 
 namespace Reservations.Reservations.Features.GetActiveSemester.Handler;
 
-public record GetActiveSemesterQuery() : IQuery<GetActiveSemesterResult>;
+internal record GetActiveSemesterQuery() : IQuery<GetActiveSemesterResult>;

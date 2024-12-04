@@ -2,4 +2,4 @@
 
 namespace Reservations.Reservations.Features.GetActiveSemester.Handler;
 
-public record GetActiveSemesterResult(SemesterDto Semester);
+internal record GetActiveSemesterResult(SemesterDto Semester);

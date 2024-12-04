@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Dormitories.Dormitories.Features.UpdateDormitory.Handler;
 
-public class UpdateDormitoryCommandValidator : AbstractValidator<UpdateDormitoryCommand>
+internal class UpdateDormitoryCommandValidator : AbstractValidator<UpdateDormitoryCommand>
 {
     public UpdateDormitoryCommandValidator()
     {

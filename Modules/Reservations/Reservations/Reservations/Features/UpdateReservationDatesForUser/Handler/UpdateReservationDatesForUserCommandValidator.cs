@@ -3,7 +3,7 @@ using Reservations.Reservations.Features.UpdateReservationDatesForUser.Endpoint;
 
 namespace Reservations.Reservations.Features.UpdateReservationDatesForUser.Handler;
 
-public class UpdateReservationDatesForUserCommandValidator : AbstractValidator<UpdateReservationDatesForUserCommand>
+internal class UpdateReservationDatesForUserCommandValidator : AbstractValidator<UpdateReservationDatesForUserCommand>
 {
     public UpdateReservationDatesForUserCommandValidator()
     {

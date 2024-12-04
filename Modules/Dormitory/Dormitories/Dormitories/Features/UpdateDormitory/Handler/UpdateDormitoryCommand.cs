@@ -2,7 +2,7 @@ using Shared.Contracts.CQRS;
 
 namespace Dormitories.Dormitories.Features.UpdateDormitory.Handler;
 
-public record UpdateDormitoryCommand(
+internal record UpdateDormitoryCommand(
     Guid DormitoryId,
     string Name,
     string Category,

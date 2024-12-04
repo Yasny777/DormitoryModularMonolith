@@ -2,7 +2,7 @@ using Dormitories.Contracts.Dto;
 
 namespace Dormitories.Dormitories.Features.GetRoomsInDormitory.Handler;
 
-public class GetRoomsInDormitoryResult : PagedResult<RoomDto>
+internal class GetRoomsInDormitoryResult : PagedResult<RoomDto>
 {
     public GetRoomsInDormitoryResult(
         List<RoomDto> items,

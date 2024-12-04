@@ -5,7 +5,7 @@ using Shared.Contracts.CQRS;
 
 namespace Reservations.Reservations.Features.GetUserReservation.Handler;
 
-public class GetUserReservationHandler(ReservationDbContext dbContext)
+internal class GetUserReservationHandler(ReservationDbContext dbContext)
     : IQueryHandler<GetUserReservationQuery, GetUserReservationResult>
 {
     public async Task<GetUserReservationResult> Handle(GetUserReservationQuery query,

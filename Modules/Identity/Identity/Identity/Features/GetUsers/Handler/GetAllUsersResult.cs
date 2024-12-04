@@ -2,4 +2,4 @@
 
 namespace Identity.Identity.Features.GetUsers.Handler;
 
-public record GetAllUsersResult(List<UserDto> Users);
+internal record GetAllUsersResult(List<UserDto> Users);

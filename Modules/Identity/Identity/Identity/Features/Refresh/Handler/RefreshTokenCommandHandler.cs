@@ -5,7 +5,7 @@ using Shared.Exceptions;
 
 namespace Identity.Identity.Features.Refresh.Handler;
 
-public class RefreshTokenCommandHandler(
+internal class RefreshTokenCommandHandler(
     UserManager<AppUser> userManager,
     ITokenService tokenService
 ) : ICommandHandler<RefreshTokenCommand, RefreshTokenResult>

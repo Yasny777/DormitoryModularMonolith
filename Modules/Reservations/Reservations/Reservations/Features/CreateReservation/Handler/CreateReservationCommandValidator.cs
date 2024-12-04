@@ -3,7 +3,7 @@ using Reservations.Reservations.Features.CreateReservation.Endpoint;
 
 namespace Reservations.Reservations.Features.CreateReservation.Handler;
 
-public class CreateReservationCommandValidator : AbstractValidator<CreateReservationCommand>
+internal class CreateReservationCommandValidator : AbstractValidator<CreateReservationCommand>
 {
     public CreateReservationCommandValidator()
     {

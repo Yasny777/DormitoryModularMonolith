@@ -1,3 +1,3 @@
 namespace Dormitories.Dormitories.Features.UpdateDormitory.Handler;
 
-public record UpdateDormitoryResult(DormitoryDto Dormitory);
+internal record UpdateDormitoryResult(DormitoryDto Dormitory);

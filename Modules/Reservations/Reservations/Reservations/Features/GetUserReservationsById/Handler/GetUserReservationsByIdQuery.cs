@@ -2,4 +2,4 @@
 
 namespace Reservations.Reservations.Features.GetUserReservationsById.Handler;
 
-public record GetUserReservationsByIdQuery(Guid UserId) : IQuery<GetUserReservationsByIdResult>;
+internal record GetUserReservationsByIdQuery(Guid UserId) : IQuery<GetUserReservationsByIdResult>;
