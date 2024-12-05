@@ -32,7 +32,8 @@ public class Semester : Aggregate<Guid>
 
     public void AddReservation(Guid userId, Guid roomId, RoomInfo roomInfo)
     {
-        var reservationActive = _reservations.FirstOrDefault(r => r.UserId == userId);
+        var reservationActive =
+            _reservations.FirstOrDefault(r => r.UserId == userId && r.Status == ReservationStatus.Active);
 
         // sprawdza czy User ma rezerwacje
         if (reservationActive != null) throw new BadRequestException("User Already has reservation!");
@@ -59,6 +60,4 @@ public class Semester : Aggregate<Guid>
         // Emit Domain Event
         AddDomainEvent(new ReservationCancelledEvent(reservation));
     }
-
-
 }

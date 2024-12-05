@@ -18,12 +18,16 @@ internal class CreateReservationHandler(
     public async Task<CreateReservationResult> Handle(CreateReservationCommand request,
         CancellationToken cancellationToken)
     {
-        var semester = await reservationDbContext.Semesters.FirstOrDefaultAsync(r => r.Name == request.SemesterName,
+        var semester = await reservationDbContext
+            .Semesters
+            .Include(s => s.Reservations)
+            .FirstOrDefaultAsync(
+            r => r.Name == request.SemesterName,
             cancellationToken: cancellationToken);
 
         if (semester == null) throw new NotFoundException("Semester not found to reserve");
         // maybe to remove Logic is in DDD model Semester
-        await reservationService.ValidateUserReservationAsync(request.UserId, cancellationToken);
+        //await reservationService.ValidateUserReservationAsync(request.UserId, cancellationToken);
         var roomId = request.RoomId;
         var roomResourceKey = $"room-reservation-{roomId}";
 
@@ -40,11 +44,10 @@ internal class CreateReservationHandler(
             var currentOccupants = await redisService.IncrementOccupantsAsync(roomId, capacity, cancellationToken);
 
             var roomToReserve = await sender.Send(new GetRoomByIdQuery(roomId), cancellationToken);
-
+            await Task.Delay(5000);
             semester.AddReservation(request.UserId, request.RoomId,
                 RoomInfo.Of(roomToReserve.Room.Number, roomToReserve.Room.Price, roomToReserve.Room.Capacity));
 
-            //await reservationService.CreateReservationAsync(reservation, cancellationToken);
             await reservationDbContext.SaveChangesAsync(cancellationToken);
             await transaction.CommitAsync(cancellationToken);
 
