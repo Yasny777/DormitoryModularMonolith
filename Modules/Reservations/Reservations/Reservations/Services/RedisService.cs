@@ -9,6 +9,8 @@ public interface IRedisService
     Task<string> GetOrSetRoomCapacityAsync(Guid roomId, CancellationToken cancellationToken);
     Task<int> IncrementOccupantsAsync(Guid roomId, string capacity, CancellationToken cancellationToken);
     Task DecrementOccupantsAsync(Guid roomId, CancellationToken cancellationToken);
+    Task ClearCacheAsync(Guid roomId, CancellationToken cancellationToken);
+
 }
 
 public class RedisService(IDistributedCache redis, ISender sender) : IRedisService
@@ -52,5 +54,14 @@ public class RedisService(IDistributedCache redis, ISender sender) : IRedisServi
         var currentOccupants = await redis.GetStringAsync(redisKeyOccupants, cancellationToken);
         var occupantsCount = int.Parse(currentOccupants) - 1;
         await redis.SetStringAsync(redisKeyOccupants, occupantsCount.ToString(), cancellationToken);
+    }
+
+    public async Task ClearCacheAsync(Guid roomId, CancellationToken cancellationToken)
+    {
+        var redisKeyCapacity = $"room:{roomId}:capacity";
+        var redisKeyOccupants = $"room:{roomId}:occupants";
+
+        await redis.RemoveAsync(redisKeyCapacity, cancellationToken);
+        await redis.RemoveAsync(redisKeyOccupants, cancellationToken);
     }
 }
