@@ -27,4 +27,12 @@
       <ProjectReference Include="..\..\Modules\Reservations\Reservations\Reservations.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="out\web.config" />
+      <_ContentIncludedByDefault Remove="out\Api.deps.json" />
+      <_ContentIncludedByDefault Remove="out\Api.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="out\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="out\appsettings.json" />
+    </ItemGroup>
+
 </Project>

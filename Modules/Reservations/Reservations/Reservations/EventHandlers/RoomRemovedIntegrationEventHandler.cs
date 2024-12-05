@@ -17,8 +17,7 @@ public class RoomRemovedIntegrationEventHandler(
         var result = await sender.Send(new CancelReservationsByRoomIdCommand(notification.RoomId), cancellationToken);
 
         if (result.IsSuccess) logger.LogInformation("Reservations for Room {RoomId} cancelled succeed", notification.RoomId);
-
-        logger.LogError("Reservations for Room {RoomId} cannot been cancelled", notification.RoomId);
+        else logger.LogError("Reservations for Room {RoomId} cannot been cancelled", notification.RoomId);
     }
 
 }

@@ -8,6 +8,7 @@ public class RoomUpdatedEventHandler(ILogger<RoomUpdatedEvent> logger)
 {
     public Task Handle(RoomUpdatedEvent notification, CancellationToken cancellationToken)
     {
+        // todo integrate with Reservation module to update price, capacity etc for active reservations in that room
         throw new NotImplementedException();
     }
 }
