@@ -12,9 +12,6 @@ public class AppUser : IdentityUser, IEntity
     public string? LastModifiedBy { get; set; }
 
     // extended AppUser props
-    public Guid? ReservationId { get; set; }
-
-    public Guid? RoomId { get; set; }
     public string? RefreshToken { get; set; }
 
     public DateTime? RefreshTokenExpiry { get; set; }

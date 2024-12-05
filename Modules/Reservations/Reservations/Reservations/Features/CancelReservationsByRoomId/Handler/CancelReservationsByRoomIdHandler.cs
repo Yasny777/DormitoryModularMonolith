@@ -5,9 +5,9 @@ using Shared.Contracts.CQRS;
 namespace Reservations.Reservations.Features.CancelReservationsByRoomId.Handler;
 
 public class CancelReservationsByRoomIdHandler(ReservationDbContext dbContext, IRedisService redisService)
-    : ICommandHandler<CancelReservationsByRoomIdQuery, CancelReservationsByRoomIdResult>
+    : ICommandHandler<CancelReservationsByRoomIdCommand, CancelReservationsByRoomIdResult>
 {
-    public async Task<CancelReservationsByRoomIdResult> Handle(CancelReservationsByRoomIdQuery request,
+    public async Task<CancelReservationsByRoomIdResult> Handle(CancelReservationsByRoomIdCommand request,
         CancellationToken cancellationToken)
     {
         var reservations = await dbContext.Reservations.Where(r =>

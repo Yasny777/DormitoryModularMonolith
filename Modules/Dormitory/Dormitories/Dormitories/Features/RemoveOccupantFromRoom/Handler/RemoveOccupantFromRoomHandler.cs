@@ -12,7 +12,7 @@ internal class RemoveOccupantFromRoomHandler(IDormitoryRepository dormitoryRepos
     {
         var dormitory = await dormitoryRepository.GetDormitoryByRoomId(request.RoomId, cancellationToken);
 
-        if (dormitory == null) throw new NotFoundException("Dormitory not found");
+        if (dormitory == null) throw new NotFoundException("Room not found");
 
         dormitory.RemoveOccupantFromRoom(request.RoomId, request.UserId.ToString());
 
