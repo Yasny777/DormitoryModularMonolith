@@ -13,7 +13,7 @@ internal class AssignUserToRoomCommandHandler(UserManager<AppUser> userManager) 
         if (user == null) throw new NotFoundException("User with id not found");
 
         user.ReservationId = command.ReservationId;
-        user.RoomId = command.ReservationId;
+        user.RoomId = command.RoomId;
 
         await userManager.UpdateAsync(user);
         return new AssignUserToRoomResult(true);

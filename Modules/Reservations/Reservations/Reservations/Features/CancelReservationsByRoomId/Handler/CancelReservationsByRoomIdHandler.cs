@@ -1,9 +1,8 @@
-﻿using Reservations.Reservations.Models;
-using Reservations.Reservations.Services;
+﻿using Reservations.Reservations.Services;
 using Reservations.Reservations.ValueObjects;
 using Shared.Contracts.CQRS;
 
-namespace Reservations.Reservations.Features.CancelReservationsByRoomId;
+namespace Reservations.Reservations.Features.CancelReservationsByRoomId.Handler;
 
 public class CancelReservationsByRoomIdHandler(ReservationDbContext dbContext, IRedisService redisService)
     : ICommandHandler<CancelReservationsByRoomIdQuery, CancelReservationsByRoomIdResult>
@@ -11,7 +10,7 @@ public class CancelReservationsByRoomIdHandler(ReservationDbContext dbContext, I
     public async Task<CancelReservationsByRoomIdResult> Handle(CancelReservationsByRoomIdQuery request,
         CancellationToken cancellationToken)
     {
-        var reservations =  await dbContext.Reservations.Where(r =>
+        var reservations = await dbContext.Reservations.Where(r =>
             r.RoomId == request.RoomId && r.Status == ReservationStatus.Active).ToListAsync(cancellationToken);
 
         foreach (var reservation in reservations)
@@ -24,9 +23,8 @@ public class CancelReservationsByRoomIdHandler(ReservationDbContext dbContext, I
 
         await redisService.ClearCacheAsync(request.RoomId, cancellationToken);
 
-        //todo change return type
         return new CancelReservationsByRoomIdResult(true);
     }
 }
 
-//todo seed semester active
+//todo seed semester active, better seeding to do

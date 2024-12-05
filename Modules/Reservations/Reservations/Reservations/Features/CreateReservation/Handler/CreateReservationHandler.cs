@@ -11,8 +11,7 @@ internal class CreateReservationHandler(
     ILogger<CreateReservationHandler> logger,
     ReservationDbContext reservationDbContext,
     IDistributedLockService distributedLockService,
-    IRedisService redisService,
-    IReservationService reservationService)
+    IRedisService redisService)
     : ICommandHandler<CreateReservationCommand, CreateReservationResult>
 {
     public async Task<CreateReservationResult> Handle(CreateReservationCommand request,
@@ -22,20 +21,20 @@ internal class CreateReservationHandler(
             .Semesters
             .Include(s => s.Reservations)
             .FirstOrDefaultAsync(
-            r => r.Name == request.SemesterName,
-            cancellationToken: cancellationToken);
+                r => r.Name == request.SemesterName,
+                cancellationToken: cancellationToken);
 
         if (semester == null) throw new NotFoundException("Semester not found to reserve");
-        // maybe to remove Logic is in DDD model Semester
-        //await reservationService.ValidateUserReservationAsync(request.UserId, cancellationToken);
+
+
         var roomId = request.RoomId;
         var roomResourceKey = $"room-reservation-{roomId}";
 
         await using var redLock = await distributedLockService.AcquireLockAsync(roomResourceKey, cancellationToken);
+
         if (!redLock.IsAcquired)
-        {
             throw new Exception("Failed to acquire lock. Room is currently being reserved by another user.");
-        }
+
 
         using var transaction = await reservationDbContext.Database.BeginTransactionAsync(cancellationToken);
         try
@@ -44,7 +43,7 @@ internal class CreateReservationHandler(
             var currentOccupants = await redisService.IncrementOccupantsAsync(roomId, capacity, cancellationToken);
 
             var roomToReserve = await sender.Send(new GetRoomByIdQuery(roomId), cancellationToken);
-            await Task.Delay(5000);
+            //await Task.Delay(5000); //for tests locks
             semester.AddReservation(request.UserId, request.RoomId,
                 RoomInfo.Of(roomToReserve.Room.Number, roomToReserve.Room.Price, roomToReserve.Room.Capacity));
 

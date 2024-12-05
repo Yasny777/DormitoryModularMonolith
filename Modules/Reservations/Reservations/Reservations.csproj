@@ -18,4 +18,8 @@
       </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Reservations\Services\ReservationService.cs" />
+    </ItemGroup>
+
 </Project>

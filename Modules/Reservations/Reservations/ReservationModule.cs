@@ -25,7 +25,6 @@ public static class ReservationModule
         services.AddSingleton(RedLockFactoryProvider.CreateRedLockFactory(configuration.GetConnectionString("Redis")!));
         services.AddScoped<IDistributedLockService, DistributedLockService>();
         services.AddScoped<IRedisService, RedisService>();
-        services.AddScoped<IReservationService, ReservationService>();
 
         return services;
     }

@@ -1,6 +1,5 @@
-using Reservations.Reservations.Models;
 using Shared.Contracts.CQRS;
 
-namespace Reservations.Reservations.Features.CancelReservationsByRoomId;
+namespace Reservations.Reservations.Features.CancelReservationsByRoomId.Handler;
 
 public record CancelReservationsByRoomIdQuery(Guid RoomId) : ICommand<CancelReservationsByRoomIdResult>;
