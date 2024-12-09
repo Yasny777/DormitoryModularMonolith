@@ -60,7 +60,7 @@ public static class IdentityModule
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"] ??
                         throw new InvalidOperationException(
                             "Key doesnt exist"))),
-                    ClockSkew = TimeSpan.FromMinutes(2)
+                    ClockSkew = TimeSpan.FromMinutes(2) //todo to change
                 };
             });
 
