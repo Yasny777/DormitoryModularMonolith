@@ -15,7 +15,7 @@ public class RefreshTokenEndpoint : PrefixedCarterModule
         {
             var refreshToken = httpContext.Request.Cookies["App_Dormitory_Refresh"];
             if (string.IsNullOrEmpty(refreshToken))
-                return Results.Unauthorized();
+                return Results.BadRequest("No refresh token provided");
 
             var command = new RefreshTokenCommand(refreshToken);
             var result = await sender.Send(command);
