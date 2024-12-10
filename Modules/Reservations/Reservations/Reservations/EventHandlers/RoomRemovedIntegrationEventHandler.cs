@@ -12,7 +12,7 @@ public class RoomRemovedIntegrationEventHandler(
 {
     public async Task Handle(RoomRemovedIntegrationEvent notification, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Integration Event handled for ROOM MODULE: {IntegrationEvent}", notification.GetType().Name);
+        logger.LogInformation("Integration Event handled: {IntegrationEvent}", notification.GetType().Name);
 
         var result = await sender.Send(new CancelReservationsByRoomIdCommand(notification.RoomId), cancellationToken);
 

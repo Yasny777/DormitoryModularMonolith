@@ -40,6 +40,11 @@ public class Reservation : Entity<Guid>
         EndDate = newEndDate.ToUniversalTime();
     }
 
+    public void Update(string number, int capacity, decimal price)
+    {
+        RoomInfo = RoomInfo.Of(number, price, capacity);
+    }
+
     public void CancelReservation()
     {
         Status = ReservationStatus.Cancelled;

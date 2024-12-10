@@ -11,7 +11,6 @@ builder.Configuration
 
 // CONFIGURATION
 var configuration = builder.Configuration;
-//Console.WriteLine($"Seq URL: {builder.Configuration["Serilog:WriteTo:Args:serverUrl"]}");
 // HOST
 builder.Host.UseSerilog((ctx, cfg) =>
 {
@@ -113,3 +112,5 @@ app.UseDormitoryModule()
     .UseReservationModule();
 app.UseIdentityModule();
 app.Run();
+
+// todo SEEDING od zera, i updateRoom endpoint i integration event i bydzie

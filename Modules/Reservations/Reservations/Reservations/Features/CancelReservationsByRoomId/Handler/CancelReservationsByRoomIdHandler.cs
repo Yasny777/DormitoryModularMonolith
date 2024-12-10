@@ -10,8 +10,10 @@ public class CancelReservationsByRoomIdHandler(ReservationDbContext dbContext, I
     public async Task<CancelReservationsByRoomIdResult> Handle(CancelReservationsByRoomIdCommand request,
         CancellationToken cancellationToken)
     {
-        var reservations = await dbContext.Reservations.Where(r =>
-            r.RoomId == request.RoomId && r.Status == ReservationStatus.Active).ToListAsync(cancellationToken);
+        var reservations = await dbContext
+            .Reservations
+            .Where(r => r.RoomId == request.RoomId && r.Status == ReservationStatus.Active)
+            .ToListAsync(cancellationToken);
 
         foreach (var reservation in reservations)
         {
