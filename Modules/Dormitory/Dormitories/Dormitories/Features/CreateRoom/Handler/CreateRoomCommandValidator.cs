@@ -2,7 +2,7 @@
 
 namespace Dormitories.Dormitories.Features.CreateRoom.Handler;
 
-internal class CreateRoomCommandValidator : AbstractValidator<CreateRoomCommand>
+public class CreateRoomCommandValidator : AbstractValidator<CreateRoomCommand>
 {
     public CreateRoomCommandValidator()
     {
@@ -15,7 +15,7 @@ internal class CreateRoomCommandValidator : AbstractValidator<CreateRoomCommand>
     }
 }
 
-internal class RoomDtoValidator : AbstractValidator<RoomDto>
+public class RoomDtoValidator : AbstractValidator<RoomDto>
 {
     public RoomDtoValidator()
     {

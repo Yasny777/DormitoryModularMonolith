@@ -2,7 +2,7 @@
 
 namespace Identity.Identity.Features.Register.Handler;
 
-internal class RegisterUserCommandValidator : AbstractValidator<RegisterUserCommand>
+public class RegisterUserCommandValidator : AbstractValidator<RegisterUserCommand>
 {
     public RegisterUserCommandValidator()
     {

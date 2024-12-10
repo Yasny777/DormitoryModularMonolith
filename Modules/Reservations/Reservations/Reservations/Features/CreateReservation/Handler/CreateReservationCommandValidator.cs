@@ -1,6 +1,6 @@
 namespace Reservations.Reservations.Features.CreateReservation.Handler;
 
-internal class CreateReservationCommandValidator : AbstractValidator<CreateReservationCommand>
+public class CreateReservationCommandValidator : AbstractValidator<CreateReservationCommand>
 {
     public CreateReservationCommandValidator()
     {

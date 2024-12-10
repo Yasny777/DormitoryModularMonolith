@@ -1,6 +1,6 @@
 namespace Reservations.Reservations.Features.UpdateReservationDatesForUser.Handler;
 
-internal class UpdateReservationDatesForUserCommandValidator : AbstractValidator<UpdateReservationDatesForUserCommand>
+public class UpdateReservationDatesForUserCommandValidator : AbstractValidator<UpdateReservationDatesForUserCommand>
 {
     public UpdateReservationDatesForUserCommandValidator()
     {

@@ -8,25 +8,25 @@ services:
   distributedcache:
     image: redis
 
-#  webapi:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile   # Ścieżka do Twojego Dockerfile
-#      args:
-#        BUILD_CONFIGURATION: Release
-#    ports:
-#      - "5195:5195"
-#    environment:
-#      - ASPNETCORE_URLS=http://+:5195
-#      - DOTNET_RUNNING_IN_CONTAINER=true
-#      - ASPNETCORE_ENVIRONMENT=Development
-#
-#  frontend:
-#    build:
-#      context: C:/Users/jjasn/WebstormProjects/dormitory-spa-client/
-#      dockerfile: Dockerfile
-#    ports:
-#      - "5173:5173"
+  webapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BUILD_CONFIGURATION: Release
+    ports:
+      - "5195:5195"
+    environment:
+      - ASPNETCORE_URLS=http://+:5195
+      - DOTNET_RUNNING_IN_CONTAINER=true
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  frontend:
+    build:
+      context: C:/Users/jjasn/WebstormProjects/dormitory-spa-client/
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
 
 volumes:
   postgres_dormitorydb:

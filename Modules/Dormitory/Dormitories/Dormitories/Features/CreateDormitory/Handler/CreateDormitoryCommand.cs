@@ -1,3 +1,3 @@
 namespace Dormitories.Dormitories.Features.CreateDormitory.Handler;
 
-internal record CreateDormitoryCommand(DormitoryDto DormitoryDto) : ICommand<CreateDormitoryResult>;
+public record CreateDormitoryCommand(DormitoryDto DormitoryDto) : ICommand<CreateDormitoryResult>;

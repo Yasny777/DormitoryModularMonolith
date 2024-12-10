@@ -1,3 +1,3 @@
 namespace Dormitories.Dormitories.Features.CreateRoom.Handler;
 
-internal record CreateRoomCommand(Guid DormitoryId, RoomDto RoomDto) : ICommand<CreateRoomResult>;
+public record CreateRoomCommand(Guid DormitoryId, RoomDto RoomDto) : ICommand<CreateRoomResult>;

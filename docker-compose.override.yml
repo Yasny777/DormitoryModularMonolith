@@ -26,32 +26,32 @@ services:
     ports:
       - "6379:6379"
 
-#  webapi:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
-#    ports:
-#      - "5195:5195"
-#    environment:
-#      # Secrets and urls to change in production
-#      - ASPNETCORE_ENVIRONMENT=Development
-#      - ConnectionStrings__Database=Host=dormitorydb;Port=5432;Database=DormitoryDb;Username=postgres;Password=postgres;Include Error Detail=true
-#      - ConnectionStrings__Redis=distributedcache:6379
-#      - Serilog__WriteTo__1__Args__serverUrl=http://seq:5341
-#      - Serilog__WriteTo__1__Name=Seq
-#      - Jwt__Key=SecretKeyDontShareShareShareShareShareShare
-#      - Jwt__Issuer=http://webapi:5195
-#      - Jwt__Audience=http://localhost:5173
-#      - Frontend__Url=http://localhost:5173
-#
-#    depends_on:
-#      - dormitorydb
-#      - distributedcache
-#      - seq
-#
-#  frontend:
-#    build:
-#      context: C:/Users/jjasn/WebstormProjects/dormitory-spa-client/
-#      dockerfile: Dockerfile
-#    ports:
-#      - "5173:5173"
+  webapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5195:5195"
+    environment:
+      # Secrets and urls to change in production
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__Database=Host=dormitorydb;Port=5432;Database=DormitoryDb;Username=postgres;Password=postgres;Include Error Detail=true
+      - ConnectionStrings__Redis=distributedcache:6379
+      - Serilog__WriteTo__1__Args__serverUrl=http://seq:5341
+      - Serilog__WriteTo__1__Name=Seq
+      - Jwt__Key=SecretKeyDontShareShareShareShareShareShare
+      - Jwt__Issuer=http://webapi:5195
+      - Jwt__Audience=http://localhost:5173
+      - Frontend__Url=http://localhost:5173
+
+    depends_on:
+      - dormitorydb
+      - distributedcache
+      - seq
+
+  frontend:
+    build:
+      context: C:/Users/jjasn/WebstormProjects/dormitory-spa-client/
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
