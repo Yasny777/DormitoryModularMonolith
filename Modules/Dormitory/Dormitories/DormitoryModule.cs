@@ -25,14 +25,14 @@ public static class DormitoryModule
             options.UseNpgsql(connectionString);
         });
 
-        services.AddScoped<IDataSeeder, DormitoryDataSeeder>();
+        services.AddScoped<DormitoryDataSeeder>();
         return services;
     }
 
 
     public static IApplicationBuilder UseDormitoryModule(this IApplicationBuilder app)
     {
-        app.UseMigration<DormitoryDbContext>();
+        app.UseMigration<DormitoryDbContext, DormitoryDataSeeder>();
         return app;
     }
 }

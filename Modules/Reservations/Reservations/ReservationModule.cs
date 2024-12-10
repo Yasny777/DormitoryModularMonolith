@@ -1,8 +1,7 @@
-﻿using RedLockNet;
-using RedLockNet.SERedis;
-using Reservations.Data;
-using Reservations.Data.Redis;
+﻿using Reservations.Data.Redis;
+using Reservations.Data.Seed;
 using Reservations.Reservations.Services;
+using Shared.Data.Seed;
 
 namespace Reservations;
 
@@ -26,12 +25,14 @@ public static class ReservationModule
         services.AddScoped<IDistributedLockService, DistributedLockService>();
         services.AddScoped<IRedisService, RedisService>();
 
+        services.AddScoped<ReservationDataSeeder>();
+
         return services;
     }
 
     public static IApplicationBuilder UseReservationModule(this IApplicationBuilder app)
     {
-        app.UseMigration<ReservationDbContext>();
+        app.UseMigration<ReservationDbContext, ReservationDataSeeder>();
         return app;
     }
 }

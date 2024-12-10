@@ -17,8 +17,7 @@ public static class IdentityModule
         IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("Database");
-        services.AddScoped<IDataSeeder, RolesDataSeeder>();
-        services.AddScoped<IDataSeeder, UserDataSeeder>();
+        services.AddScoped<MyIdentityDataSeeder>();
         services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
 
         services.AddDbContext<MyIdentityDbContext>((serviceProvider, opt) =>
@@ -75,7 +74,7 @@ public static class IdentityModule
     {
         app.UseAuthentication();
         app.UseAuthorization();
-        app.UseMigration<MyIdentityDbContext>();
+        app.UseMigration<MyIdentityDbContext, MyIdentityDataSeeder>();
         return app;
     }
 }
