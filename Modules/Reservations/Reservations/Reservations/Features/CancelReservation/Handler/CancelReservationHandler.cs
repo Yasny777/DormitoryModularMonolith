@@ -1,9 +1,4 @@
-﻿using Microsoft.Extensions.Caching.Distributed;
-using Reservations.Reservations.Features.CancelReservation.Endpoint;
-using Reservations.Reservations.Services;
-using Shared.Contracts.CQRS;
-
-namespace Reservations.Reservations.Features.CancelReservation.Handler;
+﻿namespace Reservations.Reservations.Features.CancelReservation.Handler;
 
 internal class CancelReservationHandler(ReservationDbContext reservationDbContext, IRedisService redisService)
     : ICommandHandler<CancelReservationCommand, CancelReservationResult>

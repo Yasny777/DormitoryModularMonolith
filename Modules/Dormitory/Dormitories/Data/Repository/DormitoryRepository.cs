@@ -1,8 +1,6 @@
 ﻿using Dormitories.Data.Extensions;
 using Dormitories.Data.Repository.Queries;
 using Dormitories.Dormitories.Features.GetRoomsInDormitory.Handler;
-using Dormitories.Dormitories.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace Dormitories.Data.Repository;
 

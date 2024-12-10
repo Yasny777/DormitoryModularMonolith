@@ -1,8 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using Reservations.Reservations.Events;
-using Shared.Events;
-
-namespace Reservations.Reservations.EventHandlers;
+﻿namespace Reservations.Reservations.EventHandlers;
 
 public class ReservationCancelledEventHandler(ILogger<ReservationCreatedEventHandler> logger, IPublisher publisher)
     : INotificationHandler<ReservationCancelledEvent>

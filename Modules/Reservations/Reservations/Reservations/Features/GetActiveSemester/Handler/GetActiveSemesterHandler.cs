@@ -1,9 +1,4 @@
-﻿using Mapster;
-using Reservations.Reservations.Dto;
-using Reservations.Reservations.Features.GetActiveSemester.Endpoint;
-using Shared.Contracts.CQRS;
-
-namespace Reservations.Reservations.Features.GetActiveSemester.Handler;
+﻿namespace Reservations.Reservations.Features.GetActiveSemester.Handler;
 
 internal class GetActiveSemesterHandler(ReservationDbContext dbContext)
     : IQueryHandler<GetActiveSemesterQuery, GetActiveSemesterResult>

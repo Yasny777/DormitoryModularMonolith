@@ -1,6 +1,4 @@
 ﻿using System.Reflection;
-using Microsoft.EntityFrameworkCore;
-using Reservations.Reservations.Models;
 
 namespace Reservations.Data;
 

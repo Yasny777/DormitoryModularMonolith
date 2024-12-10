@@ -1,9 +1,4 @@
-﻿using Dormitories.Data.Repository;
-using Dormitories.Dormitories.EventHandlers;
-using Shared.Contracts.CQRS;
-using Shared.Exceptions;
-
-namespace Dormitories.Dormitories.Features.AddOcuupantToRoom.Handler;
+﻿namespace Dormitories.Dormitories.Features.AddOcuupantToRoom.Handler;
 
 internal class AddOcuppantToRoomHandler(IDormitoryRepository dormitoryRepository)
     : ICommandHandler<AddOccupantToRoomCommand, AddOccupantToRoomResult>

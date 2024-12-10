@@ -1,11 +1,4 @@
-﻿using Identity.Identity.Features.Login.Handler;
-using Mapster;
-using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
-using Shared.Features.Endpoints;
-
-namespace Identity.Identity.Features.Login.Endpoint;
+﻿namespace Identity.Identity.Features.Login.Endpoint;
 
 public class LoginUserEndpoint : PrefixedCarterModule
 {

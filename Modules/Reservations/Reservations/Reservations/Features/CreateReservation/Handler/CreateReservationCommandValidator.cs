@@ -1,6 +1,3 @@
-using FluentValidation;
-using Reservations.Reservations.Features.CreateReservation.Endpoint;
-
 namespace Reservations.Reservations.Features.CreateReservation.Handler;
 
 internal class CreateReservationCommandValidator : AbstractValidator<CreateReservationCommand>

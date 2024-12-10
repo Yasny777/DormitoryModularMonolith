@@ -1,8 +1,4 @@
-﻿using Mapster;
-using Shared.Contracts.CQRS;
-using Shared.Exceptions;
-
-namespace Identity.Identity.Features.Login.Handler;
+﻿namespace Identity.Identity.Features.Login.Handler;
 
 internal class LoginUserHandler(
     UserManager<AppUser> userManager,

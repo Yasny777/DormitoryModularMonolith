@@ -1,7 +1,4 @@
-﻿using Dormitories.Data.Repository;
-using Shared.Contracts.CQRS;
-
-namespace Dormitories.Dormitories.Features.GetDormitories.Handler;
+﻿namespace Dormitories.Dormitories.Features.GetDormitories.Handler;
 
 internal class GetDormitoriesHandler(IDormitoryRepository repository) : IQueryHandler<GetDormitoriesQuery, GetDormitoriesResult>
 {

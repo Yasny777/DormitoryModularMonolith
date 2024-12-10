@@ -1,6 +1,4 @@
-﻿using Reservations.Reservations.Models;
-
-namespace Reservations.Data.Seed;
+﻿namespace Reservations.Data.Seed;
 
 public class InitialData
 {

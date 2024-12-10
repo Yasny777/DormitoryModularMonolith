@@ -1,9 +1,4 @@
-﻿using Dormitories.Data.Repository;
-using Dormitories.Dormitories.Features.UpdateDormitory.Endpoint;
-using Shared.Contracts.CQRS;
-using Shared.Exceptions;
-
-namespace Dormitories.Dormitories.Features.UpdateDormitory.Handler;
+﻿namespace Dormitories.Dormitories.Features.UpdateDormitory.Handler;
 
 internal class UpdateDormitoryHandler(IDormitoryRepository repository)
     : ICommandHandler<UpdateDormitoryCommand, UpdateDormitoryResult>

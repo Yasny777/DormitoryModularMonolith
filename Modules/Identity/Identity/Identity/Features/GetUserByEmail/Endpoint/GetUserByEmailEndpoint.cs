@@ -1,9 +1,4 @@
 ﻿using Identity.Identity.Features.GetUserByEmail.Handler;
-using Mapster;
-using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
-using Shared.Features.Endpoints;
 
 namespace Identity.Identity.Features.GetUserByEmail.Endpoint;
 

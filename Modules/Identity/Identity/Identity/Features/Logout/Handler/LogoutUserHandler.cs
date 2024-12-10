@@ -1,8 +1,4 @@
-﻿using Identity.Identity.Features.Logout.Endpoint;
-using Shared.Contracts.CQRS;
-using Shared.Exceptions;
-
-namespace Identity.Identity.Features.Logout.Handler;
+﻿namespace Identity.Identity.Features.Logout.Handler;
 
 internal class LogoutUserHandler(UserManager<AppUser> userManager) : ICommandHandler<LogoutUserCommand, LogoutUserResult>
 {

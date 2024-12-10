@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Shared.Contracts.CQRS;
 
 namespace Shared.Events;
 

@@ -1,13 +1,5 @@
 ﻿using System.Security.Claims;
-using Identity.Identity.Features.Login.Endpoint;
-using Identity.Identity.Features.Login.Handler;
 using Identity.Identity.Features.Logout.Handler;
-using Mapster;
-using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
-using Shared.Exceptions;
-using Shared.Features.Endpoints;
 
 namespace Identity.Identity.Features.Logout.Endpoint;
 

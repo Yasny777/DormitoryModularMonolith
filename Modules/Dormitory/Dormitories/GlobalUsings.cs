@@ -1,9 +1,11 @@
-﻿global using Microsoft.Extensions.DependencyInjection;
+﻿global using Dormitories.Contracts.Dto;
+global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.AspNetCore.Builder;
 global using Dormitories.Dormitories.ValueObjects;
 global using Shared.DDD;
 global using Dormitories.Data;
+global using Dormitories.Data.Repository;
 global using Mapster;
 global using MediatR;
 global using Microsoft.AspNetCore.Http;
@@ -11,6 +13,12 @@ global using Microsoft.AspNetCore.Routing;
 global using Shared.Features.Endpoints;
 global using Shared.Pagination;
 global using Dormitories.Dormitories.Dto;
+global using Dormitories.Dormitories.Events;
+global using Dormitories.Dormitories.Models;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using Microsoft.Extensions.Logging;
 global using Shared.Constants;
-
+global using Shared.Contracts.CQRS;
+global using Shared.Events;
 global using Shared.Exceptions;

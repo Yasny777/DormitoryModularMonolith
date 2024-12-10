@@ -1,6 +1,4 @@
 ﻿using System.Linq.Expressions;
-using Dormitories.Dormitories.Models;
-using Shared.Constants;
 
 namespace Dormitories.Data.Extensions;
 

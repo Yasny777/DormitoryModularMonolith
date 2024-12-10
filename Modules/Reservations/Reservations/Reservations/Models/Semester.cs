@@ -1,8 +1,4 @@
-﻿using Reservations.Reservations.Events;
-using Reservations.Reservations.ValueObjects;
-using Shared.DDD;
-
-namespace Reservations.Reservations.Models;
+﻿namespace Reservations.Reservations.Models;
 
 public class Semester : Aggregate<Guid>
 {

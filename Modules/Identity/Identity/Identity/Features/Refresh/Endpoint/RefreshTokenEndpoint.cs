@@ -1,9 +1,4 @@
-﻿using Identity.Identity.Features.Login.Handler;
-using Identity.Identity.Features.Refresh.Handler;
-using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
-using Shared.Features.Endpoints;
+﻿using Identity.Identity.Features.Refresh.Handler;
 
 namespace Identity.Identity.Features.Refresh.Endpoint;
 

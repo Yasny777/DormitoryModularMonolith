@@ -1,5 +1,4 @@
-﻿using Dormitories.Dormitories.Features.GetRoomById.Handler;
-using Dormitories.Contracts.Dormitories.GetRoomById;
+﻿using Dormitories.Contracts.Dormitories.GetRoomById;
 
 namespace Dormitories.Dormitories.Features.GetRoomById.Endpoint;
 

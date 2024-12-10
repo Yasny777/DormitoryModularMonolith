@@ -1,10 +1,4 @@
-﻿using Dormitories.Contracts.Dto;
-using Dormitories.Data.Repository;
-using Dormitories.Dormitories.Features.UpdateRoom.Endpoint;
-using Shared.Contracts.CQRS;
-using Shared.Exceptions;
-
-namespace Dormitories.Dormitories.Features.UpdateRoom.Handler;
+﻿namespace Dormitories.Dormitories.Features.UpdateRoom.Handler;
 
 internal class UpdateRoomHandler(IDormitoryRepository repository)
     : ICommandHandler<UpdateRoomCommand, UpdateRoomResult>

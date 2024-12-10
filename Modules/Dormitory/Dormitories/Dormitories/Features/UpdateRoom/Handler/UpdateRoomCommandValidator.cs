@@ -16,8 +16,8 @@ internal class UpdateRoomCommandValidator : AbstractValidator<UpdateRoomCommand>
 
         RuleFor(x => x.Number)
             .NotEmpty()
-            .MaximumLength(10)
-            .WithMessage("Room number cannot exceed 10 characters.");
+            .MaximumLength(5)
+            .WithMessage("Room number cannot exceed 5 characters.");
 
         RuleFor(x => x.Capacity)
             .GreaterThan(0)

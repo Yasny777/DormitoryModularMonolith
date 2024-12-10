@@ -1,9 +1,4 @@
-﻿using Identity.Identity.Features.Refresh.Endpoint;
-using Microsoft.EntityFrameworkCore;
-using Shared.Contracts.CQRS;
-using Shared.Exceptions;
-
-namespace Identity.Identity.Features.Refresh.Handler;
+﻿namespace Identity.Identity.Features.Refresh.Handler;
 
 internal class RefreshTokenCommandHandler(
     UserManager<AppUser> userManager,

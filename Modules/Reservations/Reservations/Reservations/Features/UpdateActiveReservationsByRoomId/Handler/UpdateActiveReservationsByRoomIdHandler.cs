@@ -1,7 +1,4 @@
-﻿using Reservations.Reservations.ValueObjects;
-using Shared.Contracts.CQRS;
-
-namespace Reservations.Reservations.Features.UpdateActiveReservationsByRoomId.Handler;
+﻿namespace Reservations.Reservations.Features.UpdateActiveReservationsByRoomId.Handler;
 
 public class UpdateActiveReservationsByRoomIdHandler(ReservationDbContext dbContext)
     : ICommandHandler<UpdateActiveReservationsByRoomIdCommand,

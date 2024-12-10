@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using Reservations.Reservations.Features.CancelReservationsByRoomId;
-using Reservations.Reservations.Features.CancelReservationsByRoomId.Handler;
-using Shared.Events;
+﻿using Reservations.Reservations.Features.CancelReservationsByRoomId.Handler;
 
 namespace Reservations.Reservations.EventHandlers;
 

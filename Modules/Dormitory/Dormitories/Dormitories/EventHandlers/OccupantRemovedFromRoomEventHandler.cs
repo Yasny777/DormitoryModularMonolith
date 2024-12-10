@@ -1,7 +1,4 @@
-﻿using Dormitories.Dormitories.Events;
-using Microsoft.Extensions.Logging;
-
-namespace Dormitories.Dormitories.EventHandlers;
+﻿namespace Dormitories.Dormitories.EventHandlers;
 
 public class OccupantRemovedFromRoomEventHandler(ILogger<OccupantRemovedFromRoomEventHandler> logger)
     : INotificationHandler<OccupantRemovedFromRoomEvent>

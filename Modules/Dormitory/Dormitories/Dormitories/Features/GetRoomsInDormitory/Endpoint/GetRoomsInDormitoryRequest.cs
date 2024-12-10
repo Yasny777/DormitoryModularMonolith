@@ -1,6 +1,4 @@
-﻿using Shared.Constants;
-
-namespace Dormitories.Dormitories.Features.GetRoomsInDormitory.Endpoint;
+﻿namespace Dormitories.Dormitories.Features.GetRoomsInDormitory.Endpoint;
 
 public class GetRoomsInDormitoryRequest(
     int pageNumber = 1,

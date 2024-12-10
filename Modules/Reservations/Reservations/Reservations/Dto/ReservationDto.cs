@@ -1,5 +1,3 @@
-using Reservations.Reservations.ValueObjects;
-
 namespace Reservations.Reservations.Dto;
 
 public record ReservationDto(

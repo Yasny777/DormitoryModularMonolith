@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Shared.Constants;
-using Shared.Data.Seed;
+﻿using Shared.Data.Seed;
 
 namespace Identity.Data.Seed;
 

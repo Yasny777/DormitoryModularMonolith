@@ -1,9 +1,4 @@
-﻿using Reservations.Reservations.Dto;
-using Reservations.Reservations.Features.CreateSemester.Endpoint;
-using Reservations.Reservations.Models;
-using Shared.Contracts.CQRS;
-
-namespace Reservations.Reservations.Features.CreateSemester.Handler;
+﻿namespace Reservations.Reservations.Features.CreateSemester.Handler;
 
 internal class CreateSemesterHandler(ReservationDbContext dbContext)
     : ICommandHandler<CreateSemesterCommand, CreateSemesterResult>

@@ -1,5 +1,4 @@
-﻿using Mapster;
-using Reservations.Reservations.Features.CreateSemester.Handler;
+﻿using Reservations.Reservations.Features.CreateSemester.Handler;
 using Shared.Constants;
 
 namespace Reservations.Reservations.Features.CreateSemester.Endpoint;

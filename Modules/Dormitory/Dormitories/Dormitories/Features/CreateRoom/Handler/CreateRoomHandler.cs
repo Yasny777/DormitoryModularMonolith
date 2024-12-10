@@ -1,12 +1,6 @@
-﻿using Dormitories.Data.Repository;
-using Dormitories.Dormitories.Exceptions;
-using Dormitories.Dormitories.Features.CreateRoom.Endpoint;
-using Dormitories.Dormitories.Models;
-using Shared.Contracts.CQRS;
-using Shared.Exceptions;
+﻿using Dormitories.Dormitories.Exceptions;
 
 namespace Dormitories.Dormitories.Features.CreateRoom.Handler;
-// todo add validators
 internal class CreateRoomHandler(IDormitoryRepository repository)
     : ICommandHandler<CreateRoomCommand, CreateRoomResult>
 {

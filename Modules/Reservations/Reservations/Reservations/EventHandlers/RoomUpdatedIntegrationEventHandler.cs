@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using Reservations.Reservations.Features.UpdateActiveReservationsByRoomId.Handler;
-using Shared.Events;
+﻿using Reservations.Reservations.Features.UpdateActiveReservationsByRoomId.Handler;
 
 namespace Reservations.Reservations.EventHandlers;
 

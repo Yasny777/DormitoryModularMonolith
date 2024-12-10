@@ -1,8 +1,4 @@
-﻿using Dormitories.Dormitories.Features.GetDormitories.Endpoint;
-using Shared.Constants;
-using Shared.Contracts.CQRS;
-
-namespace Dormitories.Dormitories.Features.GetRoomsInDormitory.Handler;
+﻿namespace Dormitories.Dormitories.Features.GetRoomsInDormitory.Handler;
 
 internal record GetRoomsInDormitoryQuery(
     Guid DormitoryId,

@@ -1,7 +1,4 @@
-﻿using Identity.Identity.Features.GetUserByEmail.Endpoint;
-using Shared.Contracts.CQRS;
-
-namespace Identity.Identity.Features.GetUserByEmail.Handler;
+﻿namespace Identity.Identity.Features.GetUserByEmail.Handler;
 
 internal class GetUserByEmailHandler(UserManager<AppUser> userManager)
     : IQueryHandler<GetUserByEmailQuery, GetUserByEmailResult>

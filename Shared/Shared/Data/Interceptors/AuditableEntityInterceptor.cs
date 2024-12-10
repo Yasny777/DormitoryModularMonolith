@@ -28,14 +28,14 @@ public class AuditableEntityInterceptor(IHttpContextAccessor httpContext) : Save
         {
             if (entry.State == EntityState.Added)
             {
-                entry.Entity.CreatedBy = userAuditing ?? "System"; // todo retrieve from token need to inject httpcontextaccessor
+                entry.Entity.CreatedBy = userAuditing ?? "System";
                 entry.Entity.CreatedAt = DateTime.UtcNow;
             }
 
             if (entry.State is EntityState.Added or EntityState.Modified
                 || entry.HasChangedOwnedEntities())
             {
-                entry.Entity.LastModifiedBy = userAuditing ?? "System"; // todo retrieve from token
+                entry.Entity.LastModifiedBy = userAuditing ?? "System";
                 entry.Entity.LastModified = DateTime.UtcNow;
             }
         }

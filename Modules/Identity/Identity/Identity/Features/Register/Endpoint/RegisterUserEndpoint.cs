@@ -1,9 +1,4 @@
 ﻿using Identity.Identity.Features.Register.Handler;
-using Mapster;
-using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
-using Shared.Features.Endpoints;
 
 namespace Identity.Identity.Features.Register.Endpoint;
 

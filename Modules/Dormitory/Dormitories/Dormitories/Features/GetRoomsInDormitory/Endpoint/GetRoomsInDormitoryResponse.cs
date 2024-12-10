@@ -1,6 +1,4 @@
-﻿using Dormitories.Contracts.Dto;
-
-namespace Dormitories.Dormitories.Features.GetRoomsInDormitory.Endpoint;
+﻿namespace Dormitories.Dormitories.Features.GetRoomsInDormitory.Endpoint;
 
 public record GetRoomsInDormitoryResponse(
     List<RoomDto> Items,

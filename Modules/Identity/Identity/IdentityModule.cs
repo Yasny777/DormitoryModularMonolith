@@ -2,12 +2,10 @@
 using Identity.Data;
 using Identity.Data.Seed;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
 using Shared.Data;
 using Shared.Data.Interceptors;
-using Shared.Data.Seed;
 
 namespace Identity;
 
@@ -59,7 +57,7 @@ public static class IdentityModule
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"] ??
                         throw new InvalidOperationException(
                             "Key doesnt exist"))),
-                    ClockSkew = TimeSpan.FromMinutes(2) //todo to change
+                    ClockSkew = TimeSpan.FromMinutes(2)
                 };
             });
 

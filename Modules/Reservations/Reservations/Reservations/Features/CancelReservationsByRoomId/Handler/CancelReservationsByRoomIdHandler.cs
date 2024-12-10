@@ -1,8 +1,4 @@
-﻿using Reservations.Reservations.Services;
-using Reservations.Reservations.ValueObjects;
-using Shared.Contracts.CQRS;
-
-namespace Reservations.Reservations.Features.CancelReservationsByRoomId.Handler;
+﻿namespace Reservations.Reservations.Features.CancelReservationsByRoomId.Handler;
 
 public class CancelReservationsByRoomIdHandler(ReservationDbContext dbContext, IRedisService redisService)
     : ICommandHandler<CancelReservationsByRoomIdCommand, CancelReservationsByRoomIdResult>
@@ -28,5 +24,3 @@ public class CancelReservationsByRoomIdHandler(ReservationDbContext dbContext, I
         return new CancelReservationsByRoomIdResult(true);
     }
 }
-
-//todo seed semester active, better seeding to do

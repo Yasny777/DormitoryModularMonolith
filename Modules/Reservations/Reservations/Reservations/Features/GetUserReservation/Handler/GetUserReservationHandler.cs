@@ -1,9 +1,4 @@
-﻿using Mapster;
-using Reservations.Reservations.Dto;
-using Reservations.Reservations.Features.GetUserReservation.Endpoint;
-using Shared.Contracts.CQRS;
-
-namespace Reservations.Reservations.Features.GetUserReservation.Handler;
+﻿namespace Reservations.Reservations.Features.GetUserReservation.Handler;
 
 internal class GetUserReservationHandler(ReservationDbContext dbContext)
     : IQueryHandler<GetUserReservationQuery, GetUserReservationResult>

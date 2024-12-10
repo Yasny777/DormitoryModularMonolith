@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Reservations.Reservations.Features.UpdateReservationDatesForUser.Endpoint;
-using Shared.Contracts.CQRS;
-
-namespace Reservations.Reservations.Features.UpdateReservationDatesForUser.Handler;
+﻿namespace Reservations.Reservations.Features.UpdateReservationDatesForUser.Handler;
 
 internal class UpdateReservationDatesForUserHandler(ReservationDbContext dbContext)
     : ICommandHandler<UpdateReservationDatesForUserCommand, UpdateReservationDatesForUserResult>

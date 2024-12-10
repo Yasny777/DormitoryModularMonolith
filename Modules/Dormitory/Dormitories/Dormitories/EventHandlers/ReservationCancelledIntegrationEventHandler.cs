@@ -1,7 +1,4 @@
-﻿using Dormitories.Dormitories.Features.AddOcuupantToRoom.Handler;
-using Dormitories.Dormitories.Features.RemoveOccupantFromRoom.Handler;
-using Microsoft.Extensions.Logging;
-using Shared.Events;
+﻿using Dormitories.Dormitories.Features.RemoveOccupantFromRoom.Handler;
 
 namespace Dormitories.Dormitories.EventHandlers;
 

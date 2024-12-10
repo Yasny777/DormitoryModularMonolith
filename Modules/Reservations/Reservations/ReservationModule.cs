@@ -1,7 +1,5 @@
 ﻿using Reservations.Data.Redis;
 using Reservations.Data.Seed;
-using Reservations.Reservations.Services;
-using Shared.Data.Seed;
 
 namespace Reservations;
 

@@ -1,8 +1,4 @@
 ﻿using Identity.Identity.Features.GetUsers.Handler;
-using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
-using Shared.Features.Endpoints;
 
 namespace Identity.Identity.Features.GetUsers.Endpoint;
 

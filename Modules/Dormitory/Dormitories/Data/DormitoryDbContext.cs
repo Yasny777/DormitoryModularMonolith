@@ -1,6 +1,4 @@
 ﻿using System.Reflection;
-using Dormitories.Dormitories.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace Dormitories.Data;
 

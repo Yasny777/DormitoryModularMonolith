@@ -1,6 +1,4 @@
-﻿using Dormitories.Dormitories.Models;
-
-namespace Dormitories.Data.Seed;
+﻿namespace Dormitories.Data.Seed;
 
 public static class InitialData
 {

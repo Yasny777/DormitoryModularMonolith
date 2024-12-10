@@ -1,5 +1,3 @@
-using Shared.Contracts.CQRS;
-
 namespace Dormitories.Dormitories.Features.UpdateDormitory.Handler;
 
 internal record UpdateDormitoryCommand(

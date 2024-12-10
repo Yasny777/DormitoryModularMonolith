@@ -1,5 +1,4 @@
 ﻿using Dormitories.Dormitories.Features.CreateDormitory.Handler;
-using Shared.Constants;
 
 namespace Dormitories.Dormitories.Features.CreateDormitory.Endpoint;
 

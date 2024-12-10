@@ -1,9 +1,6 @@
 ﻿using Identity.Identity.Exceptions;
-using Shared.Constants;
-using Shared.Contracts.CQRS;
 
 namespace Identity.Identity.Features.Register.Handler;
-//todo validate password and confirm password
 
 internal class RegisterUserHandler
     (UserManager<AppUser> userManager)

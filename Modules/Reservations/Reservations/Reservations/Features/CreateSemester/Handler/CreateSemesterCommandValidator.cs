@@ -1,7 +1,4 @@
-﻿using FluentValidation;
-using Reservations.Reservations.Features.CreateSemester.Endpoint;
-
-namespace Reservations.Reservations.Features.CreateSemester.Handler;
+﻿namespace Reservations.Reservations.Features.CreateSemester.Handler;
 
 internal class CreateSemesterCommandValidator : AbstractValidator<CreateSemesterCommand>
 {

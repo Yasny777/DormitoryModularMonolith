@@ -1,8 +1,4 @@
-﻿using Dormitories.Dormitories.Events;
-using Microsoft.Extensions.Logging;
-using Shared.Events;
-
-namespace Dormitories.Dormitories.EventHandlers;
+﻿namespace Dormitories.Dormitories.EventHandlers;
 
 public class RoomUpdatedEventHandler(ILogger<RoomUpdatedEvent> logger, IPublisher publisher)
     : INotificationHandler<RoomUpdatedEvent>

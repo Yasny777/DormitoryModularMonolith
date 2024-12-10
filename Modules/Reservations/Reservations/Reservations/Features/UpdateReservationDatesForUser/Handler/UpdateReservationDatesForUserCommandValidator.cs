@@ -1,6 +1,3 @@
-using FluentValidation;
-using Reservations.Reservations.Features.UpdateReservationDatesForUser.Endpoint;
-
 namespace Reservations.Reservations.Features.UpdateReservationDatesForUser.Handler;
 
 internal class UpdateReservationDatesForUserCommandValidator : AbstractValidator<UpdateReservationDatesForUserCommand>

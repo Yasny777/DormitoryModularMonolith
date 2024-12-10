@@ -1,7 +1,4 @@
-﻿using Dormitories.Dormitories.Models;
-using Dormitories.Contracts.Dto;
-
-namespace Dormitories.Dormitories.Mapping;
+﻿namespace Dormitories.Dormitories.Mapping;
 
 public class RoomMappingConfig : IRegister
 {

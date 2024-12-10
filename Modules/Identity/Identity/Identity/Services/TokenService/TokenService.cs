@@ -2,7 +2,6 @@
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using Identity.Identity.Features.Login.Handler;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Identity.Identity.Services.TokenService;

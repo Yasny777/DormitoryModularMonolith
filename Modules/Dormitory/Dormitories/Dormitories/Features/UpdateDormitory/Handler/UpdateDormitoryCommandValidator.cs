@@ -1,4 +1,3 @@
-using Dormitories.Dormitories.Features.UpdateDormitory.Endpoint;
 using FluentValidation;
 
 namespace Dormitories.Dormitories.Features.UpdateDormitory.Handler;

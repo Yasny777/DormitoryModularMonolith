@@ -1,6 +1,16 @@
-﻿global using Microsoft.Extensions.DependencyInjection;
+﻿global using Identity.Identity.Features.Login.Handler;
+global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.AspNetCore.Builder;
 global using Identity.Identity.Models;
 global using Identity.Identity.Services.TokenService;
+global using Mapster;
+global using MediatR;
+global using Microsoft.AspNetCore.Http;
 global using Microsoft.AspNetCore.Identity;
+global using Microsoft.AspNetCore.Routing;
+global using Microsoft.EntityFrameworkCore;
+global using Shared.Constants;
+global using Shared.Contracts.CQRS;
+global using Shared.Exceptions;
+global using Shared.Features.Endpoints;

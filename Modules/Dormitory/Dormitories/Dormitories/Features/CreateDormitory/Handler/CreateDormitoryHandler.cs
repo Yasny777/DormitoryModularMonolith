@@ -1,8 +1,4 @@
-﻿using Dormitories.Data.Repository;
-using Dormitories.Dormitories.Models;
-using Shared.Contracts.CQRS;
-
-namespace Dormitories.Dormitories.Features.CreateDormitory.Handler;
+﻿namespace Dormitories.Dormitories.Features.CreateDormitory.Handler;
 
 internal class CreateDormitoryHandler(IDormitoryRepository repository)
     : ICommandHandler<CreateDormitoryCommand, CreateDormitoryResult>

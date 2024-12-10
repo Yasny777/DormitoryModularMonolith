@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Reservations.Reservations.Models;
-using Reservations.Reservations.ValueObjects;
 
 namespace Reservations.Data.Configuration;
 

@@ -1,9 +1,4 @@
-﻿using MediatR;
-using Microsoft.Extensions.Logging;
-using Reservations.Reservations.Events;
-using Shared.Events;
-
-namespace Reservations.Reservations.EventHandlers;
+﻿namespace Reservations.Reservations.EventHandlers;
 
 public class ReservationCreatedEventHandler(ILogger<ReservationCreatedEventHandler> logger, IPublisher publisher)
     : INotificationHandler<ReservationCreatedEvent>

@@ -1,6 +1,4 @@
-﻿using Shared.Exceptions;
-
-namespace Identity.Identity.Exceptions;
+﻿namespace Identity.Identity.Exceptions;
 
 public class UserExistsException : BadRequestException
 {

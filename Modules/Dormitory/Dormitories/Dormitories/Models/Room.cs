@@ -1,7 +1,4 @@
-﻿using Dormitories.Dormitories.Events;
-using Shared.Exceptions;
-
-namespace Dormitories.Dormitories.Models;
+﻿namespace Dormitories.Dormitories.Models;
 
 public class Room : Entity<Guid>
 {

@@ -1,6 +1,5 @@
 ﻿using Dormitories.Data.Repository.Queries;
 using Dormitories.Dormitories.Features.GetRoomsInDormitory.Handler;
-using Dormitories.Dormitories.Models;
 
 namespace Dormitories.Data.Repository;
 

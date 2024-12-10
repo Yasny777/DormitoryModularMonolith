@@ -1,8 +1,4 @@
-﻿using Dormitories.Dormitories.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace Dormitories.Data.Configuration;
+﻿namespace Dormitories.Data.Configuration;
 
 public class RoomConfiguration : IEntityTypeConfiguration<Room>
 {

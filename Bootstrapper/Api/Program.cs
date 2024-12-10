@@ -112,5 +112,3 @@ app.UseDormitoryModule()
     .UseReservationModule();
 app.UseIdentityModule();
 app.Run();
-
-// todo SEEDING od zera, i updateRoom endpoint i integration event i bydzie

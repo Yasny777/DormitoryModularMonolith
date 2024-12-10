@@ -1,6 +1,4 @@
-﻿using Dormitories.Dormitories.Events;
-
-namespace Dormitories.Dormitories.Models;
+﻿namespace Dormitories.Dormitories.Models;
 
 public class Dormitory : Aggregate<Guid>
 {
@@ -77,7 +75,6 @@ public class Dormitory : Aggregate<Guid>
         _rooms.Remove(room);
 
         AddDomainEvent(new RoomRemovedEvent(room));
-        //!!!todo!  add domain event to integrate with users, and reservations to cancel and remove from rooms
     }
 
     public Room UpdateRoom(Guid roomId, string number, int capacity, decimal price)
@@ -90,7 +87,6 @@ public class Dormitory : Aggregate<Guid>
 
         room.UpdateDetails(number, capacity, price);
 
-        //!!!todo!  add domain event to integrate with users, and reservations to cancel and remove from rooms
         AddDomainEvent(new RoomUpdatedEvent(room));
 
         return room;

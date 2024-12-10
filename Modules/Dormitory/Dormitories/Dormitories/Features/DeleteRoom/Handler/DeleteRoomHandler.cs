@@ -1,9 +1,4 @@
-﻿using Dormitories.Data.Repository;
-using Dormitories.Dormitories.Features.DeleteRoom.Endpoint;
-using Shared.Contracts.CQRS;
-using Shared.Exceptions;
-
-namespace Dormitories.Dormitories.Features.DeleteRoom.Handler;
+﻿namespace Dormitories.Dormitories.Features.DeleteRoom.Handler;
 
 internal class DeleteRoomHandler(IDormitoryRepository repository)
     : ICommandHandler<DeleteRoomCommand>

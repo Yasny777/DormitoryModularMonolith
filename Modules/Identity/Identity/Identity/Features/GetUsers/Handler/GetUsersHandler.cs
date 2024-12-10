@@ -1,6 +1,4 @@
 ﻿using Identity.Identity.Dto;
-using Identity.Identity.Features.GetUsers.Endpoint;
-using Shared.Contracts.CQRS;
 
 namespace Identity.Identity.Features.GetUsers.Handler;
 

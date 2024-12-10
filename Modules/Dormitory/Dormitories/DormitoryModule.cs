@@ -1,10 +1,7 @@
-﻿using Dormitories.Data.Repository;
-using Dormitories.Data.Seed;
-using Microsoft.EntityFrameworkCore;
+﻿using Dormitories.Data.Seed;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Shared.Data;
 using Shared.Data.Interceptors;
-using Shared.Data.Seed;
 
 namespace Dormitories;
 

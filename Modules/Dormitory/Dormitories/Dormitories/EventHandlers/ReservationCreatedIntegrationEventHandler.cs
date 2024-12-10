@@ -1,6 +1,4 @@
 ﻿using Dormitories.Dormitories.Features.AddOcuupantToRoom.Handler;
-using Microsoft.Extensions.Logging;
-using Shared.Events;
 
 namespace Dormitories.Dormitories.EventHandlers;
 

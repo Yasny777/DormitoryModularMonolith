@@ -1,6 +1,4 @@
-﻿using Shared.Constants;
-
-namespace Identity.Data.Seed;
+﻿namespace Identity.Data.Seed;
 
 public static class InitialData
 {
