@@ -2,12 +2,8 @@
 
 namespace Dormitories.Data;
 
-public class DormitoryDbContext : DbContext
+public class DormitoryDbContext(DbContextOptions<DormitoryDbContext> options) : DbContext(options)
 {
-    public DormitoryDbContext(DbContextOptions<DormitoryDbContext> options) : base(options)
-    {
-    }
-
     public DbSet<Dormitory> Dormitories => Set<Dormitory>();
     public DbSet<Room> Rooms => Set<Room>();
 
@@ -20,3 +16,4 @@ public class DormitoryDbContext : DbContext
         base.OnModelCreating(builder);
     }
 }
+
