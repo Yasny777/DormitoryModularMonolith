@@ -11,8 +11,6 @@ public class Dormitory : Aggregate<Guid>
     private readonly List<Room> _rooms = [];
     public IReadOnlyList<Room> Rooms => _rooms.AsReadOnly();
 
-
-    // Dormitory management
     public static Dormitory Create(Guid id, string name, string category, string contactEmail, string contactNumber,
         Address address)
     {
@@ -28,7 +26,6 @@ public class Dormitory : Aggregate<Guid>
             ContactNumber = contactNumber,
             Address = address
         };
-        // adddomainevent dormitorycreated
         return dormitory;
     }
 
@@ -42,8 +39,6 @@ public class Dormitory : Aggregate<Guid>
 
         Address = address;
     }
-
-    // Room management
     public Room AddRoom(string number, string category, int capacity, decimal price)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(number);
@@ -61,8 +56,7 @@ public class Dormitory : Aggregate<Guid>
         var newRoom = new Room(Id, number, capacity, category, price);
         _rooms.Add(newRoom);
 
-        // can add domain event here
-
+        AddDomainEvent(new RoomAddedEvent(newRoom));
         return newRoom;
     }
 
@@ -97,10 +91,10 @@ public class Dormitory : Aggregate<Guid>
         var room = _rooms.FirstOrDefault(r => r.Id == roomId)
                    ?? throw new InvalidOperationException("Room not found.");
 
-        // Room generuje zdarzenie
+        // Encja Room generuje zdarzenie po dodaniu użytkownika do pokoju
         var occupantAddedToRoomEvent = room.AddOccupant(userId);
 
-        // Root agregat rejestruje zdarzenie
+        // Agregat rejestruje zdarzenie
         AddDomainEvent(occupantAddedToRoomEvent);
     }
 
