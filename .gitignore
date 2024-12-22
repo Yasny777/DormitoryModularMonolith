@@ -398,3 +398,9 @@ FodyWeavers.xsd
 *.sln.iml
 .idea/*
 /**/.idea/*
+/Modules/Dormitory/Dormitories/Data/Migrations/20241202211229_UpdateCheck.cs
+/Modules/Dormitory/Dormitories/Data/Migrations/20241202211229_UpdateCheck.Designer.cs
+/Modules/Identity/Identity/Data/Migrations/20241202211346_UpdateCheck.cs
+/Modules/Identity/Identity/Data/Migrations/20241202211346_UpdateCheck.Designer.cs
+/Modules/Identity/Identity/Data/Migrations/20241203183638_AddedFirstNameLastName.cs
+/Modules/Identity/Identity/Data/Migrations/20241203183638_AddedFirstNameLastName.Designer.cs

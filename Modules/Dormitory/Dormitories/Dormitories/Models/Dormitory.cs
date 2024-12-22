@@ -1,4 +1,6 @@
-﻿namespace Dormitories.Dormitories.Models;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Dormitories.Dormitories.Models;
 
 public class Dormitory : Aggregate<Guid>
 {
@@ -56,6 +58,7 @@ public class Dormitory : Aggregate<Guid>
         var newRoom = new Room(Id, number, capacity, category, price);
         _rooms.Add(newRoom);
 
+        // Rejestrowanie zdarzenia
         AddDomainEvent(new RoomAddedEvent(newRoom));
         return newRoom;
     }

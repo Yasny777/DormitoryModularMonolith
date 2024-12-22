@@ -56,7 +56,7 @@ public static class IdentityModule
                     ValidAudience = configuration["Jwt:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"] ??
                         throw new InvalidOperationException(
-                            "Key doesnt exist"))),
+                            "Key doesn't exist"))),
                     ClockSkew = TimeSpan.FromMinutes(2)
                 };
             });

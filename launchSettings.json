@@ -4,7 +4,11 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "dormitorydb": "StartWithoutDebugging"
+        "dormitorydb": "StartWithoutDebugging",
+        "distributedcache": "StartWithoutDebugging",
+        "frontend": "StartWithoutDebugging",
+        "seq": "StartWithoutDebugging",
+        "webapi": "StartWithoutDebugging"
       }
     }
   }

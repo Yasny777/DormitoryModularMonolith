@@ -19,12 +19,6 @@ public class RoomDtoValidator : AbstractValidator<RoomDto>
 {
     public RoomDtoValidator()
     {
-        RuleFor(dto => dto.Id)
-            .NotEmpty().WithMessage("Room Id is required.");
-
-        RuleFor(dto => dto.DormitoryId)
-            .NotEmpty().WithMessage("DormitoryId in RoomDto is required.");
-
         RuleFor(dto => dto.Number)
             .NotEmpty().WithMessage("Room number is required.")
             .MaximumLength(5).WithMessage("Room number must not exceed 5 characters.");

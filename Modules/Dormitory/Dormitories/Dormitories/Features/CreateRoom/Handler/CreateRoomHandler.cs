@@ -17,7 +17,6 @@ internal class CreateRoomHandler(IDormitoryRepository repository)
 
         await repository.SaveChangesAsync(cancellationToken);
 
-            // room is reference to Room entity which is tracked and Id is assigned after savechanges
         return new CreateRoomResult(room.Id);
     }
 }
