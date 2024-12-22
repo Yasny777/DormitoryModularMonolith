@@ -16,12 +16,12 @@ internal class CreateReservationHandler(
         var semester = await reservationDbContext
             .Semesters
             .Include(s => s.Reservations)
+            .Include(s => s.PriorityWindow)
             .FirstOrDefaultAsync(
                 r => r.Name == request.SemesterName,
                 cancellationToken: cancellationToken);
 
         if (semester == null) throw new NotFoundException("Semester not found to reserve");
-
 
         var roomId = request.RoomId;
         var roomResourceKey = $"room-reservation-{roomId}";
@@ -36,12 +36,12 @@ internal class CreateReservationHandler(
         try
         {
             var capacity = await redisService.GetOrSetRoomCapacityAsync(roomId, cancellationToken);
-            var currentOccupants = await redisService.IncrementOccupantsAsync(roomId, capacity, cancellationToken);
+            await redisService.IncrementOccupantsAsync(roomId, capacity, cancellationToken);
 
             var roomToReserve = await sender.Send(new GetRoomByIdQuery(roomId), cancellationToken);
             //await Task.Delay(5000); //for tests locks
             semester.AddReservation(request.UserId, request.RoomId,
-                RoomInfo.Of(roomToReserve.Room.Number, roomToReserve.Room.Price, roomToReserve.Room.Capacity));
+                RoomInfo.Of(roomToReserve.Room.Number, roomToReserve.Room.Price, roomToReserve.Room.Capacity), request.UserRole);
 
             await reservationDbContext.SaveChangesAsync(cancellationToken);
             await transaction.CommitAsync(cancellationToken);

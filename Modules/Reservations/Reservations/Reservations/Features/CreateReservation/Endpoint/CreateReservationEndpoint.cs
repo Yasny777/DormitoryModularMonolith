@@ -11,7 +11,11 @@ public class CreateReservationEndpoint : PrefixedCarterModule
                                      .FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value
                                  ?? throw new BadRequestException("User doesn't exist");
 
-                    var command = new CreateReservationCommand(roomId, Guid.Parse(userId), request.SemesterName);
+                    var userRole = httpContext.User.Claims
+                                       .FirstOrDefault(claim => claim.Type == ClaimTypes.Role)?.Value
+                                   ?? throw new BadRequestException("User role doesn't exist");
+
+                    var command = new CreateReservationCommand(roomId, Guid.Parse(userId), request.SemesterName, userRole);
                     var result = await sender.Send(command);
                     return Results.Created();
                 })

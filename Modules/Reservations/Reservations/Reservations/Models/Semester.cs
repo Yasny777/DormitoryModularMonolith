@@ -11,6 +11,8 @@ public class Semester : Aggregate<Guid>
     private readonly List<Reservation> _reservations = [];
     public IReadOnlyList<Reservation> Reservations => _reservations.AsReadOnly();
 
+    public PriorityWindow? PriorityWindow { get; private set; }
+
     public static Semester Create(Guid id, string name, int number, DateTime startDate, DateTime endDate, bool isActive)
     {
         var semester = new Semester()
@@ -20,21 +22,38 @@ public class Semester : Aggregate<Guid>
             Number = number,
             StartDate = startDate.ToUniversalTime(),
             EndDate = endDate.ToUniversalTime(),
-            IsActive = isActive,
+            IsActive = isActive
         };
 
         return semester;
     }
 
-    public void AddReservation(Guid userId, Guid roomId, RoomInfo roomInfo)
+    public void SetPriorityWindow(List<string> roleNames, DateTime startDateTime, DateTime endDateTime)
+    {
+        if (roleNames == null || !roleNames.Any())
+            throw new ArgumentException("At least one role must be specified.");
+
+        PriorityWindow = new PriorityWindow(Id, this, roleNames, startDateTime, endDateTime);
+    }
+
+    public void AddReservation(Guid userId, Guid roomId, RoomInfo roomInfo, string userRole)
     {
         var reservationActive =
             _reservations.FirstOrDefault(r => r.UserId == userId && r.Status == ReservationStatus.Active);
 
-        // sprawdza czy User ma rezerwacje
         if (reservationActive != null) throw new BadRequestException("User Already has reservation!");
 
-        // startdate i enddate jest przypisany do semestru, chyba ze admin zmieni dla usera
+        if (PriorityWindow != null)
+        {
+            var now = DateTime.UtcNow;
+
+            if (PriorityWindow.IsWithinWindow(now) && !PriorityWindow.IsRoleAllowed(userRole))
+            {
+                throw new UnauthorizedAccessException(
+                    "Brak uprawnień do rezerwacji priorytetowej");
+            }
+        }
+
         var reservation = new Reservation(roomId, userId, this.StartDate, this.EndDate, ReservationStatus.Active,
             roomInfo, this.Id, this);
 

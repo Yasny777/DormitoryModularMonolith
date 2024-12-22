@@ -6,6 +6,7 @@ internal class GetActiveSemesterHandler(ReservationDbContext dbContext)
     public async Task<GetActiveSemesterResult> Handle(GetActiveSemesterQuery query, CancellationToken cancellationToken)
     {
         var semester = await dbContext.Semesters
+            .Include(s => s.PriorityWindow)
             .AsNoTracking()
             .Where(s => s.IsActive)
             .FirstOrDefaultAsync(cancellationToken);

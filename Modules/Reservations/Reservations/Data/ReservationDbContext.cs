@@ -10,6 +10,7 @@ public class ReservationDbContext : DbContext
 
     public DbSet<Semester> Semesters => Set<Semester>();
     public DbSet<Reservation> Reservations => Set<Reservation>();
+    public DbSet<PriorityWindow> PriorityWindows => Set<PriorityWindow>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

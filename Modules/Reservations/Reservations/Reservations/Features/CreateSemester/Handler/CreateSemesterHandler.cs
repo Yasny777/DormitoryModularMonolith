@@ -12,6 +12,11 @@ internal class CreateSemesterHandler(ReservationDbContext dbContext)
         if (semesterActive is not null && command.SemesterDto.IsActive)
             throw new BadRequestException("Active semester already exists");
         var semester = CreateNewSemester(command.SemesterDto);
+
+        semester.SetPriorityWindow(command.SemesterDto.PriorityWindow.RoleNames,
+            command.SemesterDto.PriorityWindow.StartDateTime,
+            command.SemesterDto.PriorityWindow.EndDateTime);
+
         var result = await dbContext.Semesters.AddAsync(semester, cancellationToken);
         await dbContext.SaveChangesAsync(cancellationToken);
         return new CreateSemesterResult(semester.Id);
