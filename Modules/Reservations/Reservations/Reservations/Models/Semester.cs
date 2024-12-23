@@ -41,7 +41,7 @@ public class Semester : Aggregate<Guid>
         var reservationActive =
             _reservations.FirstOrDefault(r => r.UserId == userId && r.Status == ReservationStatus.Active);
 
-        if (reservationActive != null) throw new BadRequestException("User Already has reservation!");
+        if (reservationActive != null) throw new BadRequestException("Użytkownik posiada już rezerwacje");
 
         if (PriorityWindow != null)
         {
