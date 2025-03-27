@@ -1,4 +1,4 @@
-// INITALIZE BUILDER
+// INITIALIZE BUILDER
 using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
