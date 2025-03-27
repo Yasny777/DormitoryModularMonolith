@@ -404,3 +404,4 @@ FodyWeavers.xsd
 /Modules/Identity/Identity/Data/Migrations/20241202211346_UpdateCheck.Designer.cs
 /Modules/Identity/Identity/Data/Migrations/20241203183638_AddedFirstNameLastName.cs
 /Modules/Identity/Identity/Data/Migrations/20241203183638_AddedFirstNameLastName.Designer.cs
+/Bootstrapper/Api/appsettings.Development.json

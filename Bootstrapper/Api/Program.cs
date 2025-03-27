@@ -7,7 +7,7 @@ builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
-    .AddEnvironmentVariables(); // Umożliwia nadpisanie z Docker Compose
+    .AddEnvironmentVariables();
 
 // CONFIGURATION
 var configuration = builder.Configuration;
@@ -51,7 +51,7 @@ builder.Services.AddCors(options =>
         policy.WithOrigins(frontend!) // Adres frontendu
             .AllowAnyHeader()
             .AllowAnyMethod()
-            .AllowCredentials(); // Umożliwia obsługę ciasteczek
+            .AllowCredentials();
     });
 });
 
@@ -94,8 +94,6 @@ builder.Services.AddSwaggerGen(opt =>
 });
 
 
-
-
 var app = builder.Build();
 // Configure HTTP request pipeline
 if (app.Environment.IsDevelopment())
@@ -106,7 +104,6 @@ if (app.Environment.IsDevelopment())
 app.UseSerilogRequestLogging();
 app.UseExceptionHandler(cfg => {});
 app.UseCors("AllowFrontend");
- // jesli przy starcie apki nie dziala seedowanie zmienic kolejnoscia na dormitory module pierw
 app.MapCarter();
 app.UseDormitoryModule()
     .UseReservationModule();
